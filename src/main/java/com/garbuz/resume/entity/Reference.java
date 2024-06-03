@@ -31,14 +31,6 @@ public class Reference {
 	private String title;
 	public Reference() {
 	}
-	public Reference(Long id, Resume resume, String name, String email, String phone, String title) {
-		this.id = id;
-		this.resume = resume;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-		this.title = title;
-	}
 	public Reference(Resume resume, String name, String email, String phone, String title) {
 		this.resume = resume;
 		this.name = name;
@@ -67,7 +59,7 @@ public class Reference {
 	public String getEmail() {
 		return email;
 	}
-	public void setEmail(String emaIL) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 	public String getPhone() {

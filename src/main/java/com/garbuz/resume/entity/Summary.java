@@ -29,10 +29,14 @@ public class Summary {
 	public Summary() {
 	}
 	public Summary(Long id, String objective, String summary) {
-		super();
 		this.id = id;
 		this.objective = objective;
 		this.summary = summary;
+	}
+	public Summary( Resume resume, String objective, String summary) {
+		this.objective = objective;
+		this.summary = summary;
+		this.resume = resume;
 	}
 	public Long getId() {
 		return id;

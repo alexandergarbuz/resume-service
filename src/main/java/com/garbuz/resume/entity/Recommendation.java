@@ -34,9 +34,9 @@ public class Recommendation {
 	
 	public Recommendation() {
 	}
-	
-	public Recommendation(Long id, String author, String authorTitle, String relationship, String text) {
-		this.id = id;
+
+	public Recommendation(Resume resume, String author, String authorTitle, String relationship, String text) {
+		this.resume = resume;
 		this.author = author;
 		this.authorTitle = authorTitle;
 		this.relationship = relationship;

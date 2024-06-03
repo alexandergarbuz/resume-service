@@ -29,15 +29,26 @@ public class Resume {
 	private ContactInformation contactInformation;
 	@OneToOne(mappedBy = "resume", fetch = FetchType.LAZY)
 	private Summary summary;
-//	private List<Education> educations;
-//	private List<Certification> certifications;
+	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
+	private List<Education> educations;
+	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
+	private List<Certification> certifications;
 //	private List<Position> positions;
-//	private List<SkillGroup> skills;
+	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
+	private List<SkillGroup> skills;
 	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
 	private List<Recommendation> recommendations = new ArrayList<>();
 	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
 	private List<Reference> references = new ArrayList<>();
 	
+	
+	public Resume() {
+	}	
+	public Resume(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -69,6 +80,13 @@ public class Resume {
 	public void setSummary(Summary summary) {
 		this.summary = summary;
 	}
+	
+	public List<SkillGroup> getSkills() {
+		return skills;
+	}
+	public void setSkills(List<SkillGroup> skills) {
+		this.skills = skills;
+	}
 	public List<Recommendation> getRecommendations() {
 		return recommendations;
 	}
@@ -81,6 +99,20 @@ public class Resume {
 	}
 	public void setReferences(List<Reference> references) {
 		this.references = references;
+	}
+	
+	public List<Education> getEducations() {
+		return educations;
+	}
+	public void setEducations(List<Education> educations) {
+		this.educations = educations;
+	}
+	
+	public List<Certification> getCertifications() {
+		return certifications;
+	}
+	public void setCertifications(List<Certification> certifications) {
+		this.certifications = certifications;
 	}
 	@Override
 	public int hashCode() {

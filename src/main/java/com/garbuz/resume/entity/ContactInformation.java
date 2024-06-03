@@ -39,16 +39,17 @@ public class ContactInformation {
 	public ContactInformation() {
 	}
 
-	public ContactInformation(Long id, String email, String phone, String address,
-			String city, String state, String zip) {
-		this.id = id;
+
+	public ContactInformation(Resume resume, String email, String phone, String address, String city, String state, String zip) {
 		this.email = email;
 		this.phone = phone;
 		this.address = address;
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
+		this.resume = resume;
 	}
+
 
 	public Long getId() {
 		return id;
