@@ -8,9 +8,9 @@ To execute run the following commands
 
  docker build .
 
- docker build --tag=docker-spring-boot-test .
+ docker build --tag=resume-service .
 
- docker run -it -p 8080:8080 docker-spring-boot-test
+ docker run -it -p 8080:8080 resume-service
 
 ```
 

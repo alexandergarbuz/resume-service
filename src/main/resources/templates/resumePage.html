@@ -16,6 +16,21 @@
 			<div><span th:text="${resume.contactInformation.city}"/>, <span th:text="${resume.contactInformation.state}"/> <span th:text="${resume.contactInformation.zip}"/></div>
 
 		</div>
+		<div>
+			<h2>Objective</h2>
+			<div><span th:text="${resume.summary.objective}"/></div>
+			<h2>Summary</h2>
+			<div><span th:text="${resume.summary.summary}"/></div>
+
+		</div>
+		<h1>References</h1>
+		<div th:each="r : ${resume.references}" th:id="'reference' +${r.id}">
+			<p><strong><span  th:text="${r.name}">Name</span></strong></p>
+			<p><a th:href="'mailto:'+${r.email}" th:text="${r.email}"/></a></p>
+			<p><span th:text="${r.phone}">phone</span></p>
+			<p><span th:text="${r.title}">title</span></p>
+			<hr size="0"/>
+		</div>
 		<h1>Recommendations</h1>
 		<div th:each="r : ${resume.recommendations}" th:id="'recommendation' +${r.id}">
 			<p><strong><span  th:text="${r.author}">Author</span></strong></p>
