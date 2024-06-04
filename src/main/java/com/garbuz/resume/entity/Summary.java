@@ -19,15 +19,20 @@ public class Summary {
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private Long id;
+	
 	@Column(name="objective", length = 500)
 	private String objective;
+	
 	@Column(name="summary", length = 1000)
 	private String summary;
+	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "resume_id")
 	private Resume resume;
+	
 	public Summary() {
 	}
+	
 	public Summary(Long id, String objective, String summary) {
 		this.id = id;
 		this.objective = objective;

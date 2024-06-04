@@ -21,23 +21,32 @@ public class Resume {
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private Long id;
+	
 	@Column(name = "first_name")
 	private String firstName;
+	
 	@Column(name = "last_name")
 	private String lastName;
+	
 	@OneToOne(mappedBy = "resume",  fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private ContactInformation contactInformation;
+	
 	@OneToOne(mappedBy = "resume", fetch = FetchType.LAZY)
 	private Summary summary;
+	
 	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
 	private List<Education> educations;
+	
 	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
 	private List<Certification> certifications;
 //	private List<Position> positions;
+	
 	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
 	private List<SkillGroup> skills;
+	
 	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
 	private List<Recommendation> recommendations = new ArrayList<>();
+	
 	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
 	private List<Reference> references = new ArrayList<>();
 	
