@@ -5,15 +5,14 @@ services:
       - "3307:3307"
     environment:
       - MYSQL_ROOT_PASSWORD=pass
-#      - MYSQL_ROOT_HOST=%
-#      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
 #      - MYSQL_USER=resume_user
 #      - MYSQL_PASSWORD=resume_password
       - MYSQL_DATABASE=resume_manager_db
       - MYSQL_TCP_PORT=3307
 #    volumes:
 #      - "./conf.d:/etc/mysql/conf.d:ro"
-    command: mysqld --mysql_native_password
     healthcheck:
        test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
        timeout: 2s
@@ -33,9 +32,9 @@ services:
     ports:
       - "80:80"
     environment:
-      - MYSQL_URL=jdbc:mysql://db:3307/mysql
+      - MYSQL_URL=jdbc:mysql://db:3307/resume_manager_db
       - MYSQL_USER=root
-      - MYSQL_PASSWORD=my_root_pwd
+      - MYSQL_PASSWORD=pass
 #    volumes:
 #      - .:/app
     networks:
