@@ -1,10 +1,19 @@
 package com.garbuz.resume.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.garbuz.resume.entity.ContactInformation;
-import com.garbuz.resume.entity.Resume;
+import com.garbuz.resume.entity.ContactInformation_;
 
-public interface ContactInformationDao extends JpaRepository<ContactInformation, Long> {
-	ContactInformation findByResume(final Resume resume);
+import jakarta.persistence.metamodel.SingularAttribute;
+import jakarta.transaction.Transactional;
+@Repository
+@Transactional
+public class ContactInformationDao extends BaseDaoImpl<ContactInformation> {
+
+	@Override
+	public SingularAttribute<ContactInformation, Long> getIdAttribute() {
+		return ContactInformation_.id;
+	}
+
 }

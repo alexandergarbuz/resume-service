@@ -29,9 +29,6 @@ public class ResumeController {
 		Long resumeId = 1L;
 		
 		Resume resume = this.resumeService.findResume(resumeId);
-		if(resume == null) {
-			resume = resumeService.initializeData();
-		}
 		mv.addObject("resume", resume);
 		
 		return mv;

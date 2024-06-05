@@ -13,7 +13,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Position")
-public class Position {
+public class Position extends BaseEntity{
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)	

@@ -16,7 +16,9 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 @Entity
 @Table(name="Resume")
-public class Resume {
+public class Resume extends BaseEntity {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)	

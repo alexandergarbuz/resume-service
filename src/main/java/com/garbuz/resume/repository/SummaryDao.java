@@ -1,17 +1,21 @@
 package com.garbuz.resume.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.garbuz.resume.entity.Resume;
 import com.garbuz.resume.entity.Summary;
+import com.garbuz.resume.entity.Summary_;
 
+import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface SummaryDao extends JpaRepository<Summary, Long>{
+public class SummaryDao extends BaseDaoImpl<Summary>{
 
-	Summary findByResume(Resume resume);
+	@Override
+	public SingularAttribute<Summary, Long> getIdAttribute() {
+		return Summary_.id;
+	}
+
 	
 }

@@ -1,18 +1,18 @@
 package com.garbuz.resume.repository;
 
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.garbuz.resume.entity.Education;
-import com.garbuz.resume.entity.Resume;
+import com.garbuz.resume.entity.Education_;
 
+import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface EducationDao extends JpaRepository<Education, Long> {
-
-	List<Education> findByResume(Resume resume);
+public class EducationDao extends BaseDaoImpl<Education> {
+	@Override
+	SingularAttribute<Education, Long> getIdAttribute() {
+		return Education_.id;
+	}
 }

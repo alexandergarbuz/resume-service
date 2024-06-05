@@ -14,7 +14,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Skill")
-public class Skill {
+public class Skill extends BaseEntity{
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,18 +1,21 @@
 package com.garbuz.resume.repository;
 
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.garbuz.resume.entity.Skill;
-import com.garbuz.resume.entity.SkillGroup;
+import com.garbuz.resume.entity.Skill_;
 
+import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface SkillDao extends JpaRepository<Skill, Long> {
+public class SkillDao extends BaseDaoImpl<Skill> {
 
-	List<Skill> findBySkillGroup(SkillGroup skillGroup);
+	@Override
+	SingularAttribute<Skill, Long> getIdAttribute() {
+		return Skill_.id;
+	}
+
+	
 }
