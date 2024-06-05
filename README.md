@@ -10,7 +10,7 @@ To execute run the following commands
 
  docker build --tag=resume-service .
 
- docker run -it -p 8080:8080 resume-service
+ docker run -it -p 80:80 resume-service
 
 ```
 
