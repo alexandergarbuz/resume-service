@@ -31,6 +31,7 @@ public class SkillGroup extends BaseEntity{
 	private List<Skill> skills;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "resume_id")
+	@JsonIgnoreProperties("skills")
 	private Resume resume;
 	
 	public SkillGroup() {

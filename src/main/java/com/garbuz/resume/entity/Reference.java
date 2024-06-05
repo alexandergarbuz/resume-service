@@ -2,6 +2,8 @@ package com.garbuz.resume.entity;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -21,6 +23,7 @@ public class Reference extends BaseEntity{
 	private Long id;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "resume_id")
+	@JsonIgnoreProperties("references")
 	private Resume resume;
 	@Column(name="name")
 	private String name;

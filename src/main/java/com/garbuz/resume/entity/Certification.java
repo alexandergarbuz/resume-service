@@ -3,6 +3,8 @@ package com.garbuz.resume.entity;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,6 +27,7 @@ public class Certification extends BaseEntity{
 	private LocalDate date;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "resume_id")
+	@JsonIgnoreProperties("certifications")
 	private Resume resume;
 
 	public Certification() {
