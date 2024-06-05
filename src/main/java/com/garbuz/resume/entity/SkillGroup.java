@@ -3,6 +3,8 @@ package com.garbuz.resume.entity;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,6 +27,7 @@ public class SkillGroup extends BaseEntity{
 	@Column(name = "name")
 	private String name;
 	@OneToMany(mappedBy="skillGroup",  fetch = FetchType.LAZY)
+	@JsonIgnoreProperties("skillGroup")
 	private List<Skill> skills;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "resume_id")
