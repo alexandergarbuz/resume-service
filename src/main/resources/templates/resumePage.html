@@ -24,10 +24,11 @@
 		</div>
 		<h1>Skills</h1>
 		<div th:each="sg : ${resume.skills}" th:id="'skillGroup' +${sg.id}">
-			<p><strong><span  th:text="${sg.name}">Skill Group Name</span></strong></p>
-			<div th:each="s:${sg.skills}">
-				<span th:text="${s.name}"> ,</span>
-			</div>
+			<p>
+				<strong><span  th:text="${sg.name} + ':'">Skill Group Name</span></strong> 
+						<span th:each="s:${sg.skills}"  th:text="${s.name} + ', '"></span>
+			</p>
+			
 
 		</div>
 		<h1>Education</h1>
