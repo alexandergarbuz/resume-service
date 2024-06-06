@@ -5,7 +5,7 @@ COPY pom.xml /build/
 COPY src /build/src/
 
 #RUN mvn clean package
-RUN mvn clean package -Dmaven.test.skip=true
+RUN mvn clean compile generate-sources package -Dmaven.test.skip=true
 RUN cp target/resume-service-${VERSION}.jar target/application.jar
 
 FROM openjdk

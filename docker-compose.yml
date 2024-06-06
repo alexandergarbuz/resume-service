@@ -14,8 +14,6 @@ services:
     command: --init-file /data/application/create_user.sql
     volumes:
       - "./src/main/resources/db/mysql:/data/application"
-#    volumes:
-#      - "./conf.d:/etc/mysql/conf.d:ro"
     healthcheck:
        test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
        timeout: 2s
@@ -36,8 +34,6 @@ services:
       MYSQL_URL: "jdbc:mysql://mysql:3307/resume_manager_db"
       MYSQL_USER: "resume_user"
       MYSQL_PASSWORD: "resume_password"
-#    volumes:
-#      - .:/app
     networks:
       - resume-service-network
 
