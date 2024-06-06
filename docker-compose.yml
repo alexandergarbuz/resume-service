@@ -1,30 +1,31 @@
 services:
-  db:
+  mysql:
     image: mysql:8.4
     ports:
       - "3307:3307"
     environment:
-      - MYSQL_ROOT_PASSWORD=pass
-      - MYSQL_ROOT_HOST=%
-      - MYSQL_ALLOW_EMPTY_PASSWORD=true
-#      - MYSQL_USER=resume_user
-#      - MYSQL_PASSWORD=resume_password
-      - MYSQL_DATABASE=resume_manager_db
-      - MYSQL_TCP_PORT=3307
+      MYSQL_ROOT_PASSWORD: "pass"
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_USER: "resume_user"
+      MYSQL_PASSWORD: "resume_password"
+      MYSQL_DATABASE: "resume_manager_db"
+      MYSQL_TCP_PORT: 3307
+    command: --init-file /data/application/create_user.sql
+    volumes:
+      - "./src/main/resources/db/mysql:/data/application"
 #    volumes:
 #      - "./conf.d:/etc/mysql/conf.d:ro"
     healthcheck:
        test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
        timeout: 2s
        retries: 10
-#    profiles:
-#      - mysql
     networks:
-      - my_network
+      - resume-service-network
         
   web-app:
     depends_on:
-       db:
+       mysql:
          condition: service_healthy
     build:
         context: .
@@ -32,14 +33,14 @@ services:
     ports:
       - "80:80"
     environment:
-      - MYSQL_URL=jdbc:mysql://db:3307/resume_manager_db
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=pass
+      MYSQL_URL: "jdbc:mysql://mysql:3307/resume_manager_db"
+      MYSQL_USER: "resume_user"
+      MYSQL_PASSWORD: "resume_password"
 #    volumes:
 #      - .:/app
     networks:
-      - my_network
+      - resume-service-network
 
 networks:
-  my_network:
+  resume-service-network:
     driver: bridge  
