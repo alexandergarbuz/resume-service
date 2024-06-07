@@ -1,9 +1,11 @@
 body, h1, h2, h3, td, p, div, span, li, a {
-	font-family: Arial, serif;
+	font-family: Verdana, Arial, serif;
+}
+body, h1, h2, h3, td, p, div, span, li {
 	color: #000000;
 }
 
-body, td, p, div, span, li {
+body, td, p, div, span, li, dd, dt {
 	font-size: medium;
 }
 
@@ -12,5 +14,9 @@ td {
   vertical-align: top;
 }
 pre {
-	font-family: Courier;
+	font-family: Courier, monospace;
+}
+
+div#topNavigationSection a {
+	color: blue;
 }
