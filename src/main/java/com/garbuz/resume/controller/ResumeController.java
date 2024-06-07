@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,16 +22,17 @@ public class ResumeController {
 	private ResumeService resumeService;
 	
 	
-	@GetMapping("/show")
-	public ModelAndView showResume() {
+	@GetMapping("/show/{id}")
+	public ModelAndView showResume(@PathVariable(name="id", required = true) final String id) {
+		LOG.info("Show resume request for resumeId={}", id);
+		Long resumeId = Long.valueOf(id);
 		ModelAndView mv = new ModelAndView();
 		String viewName = "resumePage";
 		mv.setViewName(viewName);
-		Long resumeId = 1L;
-		
+	
 		Resume resume = this.resumeService.findResume(resumeId);
 		mv.addObject("resume", resume);
-		
+		LOG.info("Displaying {}", resume);
 		return mv;
 	}
 }
