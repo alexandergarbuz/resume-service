@@ -1,4 +1,6 @@
-CREATE DATABASE IF NOT EXISTS resume_manager_db;
+DROP SCHEMA IF EXISTS resume_manager_db;
+CREATE SCHEMA resume_manager_db;
+USE resume_manager_db;
 
 ALTER DATABASE resume_manager_db 
 DEFAULT CHARACTER SET utf8 
