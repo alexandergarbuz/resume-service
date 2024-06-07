@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,7 +43,7 @@ public class Resume extends BaseEntity {
 	private List<Certification> certifications;
 	
 	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
-	private List<Position> positions;
+	private List<Job> jobs;
 	
 	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
 	private List<SkillGroup> skills;
@@ -101,6 +99,13 @@ public class Resume extends BaseEntity {
 	}
 	public void setSkills(List<SkillGroup> skills) {
 		this.skills = skills;
+	}
+	
+	public List<Job> getJobs() {
+		return jobs;
+	}
+	public void setJobs(List<Job> jobs) {
+		this.jobs = jobs;
 	}
 	public List<Recommendation> getRecommendations() {
 		return recommendations;

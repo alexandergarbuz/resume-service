@@ -15,6 +15,8 @@ import org.thymeleaf.util.StringUtils;
 import com.garbuz.resume.entity.Certification;
 import com.garbuz.resume.entity.ContactInformation;
 import com.garbuz.resume.entity.Education;
+import com.garbuz.resume.entity.Job;
+import com.garbuz.resume.entity.JobResponsibility;
 import com.garbuz.resume.entity.Recommendation;
 import com.garbuz.resume.entity.Reference;
 import com.garbuz.resume.entity.Resume;
@@ -24,6 +26,8 @@ import com.garbuz.resume.entity.Summary;
 import com.garbuz.resume.repository.CertificationDao;
 import com.garbuz.resume.repository.ContactInformationDao;
 import com.garbuz.resume.repository.EducationDao;
+import com.garbuz.resume.repository.JobDao;
+import com.garbuz.resume.repository.JobResponsibilityDao;
 import com.garbuz.resume.repository.RecommendationDao;
 import com.garbuz.resume.repository.ReferenceDao;
 import com.garbuz.resume.repository.ResumeDao;
@@ -53,6 +57,10 @@ public class ResumeService {
 	private SkillGroupDao skillGroupDao;
 	@Autowired
 	private SkillDao skillDao;
+	@Autowired
+	private JobDao jobDao;
+	@Autowired
+	private JobResponsibilityDao jobResponsibilityDao;
 
 	public Resume findResume(final Long id) {
 		LOG.info("Loading resume for {}", id);
@@ -86,7 +94,7 @@ public class ResumeService {
 		Resume resume = saveOrCreateNew(new Resume("Alexander", "Garbuz"));
 		summaryDao.saveOrCreateNew(new Summary(
 				resume,
-				"Looking for Java Back End developer position",
+				"Looking for Java Back End developer job",
 				"Senior IT professional with more than 25 years of combined software development, leadership and management experience in insurance, healthcare, telecommunications, and e-commerce industries"
 				));
 		contactInformationDao.saveOrCreateNew(new ContactInformation(resume, "alexander.garbuz@gmail.com","608-628-2448", "405 Burnt Sienna Dr.", "Middleton", "WI", "53562"));
@@ -99,6 +107,28 @@ public class ResumeService {
 		skills.add(createSkillGroup(resume, "Servers", "IIS, Apache, Tomcat, JBoss WildFly, New Atlanta ServletExec, JRun, WebLogic"));
 		skills.add(createSkillGroup(resume, "Frameworks", "Struts, Spring, Spring Boot, Hibernate, iBATIS SQL Maps, iBATIS DAO, JUnit, Apache Cactus, EasyMock, Mockito, Selenium, Arquillian"));
 		skills.add(createSkillGroup(resume, "Tools", "IBM Rational Application Developer (RAD), IBM Web Sphere Application Developer Studio (WSAD), Eclipse, IntelliJ IDEA, NetBeans, iReports, VisualCaffe, Borland JBuilder, Ant, Maven, Cruise Control, Continuum, Jenkins, Subversion, Git"));
+		
+
+		createJob(resume, "Sr. Java Developer / Consultant", "Ford Credit", "Remote", LocalDate.of(2021, 8, 1), LocalDate.of(2024, 4, 1),
+			new String[] {
+				"Developed and maintained a number of micro-services using Spring Boot and Oracle. Helped the team to migrate from ADFS (Active Directory Federation Service) to Azure AD; Participated in building POC for deploying services to GCP (Google Could Platform) utilizing Google Apigee platform as abstraction layer to provide access to backend service. Used S3 SDK to access and store objects in AWS storage;",
+				"Led successful adaptation of Agile development practices such as test driven development, pair programming, iterative development, and continuous integration. Used GitHub, Jenkins, and Gradle to implement continuous integration/continues deployment environment. Utilized Checkmarx and FOSSA to ensure code quality and security compliance. Developed a suite of automated functional/acceptance tests using Postman. Built performance/load tests using Apache JMeter. Ensured targeted test coverage using JaCoCo code coverage reports;",
+				"Maintained legacy Java web application utilizing Servlets, Velocity templates, jQuery, DB2 and IBM WebSphere Liberty server;",
+				"Actively participated in project planning and management, created estimates, and provided status reports to management. Planned, organized and led meetings and training sessions. Mentored less experienced developers, conducted design and code reviews, performed analysis for senior management;", 
+				"Provided on-call support;"
+				});
+		createJob(resume, "Sr. Java Developer", "CDW", "Madison, WI", LocalDate.of(2015, 9, 1), LocalDate.of(2021, 6, 1),
+			new String[] {
+				"Worked on a number of projects delivering both new functionality as well as providing maintenance and support for the existing applications;",
+				"Helped define technical requirements and estimated assigned tasks. Used JPA and Hibernate to store and retrieve information from MS SQL Server databases. Used Prime Faces JSF implementation to build responsive UI layer for web based applications.",
+				"Developed a number of RESTful web services to share information between multiple applications and platforms (web and mobile);",
+				"Utilized Agile development practices such as test driven development, iterative development, continuous integration. Designed and developed functional testing framework using Arquillian and Selenium. Used Maven and Jenkins to set up continuous integration environment builds. Ensured targeted test coverage using JaCoCo code coverage reports integrated into Maven builds;",
+				"Worked closely with the product owners and customers and participated in all phases of the project delivery starting with the project initiation, requirements gathering and analysis, estimating, as well as developing and testing of the delivered functionality;",
+				"Participated in the hiring process, perform initial technical screening on the phone and conduct in-person interviews;",
+				"Worked with contractors, conducted code reviews, mentored less experienced developers;",
+				"Provided on-call support for the clients. Used DynaTrace to document and troubleshoot issues with the applications we supported."
+				});		
+		
 		
 		
 		this.referenceDao.saveOrCreateNew(new Reference(resume, "Erick Hallick", "erick@hallick.com", "555-555-5555", "Executive VP of Operations @ CPM Healthgrades"));
@@ -166,4 +196,13 @@ public class ResumeService {
 		group.setSkills(savedSkills);
 		return group;
 	}
+	
+	protected Job createJob(Resume resume, String title, String companyName, String location, LocalDate start, LocalDate end, String[] responsibilities) {
+		Job job = jobDao.saveOrCreateNew(new Job(resume, title, companyName, location, start, end));
+		for(String r : responsibilities) {
+			JobResponsibility jr = jobResponsibilityDao.saveOrCreateNew(new JobResponsibility(r, job));
+		}
+		return job;
+	}
+	
 }
