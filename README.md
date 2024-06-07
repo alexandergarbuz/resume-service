@@ -13,6 +13,16 @@ To execute run the following commands
  docker run -it -p 80:80 resume-service
 
 ```
+To run both web application and MySQL run the following commands
+
+
+```
+
+ docker compose build
+ 
+ docker compose up
+
+```
 
 For additional information on Docker checkout these links
 
