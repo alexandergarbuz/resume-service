@@ -16,6 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="Summary")
+@JsonIgnoreProperties("resume")
 public class Summary extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -31,7 +32,6 @@ public class Summary extends BaseEntity {
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "resume_id")
-	@JsonIgnoreProperties("summary")
 	private Resume resume;
 	
 	public Summary() {

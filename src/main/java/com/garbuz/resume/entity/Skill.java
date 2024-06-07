@@ -16,6 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Skill")
+@JsonIgnoreProperties({"skillGroup"})
 public class Skill extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -26,7 +27,6 @@ public class Skill extends BaseEntity{
 	private String name;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "skill_group_id")
-	@JsonIgnoreProperties("skills")
 	private SkillGroup skillGroup;
 
 	public Skill() {

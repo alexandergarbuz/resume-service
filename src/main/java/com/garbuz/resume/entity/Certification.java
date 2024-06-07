@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 @Entity
 @Table(name="Certification")
+@JsonIgnoreProperties({"resume"})
 public class Certification extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -27,7 +28,6 @@ public class Certification extends BaseEntity{
 	private LocalDate date;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "resume_id")
-	@JsonIgnoreProperties("certifications")
 	private Resume resume;
 
 	public Certification() {

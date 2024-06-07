@@ -17,6 +17,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="Education")
+@JsonIgnoreProperties({"resume"})
 public class Education extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -30,7 +31,6 @@ public class Education extends BaseEntity{
 	private String comments;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "resume_id")
-	@JsonIgnoreProperties("educations")
 	private Resume resume;
 	
 	public Education() {

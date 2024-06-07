@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 @Entity
 @Table(name="Reference")
+@JsonIgnoreProperties({ "resume" })
 public class Reference extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -23,7 +24,6 @@ public class Reference extends BaseEntity{
 	private Long id;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "resume_id")
-	@JsonIgnoreProperties("references")
 	private Resume resume;
 	@Column(name="name")
 	private String name;

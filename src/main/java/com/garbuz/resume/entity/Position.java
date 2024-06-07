@@ -4,26 +4,41 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Position")
+@JsonIgnoreProperties({"resume"})
 public class Position extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private Long id;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "position_id")
+	private Resume resume;
+	@Column(name="title")
 	private String title;
+	@Column(name="company_name")
 	private String companyName;
+	@Column(name="location")
 	private String location;
 	private List<String> responsibilities;
+	@Column(name="start_date")
 	private LocalDate start;
+	@Column(name="end_date")
 	private LocalDate end;
 	
 	public Position() {

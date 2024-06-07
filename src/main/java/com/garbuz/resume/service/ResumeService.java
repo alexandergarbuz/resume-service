@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,13 @@ public class ResumeService {
 		final Resume savedResume = this.resumeDao.saveOrCreateNew(resumeToSave);
 		LOG.info("Saved {} ", savedResume);
 		return savedResume;
+	}
+	
+	public List<Reference> findReferencesByFirstAndLastName(final String firstName, final String lastName) {
+		LOG.debug("Loading info for {} {}", firstName, lastName);
+		List<Reference> references = this.referenceDao.findReferencesByFirstAndLastName(firstName, lastName);
+		LOG.info("Loaded {} references", CollectionUtils.size(references));
+		return references;
 	}
 
 	public Resume initializeData() {

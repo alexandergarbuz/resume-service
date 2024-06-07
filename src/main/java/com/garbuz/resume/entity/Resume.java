@@ -33,32 +33,27 @@ public class Resume extends BaseEntity {
 	private String lastName;
 	
 	@OneToOne(mappedBy = "resume",  fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonIgnoreProperties("resume")
 	private ContactInformation contactInformation;
 	
 	@OneToOne(mappedBy = "resume", fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("resume")
 	private Summary summary;
 	
 	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("resume")
 	private List<Education> educations;
 	
 	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("resume")
 	private List<Certification> certifications;
-//	private List<Position> positions;
 	
 	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("resume")
+	private List<Position> positions;
+	
+	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
 	private List<SkillGroup> skills;
 	
 	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("resume")
 	private List<Recommendation> recommendations = new ArrayList<>();
 	
 	@OneToMany(mappedBy="resume",  fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("resume")
 	private List<Reference> references = new ArrayList<>();
 	
 	
