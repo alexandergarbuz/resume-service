@@ -14,6 +14,7 @@ services:
     command: --init-file /data/application/create_user.sql
     volumes:
       - "./src/main/resources/db/mysql:/data/application"
+#      - "C:/ProgramData/MySQL/MySQL Server 8.0/Data/resume_manager_db:/var/lib/mysql/resume_manager_db"
     healthcheck:
        test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
        timeout: 2s
