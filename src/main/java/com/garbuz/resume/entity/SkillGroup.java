@@ -18,18 +18,20 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="Skill_Group")
-@JsonIgnoreProperties({"resume", "skills"})
+@JsonIgnoreProperties({"resume"})
 public class SkillGroup extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private Long id;
+	
 	@Column(name = "name")
 	private String name;
+	
 	@OneToMany(mappedBy="skillGroup",  fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("skillGroup")
 	private List<Skill> skills;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "resume_id")
 	private Resume resume;

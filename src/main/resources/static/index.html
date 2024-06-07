@@ -8,8 +8,13 @@
 <body>
 
 <h1>Resume Project</h1>
-<p><a href="./admin/user/users">View Users</a></p>
-<p><a href="./api/admin/user/users">View Users from Web Service</a></p>
+<p>
+	<a th:href="@{/init/data}">Initialize Data</a>&nbsp;|&nbsp;
+	<a th:href="@{/resume/show}">View Resume</a>&nbsp;|&nbsp;
+	<a th:href="@{/api/resume/show}">View JSON</a>&nbsp;|&nbsp;
+	<a th:href="@{/api/resume/references?firstName=Alexander&lastName=Garbuz}">View References</a>&nbsp;|&nbsp;
+	<a th:href="@{/api/resume/skills}">View Skills</a>&nbsp;|&nbsp;
+</p>
 
 </body>
 </html>

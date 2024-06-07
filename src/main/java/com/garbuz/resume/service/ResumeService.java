@@ -73,6 +73,14 @@ public class ResumeService {
 		LOG.info("Loaded {} references", CollectionUtils.size(references));
 		return references;
 	}
+	public List<SkillGroup> findSkillsByResumeId(final Long resumeId) {
+		LOG.debug("Loading skills for resumeId={}", resumeId);
+		
+		List<SkillGroup> skills = this.skillGroupDao.findlSkillsByResume(resumeId);
+		
+		LOG.debug("Loaded {} skills", CollectionUtils.size(skills));
+		return skills;
+	}
 
 	public Resume initializeData() {
 		Resume resume = saveOrCreateNew(new Resume("Alexander", "Garbuz"));

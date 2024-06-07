@@ -6,7 +6,13 @@
 	<link rel="stylesheet" th:href="@{/css/default.css}">
 </head>
 <body>
-<p><a th:href="@{/init/data}">Initialize Data</a>&nbsp;|&nbsp;<a th:href="@{/resume/show}">View Resume</a></p>
+<p>
+	<a th:href="@{/init/data}">Initialize Data</a>&nbsp;|&nbsp;
+	<a th:href="@{/resume/show}">View Resume</a>&nbsp;|&nbsp;
+	<a th:href="@{/api/resume/show/1}">View Resume as JSON</a>&nbsp;|&nbsp;
+	<a th:href="@{/api/resume/references?firstName=Alexander&lastName=Garbuz}">View References as JSON</a>&nbsp;|&nbsp;
+	<a th:href="@{/api/resume/skills/1}">View Skills as JSON</a>&nbsp;|&nbsp;
+</p>
 
 		
 		<div>

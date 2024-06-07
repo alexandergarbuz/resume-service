@@ -45,6 +45,7 @@ public class ReferenceDao extends BaseDaoImpl<Reference> {
 		
 		
 		Join<Reference, Resume> join = root.join(Reference_.resume);
+		
 		Predicate whereFirstName = builder.equal(join.get(Resume_.firstName), firstName);
 		Predicate whereLastName = builder.equal(join.get(Resume_.lastName), lastName);
 		Predicate[] where = new Predicate[] {whereFirstName, whereLastName};
@@ -54,7 +55,7 @@ public class ReferenceDao extends BaseDaoImpl<Reference> {
 		criteria.orderBy(orderBy);
 		
 		List<Reference> references = em.createQuery(criteria).getResultList();
-		LOG.info("Loaded {} references", CollectionUtils.size(references));
+		LOG.debug("Loaded {} references", CollectionUtils.size(references));
 		return references;
 	}
 
