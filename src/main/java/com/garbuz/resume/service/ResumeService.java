@@ -128,7 +128,13 @@ public class ResumeService {
 				"Worked with contractors, conducted code reviews, mentored less experienced developers;",
 				"Provided on-call support for the clients. Used DynaTrace to document and troubleshoot issues with the applications we supported."
 				});		
-		
+		createJob(resume, "Technical Lead / Consultant", "American Family Insurance", "Madison, WI", LocalDate.of(2013, 2, 1), LocalDate.of(2015, 9, 1),
+				new String[] {
+				"Led technical implementation of a large development project. Worked closely with the project manager and participated in all phases of the project delivery starting with the project initiation, requirements gathering and analysis, work planning and scheduling, as well as monitoring and controlling of the project work;",
+				"Reviewed technical requirements, provided estimates, facilitated issue resolution, coordinated work for developers, and ensured that software development best practices were followed. Conducted code reviews, mentored less experienced developers;",
+				"Helped troubleshoot issues related to Guidewire PolicyCenter environment configuration and work with various teams to ensure prompt resolution;",
+				"Coordinated work with outside vendors for security assessments and load and penetration testing."
+				});	
 		
 		
 		this.referenceDao.saveOrCreateNew(new Reference(resume, "Erick Hallick", "erick@hallick.com", "555-555-5555", "Executive VP of Operations @ CPM Healthgrades"));
