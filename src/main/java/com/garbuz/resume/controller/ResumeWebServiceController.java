@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.garbuz.resume.entity.Job;
 import com.garbuz.resume.entity.Reference;
 import com.garbuz.resume.entity.Resume;
 import com.garbuz.resume.entity.SkillGroup;
@@ -38,7 +39,7 @@ public class ResumeWebServiceController {
 	
 	@GetMapping("/references")
 	public ResponseEntity<List<Reference>> showReferences(@RequestParam(name="firstName") String firstName, @RequestParam(name="lastName") final String lastName) {
-		final List<Reference> references = this.resumeService.findReferencesByFirstAndLastName(firstName, lastName);
+		final List<Reference> references = this.resumeService.findReferencesByLastAndFirstName(lastName, firstName);
 		return new ResponseEntity<List<Reference>>(references, HttpStatus.OK);
 	}
 	
@@ -47,5 +48,11 @@ public class ResumeWebServiceController {
 	public ResponseEntity<List<SkillGroup>> showSkills(@PathVariable(name="id", required = true) final String resumeId) {
 		final List<SkillGroup> references = this.resumeService.findSkillsByResumeId(Long.valueOf(resumeId));
 		return new ResponseEntity<List<SkillGroup>>(references, HttpStatus.OK);
+	}
+	
+	@GetMapping("/work-history/{lastName}/{firstName}")
+	public ResponseEntity<List<Job>> showWorkHistory(@PathVariable(name="lastName", required = true) final String lastName, @PathVariable(name="firstName",required = true) final String firstName) {
+		final List<Job> jobs = this.resumeService.findJobsByLastAndFirstName(lastName, firstName);
+		return new ResponseEntity<List<Job>>(jobs, HttpStatus.OK);
 	}
 }

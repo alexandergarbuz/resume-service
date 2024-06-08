@@ -75,11 +75,17 @@ public class ResumeService {
 		return savedResume;
 	}
 	
-	public List<Reference> findReferencesByFirstAndLastName(final String firstName, final String lastName) {
-		LOG.debug("Loading info for {} {}", firstName, lastName);
-		List<Reference> references = this.referenceDao.findReferencesByFirstAndLastName(firstName, lastName);
+	public List<Reference> findReferencesByLastAndFirstName(final String lastName, final String firstName) {
+		LOG.debug("Loading for {} {}", lastName, firstName);
+		List<Reference> references = this.referenceDao.findReferencesByLastAndFirstName(lastName, firstName);
 		LOG.info("Loaded {} references", CollectionUtils.size(references));
 		return references;
+	}
+	public List<Job> findJobsByLastAndFirstName(final String lastName, final String firstName) {
+		LOG.debug("Loading for {} {}", lastName, firstName);
+		List<Job> jobs = this.referenceDao.findJobsByLastAndFirstName(lastName, firstName);
+		LOG.info("Loaded {} jobs", CollectionUtils.size(jobs));
+		return jobs;
 	}
 	public List<SkillGroup> findSkillsByResumeId(final Long resumeId) {
 		LOG.debug("Loading skills for resumeId={}", resumeId);
