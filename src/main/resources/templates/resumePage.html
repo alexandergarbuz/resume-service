@@ -28,7 +28,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Resume</a>
+            <a class="navbar-brand" href="#">Start</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
@@ -112,8 +112,13 @@
 			<h1>Recommendations</h1>
 			<div th:each="r : ${resume.recommendations}" th:id="'recommendation' +${r.id}">
 				<div th:text="${r.text}"/>
-				<p><strong><span  th:text="${r.author}"/></strong><br/><em><span th:text="${r.authorTitle}"/> (<span th:text="${r.relationship}"/>)</em></p>
-				
+				<p>
+				<br/>
+				<strong><span  th:text="${r.author}"/></strong><br/>
+				<em><span th:text="${r.authorTitle}"/><br/>(<span th:text="${r.relationship}"/>)</em>
+				<br/>
+				<br/>
+				</p>
 			</div>
 		</div>
 		<div id="referencesSection">
