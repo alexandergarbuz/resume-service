@@ -2,21 +2,5 @@ body, h1, h2, h3, td, p, div, span, li, a {
 	font-family: Verdana, Arial, serif;
 }
 body, h1, h2, h3, td, p, div, span, li {
-	color: #000000;
-}
-
-body, td, p, div, span, li, dd, dt {
-	font-size: small;
-}
-
-td {
-  text-align: left;
-  vertical-align: top;
-}
-pre {
-	font-family: Courier, monospace;
-}
-
-div#topNavigationSection a {
-	color: blue;
+	color: #000;
 }
