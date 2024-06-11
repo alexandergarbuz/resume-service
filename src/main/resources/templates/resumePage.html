@@ -37,13 +37,21 @@
                 <li><a href="#recommendationsSection">Recommendations</a></li>
                 <li><a href="#referencesSection">References</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Microservices / JSON <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Microservices API <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-	                    <li><a th:href="@{/api/resume/show/1}">Resume</a></li>
-                        <li><a th:href="@{/api/resume/skills/1}">Skills</a></li>
-                        <li><a th:href="@{/api/resume/references?firstName=Alexander&lastName=Garbuz}">References</a></li>
-                        <li><a th:href="@{/api/resume/work-history/Garbuz/Alexander}">Work History</a></li>
-                        <li><a th:href="@{/work-history/show/1}">Work History as MVC</a></li>
+	                    <li class="dropdown-header">Micro Services</li>
+	                    <li><a th:href="@{/api/resume/show/1}" target="_blank">Resume <i class="fa fa-external-link"></i></a></li>
+                        <li><a th:href="@{/api/resume/skills/1}" target="_blank">Skills <i class="fa fa-external-link"></i></a></li>
+                        <li><a th:href="@{/api/resume/references?firstName=Alexander&lastName=Garbuz}" target="_blank">References <i class="fa fa-external-link"></i></a></li>
+                        <li><a th:href="@{/api/resume/work-history/Garbuz/Alexander}" target="_blank">Work History <i class="fa fa-external-link"></i></a></li>
+                        
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">Swagger</li>
+                        <li><a th:href="@{/swagger-ui.html}" target="_blank">Swagger (OpenAPI ) <i class="fa fa-external-link"></i></a></li>
+                        
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">MVC Client</li>
+                        <li><a th:href="@{/work-history/show/1}">Work History</a></li>
                     </ul>
                 </li>
             </ul>
