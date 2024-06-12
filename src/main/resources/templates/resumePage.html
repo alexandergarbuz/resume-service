@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/default.css}">
     <link rel="stylesheet" th:href="@{/bootstrap-3.4.1/css/bootstrap.css}">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -13,6 +14,45 @@
     <style>
         body {
             padding-top: 70px; /* Adjust based on the height of your navbar */
+        }
+        blockquote {
+        	font-weight: normal;
+        }
+        
+        #contactInformationSection ul {
+ 			list-style-type:none; 
+ 			padding-left: 30px; 
+ 			padding-top: 20px; 
+ 			padding-bottom: 20px;
+        }
+        #contactInformationSection ul li {
+ 			padding-top: 10px; 
+        }
+        
+        #skillsSection ul {
+        	list-style-type:none; 
+        } 
+        
+        #referencesSection ul li {
+        	list-style-type:none;
+        	padding-bottom: 5px;
+        }
+        p.recommendationAutor {
+        	padding-left: 30px;
+        	padding-top: 10px;
+        }
+        #recommendationsSection div.recommendation {
+        	
+        	border-left: 4px solid #000;
+        	border-radius:5px; 
+        	background-color: #f5f5f5;
+        	margin-top: 20px; 
+        	margin-bottom: 20px; 
+        	padding-top: 10px; 
+        	padding-bottom: 5px; 
+        	padding-left: 30px;
+        	padding-right: 10px;
+        	font-size: 120%;
         }
     </style> 
     
@@ -64,9 +104,11 @@
 
 		<div id="contactInformationSection">
 			<h1 th:text="${resume.firstName} + ' ' + ${resume.lastName}">Name</h1>
-			<div><i class="fa fa-home"></i> <span th:text="${resume.contactInformation.address}"/> <span th:text="${resume.contactInformation.city}"/>, <span th:text="${resume.contactInformation.state}"/> <span th:text="${resume.contactInformation.zip}"/></div>
-			<div><i class="fa fa-envelope"></i> <a th:href="'mailto:'+${resume.contactInformation.email}" th:text="${resume.contactInformation.email}"/></a></div>
-			<div><i class="fa fa-phone"></i> <span th:text="${resume.contactInformation.phone}"/></div>
+			<ul>
+			<li><i class="fa fa-home"></i> <span th:text="${resume.contactInformation.address}"/> <span th:text="${resume.contactInformation.city}"/>, <span th:text="${resume.contactInformation.state}"/> <span th:text="${resume.contactInformation.zip}"/></li>
+			<li><i class="fa fa-envelope"></i> <a th:href="'mailto:'+${resume.contactInformation.email}" th:text="${resume.contactInformation.email}"/></a></li>
+			<li><i class="fa fa-phone"></i> <span th:text="${resume.contactInformation.phone}"/></li>
+			</ul>
 		</div>
 		<div id="summarySection">
 			<h2>Objective</h2>
@@ -119,23 +161,24 @@
 		<div id="recommendationsSection">
 			<h1>Recommendations</h1>
 			<div th:each="r : ${resume.recommendations}" th:id="'recommendation' +${r.id}">
-				<div th:text="${r.text}"/>
-				<p>
-				<br/>
-				<strong><span  th:text="${r.author}"/></strong><br/>
-				<em><span th:text="${r.authorTitle}"/><br/>(<span th:text="${r.relationship}"/>)</em>
-				<br/>
-				<br/>
-				</p>
+				<div class="recommendation">
+					<i class="fa fa-angle-double-left"></i> <span th:text="${r.text}"/> <i class="fa fa-angle-double-right"></i>
+					<p class="recommendationAutor">				
+					<strong><span  th:text="${r.author}"/></strong> <em><span th:text="${r.authorTitle}"/></em><br/>
+						<em><span th:text="${r.relationship}"/></em>
+					</p>
+				</div>
+
 			</div>
 		</div>
 		<div id="referencesSection">
 			<h1>References</h1>
+			<p>(Contact information will be available upon request)</p>
 			<div th:each="r : ${resume.references}" th:id="'reference' +${r.id}">
 				<p><strong><span  th:text="${r.name}"/></strong> (<span th:text="${r.title}"/>)</p>
 				<ul>
-					<li><a th:href="'mailto:'+${r.email}" th:text="${r.email}"/></a></li>
-					<li><span th:text="${r.phone}"/></li>
+					<li><i class="fa fa-envelope"></i> <a th:href="'mailto:'+${r.email}" th:text="${r.email}"/></a></li>
+					<li><i class="fa fa-phone"></i> <span th:text="${r.phone}"/></li>
 				</ul>
 			</div>
 		</div>
