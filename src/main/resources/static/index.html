@@ -2,19 +2,32 @@
 <html lang="en" xmlns="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-	<title>Resume</title>
-	<link rel="stylesheet" th:href="@{/css/default.css}">
+	<title>Resume Service</title>
+    <link rel="stylesheet" href="./css/default.css">
+    <link rel="stylesheet" href="./bootstrap-3.4.1/css/bootstrap.css">
+   
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+        body {
+            padding-top: 10%; /* Adjust based on the height of your navbar */
+        }
+    </style> 
+    
 </head>
 <body>
 
-<h1>Resume Project</h1>
-<p>
-	<a th:href="@{/init/data}">Initialize Data</a>&nbsp;|&nbsp;
-	<a th:href="@{/resume/show}">View Resume</a>&nbsp;|&nbsp;
-	<a th:href="@{/api/resume/show}">View JSON</a>&nbsp;|&nbsp;
-	<a th:href="@{/api/resume/references?firstName=Alexander&lastName=Garbuz}">View References</a>&nbsp;|&nbsp;
-	<a th:href="@{/api/resume/skills}">View Skills</a>&nbsp;|&nbsp;
-</p>
+<h1 style="text-align: center;">Resume Service</h1>
+<div style="text-align:center">
+	<a href="./init/data" target="_blank"><i class="fa fa-gear"></i> Initialize Data <i class="fa fa-external-link"></i></a>&nbsp;|&nbsp;
+	<a href="./resume/show/1" target="_blank"><i class="fa fa-file"></i> View Resume <i class="fa fa-external-link"></i></a>&nbsp;|&nbsp;
+	<a href="./api/resume/show/1" target="_blank"><i class="fa fa-rss"></i> View JSON <i class="fa fa-external-link"></i></a></a>&nbsp;|&nbsp;
+	<a href="./swagger-ui.html" target="_blank"><i class="fa fa-gears"></i> Swagger (OpenAPI ) <i class="fa fa-external-link"></i></a>
+	
+</div>
 
 </body>
 </html>
