@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,20 @@ public class WorkHistoryController {
 		final String firstName = resume.getFirstName();
 		
 		RestTemplate restTemplate = this.restTemplateBuilder.build();
-		List<Job> jobs = (List<Job>)restTemplate.getForObject("http://" + r.getServerName() + "/api/resume/work-history/{lastName}/{firstName}", ArrayList.class, lastName, firstName);
+		
+		
+		String protocol = StringUtils.containsIgnoreCase(r.getProtocol(), "https") ? "https" : "http";
+		String serverName = r.getServerName();
+		int serverPort = r.getServerPort();
+		String contextPath = r.getContextPath();
+		final String endPoint = protocol + "://" + serverName + ":" + serverPort + contextPath + "/api/resume/work-history/{lastName}/{firstName}";
+		LOG.info("PROTOCOL {}", protocol);
+		LOG.info("SERVER {}", serverName);
+		LOG.info("PORT {}", serverPort);
+		LOG.info("PATH {}", contextPath);
+		LOG.info("Endpoint {}", endPoint);
+		List<Job> jobs = (List<Job>)restTemplate.getForObject(endPoint, ArrayList.class, lastName, firstName);
+		
 
 		
 		ModelAndView mv = new ModelAndView();
