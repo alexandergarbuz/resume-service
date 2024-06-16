@@ -63,13 +63,8 @@ public class WorkHistoryController {
 		ModelAndView mv = new ModelAndView();
 		String viewName = "resumePage";
 		mv.setViewName(viewName);
-		mv.getModel().put("contentTemplate", "workHistoryFragment");
-		
+		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.WORK_HISTORY_PAGE);
 		mv.addObject("jobs", jobs);
-		
-		
-		mv.getModel().put("contentTemplate", "contentFragment");
-		
 		
 		LOG.info("Displaying {} jobs", CollectionUtils.size(jobs));
 		return mv;
