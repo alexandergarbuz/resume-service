@@ -19,16 +19,17 @@ public class InitController {
 	
 	@GetMapping("/data")
 	public ModelAndView showResume() {
-		ModelAndView mv = new ModelAndView();
-		String viewName = "resumePage";
-		mv.setViewName(viewName);
 		Long resumeId = 1L;
 		
 		Resume resume = this.resumeService.findResume(resumeId);
 		if(resume == null) {
 			resume = resumeService.initializeData();
 		}
+		ModelAndView mv = new ModelAndView();
+		String viewName = "resumePage";
+		mv.setViewName(viewName);
 		mv.addObject("resume", resume);		
+		mv.getModel().put("contentTemplate", "contentFragment");
 		return mv;
 	}
 	

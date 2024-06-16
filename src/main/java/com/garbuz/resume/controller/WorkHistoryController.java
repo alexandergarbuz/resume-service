@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +21,6 @@ import com.garbuz.resume.entity.Resume;
 import com.garbuz.resume.service.ResumeService;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.websocket.server.ServerEndpoint;
 
 @Controller
 @RequestMapping("/work-history")
@@ -63,9 +61,16 @@ public class WorkHistoryController {
 
 		
 		ModelAndView mv = new ModelAndView();
-		String viewName = "workHistoryPage";
+		String viewName = "resumePage";
 		mv.setViewName(viewName);
+		mv.getModel().put("contentTemplate", "workHistoryFragment");
+		
 		mv.addObject("jobs", jobs);
+		
+		
+		mv.getModel().put("contentTemplate", "contentFragment");
+		
+		
 		LOG.info("Displaying {} jobs", CollectionUtils.size(jobs));
 		return mv;
 	}
