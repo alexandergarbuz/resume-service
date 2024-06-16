@@ -29,7 +29,7 @@ public class InitController {
 		String viewName = "resumePage";
 		mv.setViewName(viewName);
 		mv.addObject("resume", resume);		
-		mv.getModel().put("contentTemplate", "contentFragment");
+		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.RESUME_PAGE);
 		return mv;
 	}
 	
