@@ -28,7 +28,7 @@ public class Job extends BaseEntity{
 	private Long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "job_id")
+	@JoinColumn(name = "resume_id")
 	private Resume resume;
 	
 	@Column(name="title")
