@@ -88,14 +88,7 @@ public class ResumeService {
 		
 		LOG.info("Loaded {} skills", CollectionUtils.size(skills));
 		return skills;
-	}
-	
-	public List<Resume> finadAll() {
-		List<Resume> resumes = resumeDao.findAll();
-		LOG.info("Found {} resumes", CollectionUtils.size(resumes));
-		return resumes;
-	}
-	
+	}	
 
 	public Resume initializeData() {
 		Resume resume = null;
