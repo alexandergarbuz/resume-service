@@ -13,7 +13,7 @@ import jakarta.transaction.Transactional;
 @Transactional
 public interface ReferenceDao extends JpaRepository<Reference, Long> {
 
-	public List<Reference> findByResume_FirstNameAndResume_LastName(final String lastName, final String firstName);
+	public List<Reference> findByResume_LastNameAndResume_FirstName(final String lastName, final String firstName);
 
 
 }

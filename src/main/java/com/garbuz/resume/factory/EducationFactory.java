@@ -30,7 +30,7 @@ public class EducationFactory {
 
 		schools.forEach(school -> {
 			
-			dao.saveOrCreateNew(school);
+			dao.saveAndFlush(school);
 			LOG.info("Saved {}", school);
 			
 		});

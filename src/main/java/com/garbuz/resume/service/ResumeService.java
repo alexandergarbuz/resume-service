@@ -74,13 +74,14 @@ public class ResumeService {
 	
 	public List<Reference> findReferencesByLastAndFirstName(final String lastName, final String firstName) {
 		LOG.debug("Loading for {} {}", lastName, firstName);
-		List<Reference> references = this.referenceDao.findByResume_FirstNameAndResume_LastName(lastName, firstName);
+		List<Reference> references = this.referenceDao.findByResume_LastNameAndResume_FirstName(lastName, firstName);
 		LOG.info("Loaded {} references", CollectionUtils.size(references));
 		return references;
 	}
 	public List<Job> findJobsByLastAndFirstName(final String lastName, final String firstName) {
 		LOG.debug("Loading for {} {}", lastName, firstName);
-		List<Job> jobs = jobDao.findByResume_FirstNameAndResume_LastName(lastName, firstName);
+		
+		List<Job> jobs = jobDao.findByResume_LastNameAndResume_FirstName(lastName, firstName);
 		LOG.info("Loaded {} jobs", CollectionUtils.size(jobs));
 		return jobs;
 	}
