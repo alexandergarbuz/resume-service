@@ -6,6 +6,6 @@ public final class UIConstants {
 
 	public final static String DEFAULT_TEMPLATE = "contentTemplate";
 	
-	public final static String RESUME_PAGE = "resumeFragment";
-	public final static String WORK_HISTORY_PAGE = "workHistoryFragment";
+	public final static String RESUME_FRAGMENT = "resumeFragment";
+	public final static String WORK_HISTORY_FRAGMENT = "workHistoryFragment";
 }

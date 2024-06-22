@@ -63,7 +63,7 @@ public class WorkHistoryController {
 		ModelAndView mv = new ModelAndView();
 		String viewName = "resumePage";
 		mv.setViewName(viewName);
-		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.WORK_HISTORY_PAGE);
+		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.WORK_HISTORY_FRAGMENT);
 		mv.addObject("jobs", jobs);
 		
 		LOG.info("Displaying {} jobs", CollectionUtils.size(jobs));
