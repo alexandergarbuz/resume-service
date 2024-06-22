@@ -20,7 +20,7 @@ public class SummaryFactory {
 	}
 	
 	public Summary createDefaultSummarys(final Resume resume) {
-		Summary summary = dao.saveOrCreateNew(new Summary(
+		Summary summary = dao.saveAndFlush(new Summary(
 				resume,
 				"Looking for leadership position in a technology driven organization where I can utilize my problem solving, mentoring and communication skills.",
 				"Senior IT professional with more than 25 years of combined software development, leadership and management experience in insurance, healthcare, telecommunications, and e-commerce industries"

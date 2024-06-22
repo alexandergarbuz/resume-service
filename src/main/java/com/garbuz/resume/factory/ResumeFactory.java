@@ -19,7 +19,7 @@ public class ResumeFactory {
 	}
 	
 	public Resume createDefaultResume() {
-		Resume contactInformation = dao.saveOrCreateNew(new Resume("Alexander", "Garbuz"));
+		Resume contactInformation = dao.saveAndFlush(new Resume("Alexander", "Garbuz"));
 		LOG.info("Created {}", contactInformation);
 		return contactInformation;
 	}

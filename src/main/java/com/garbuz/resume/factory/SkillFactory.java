@@ -51,11 +51,11 @@ public class SkillFactory {
 		
 	}
 	protected SkillGroup createSkillGroup(final Resume resume, final String groupName, final List<String> skillsList)  {
-		SkillGroup group = skillGroupDao.saveOrCreateNew(new SkillGroup(resume,groupName));
+		SkillGroup group = skillGroupDao.saveAndFlush(new SkillGroup(resume,groupName));
 		LOG.info("Created {}", group);
 		List<Skill> savedSkills = new ArrayList<>();
 		skillsList.forEach(skillName-> {
-			Skill skill = skillDao.saveOrCreateNew(new Skill(skillName, group));
+			Skill skill = skillDao.saveAndFlush(new Skill(skillName, group));
 			savedSkills.add(skill);
 			LOG.info("Created {}", skill);
 		});

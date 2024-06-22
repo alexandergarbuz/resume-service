@@ -21,6 +21,7 @@ import com.garbuz.resume.factory.ReferenceFactory;
 import com.garbuz.resume.factory.ResumeFactory;
 import com.garbuz.resume.factory.SkillFactory;
 import com.garbuz.resume.factory.SummaryFactory;
+import com.garbuz.resume.repository.JobDao;
 import com.garbuz.resume.repository.ReferenceDao;
 import com.garbuz.resume.repository.ResumeDao;
 import com.garbuz.resume.repository.SkillGroupDao;
@@ -33,6 +34,8 @@ public class ResumeService {
 	private ResumeDao resumeDao;
 	@Autowired
 	private ReferenceDao referenceDao;
+	@Autowired
+	private JobDao jobDao;
 	@Autowired
 	private SkillGroupDao skillGroupDao;
 	@Autowired
@@ -58,33 +61,33 @@ public class ResumeService {
 
 	public Resume findResume(final Long id) {
 		LOG.info("Loading resume for {}", id);
-		Resume r = this.resumeDao.findCompleteResumeById(id);
+		Resume r = this.resumeDao.getReferenceById(id);
 		LOG.info("Loaded {} ", r);
 		return r;
 	}
 	public Resume saveOrCreateNew(final Resume resumeToSave) {
 		LOG.info("Saving {}", resumeToSave);
-		final Resume savedResume = this.resumeDao.saveOrCreateNew(resumeToSave);
+		final Resume savedResume = this.resumeDao.saveAndFlush(resumeToSave);
 		LOG.info("Saved {} ", savedResume);
 		return savedResume;
 	}
 	
 	public List<Reference> findReferencesByLastAndFirstName(final String lastName, final String firstName) {
 		LOG.debug("Loading for {} {}", lastName, firstName);
-		List<Reference> references = this.referenceDao.findReferencesByLastAndFirstName(lastName, firstName);
+		List<Reference> references = this.referenceDao.findByResume_FirstNameAndResume_LastName(lastName, firstName);
 		LOG.info("Loaded {} references", CollectionUtils.size(references));
 		return references;
 	}
 	public List<Job> findJobsByLastAndFirstName(final String lastName, final String firstName) {
 		LOG.debug("Loading for {} {}", lastName, firstName);
-		List<Job> jobs = this.referenceDao.findJobsByLastAndFirstName(lastName, firstName);
+		List<Job> jobs = jobDao.findByResume_FirstNameAndResume_LastName(lastName, firstName);
 		LOG.info("Loaded {} jobs", CollectionUtils.size(jobs));
 		return jobs;
 	}
 	public List<SkillGroup> findSkillsByResumeId(final Long resumeId) {
 		LOG.info("Loading skills for resumeId={}", resumeId);
 		
-		List<SkillGroup> skills = this.skillGroupDao.findlSkillsByResume(resumeId);
+		List<SkillGroup> skills = this.skillGroupDao.findByResumeId(resumeId);
 		
 		LOG.info("Loaded {} skills", CollectionUtils.size(skills));
 		return skills;
@@ -92,12 +95,12 @@ public class ResumeService {
 
 	public Resume initializeData() {
 		Resume resume = null;
-		long resumeCount = resumeDao.getCountOfResumes();
+		long resumeCount = resumeDao.count();
 		
 		if(resumeCount == 0) {
 			resume = generateData();
 		} else {
-			resume = resumeDao.getResumeWithLowestId();
+			resume = resumeDao.findFirstByOrderByIdAsc();
 		}
 		return resume;
 	}

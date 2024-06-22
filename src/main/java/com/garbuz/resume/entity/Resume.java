@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,7 +29,7 @@ public class Resume extends BaseEntity {
 	@Column(name = "last_name")
 	private String lastName;
 	
-	@OneToOne(mappedBy = "resume",  fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(mappedBy = "resume",  fetch = FetchType.LAZY)
 	private ContactInformation contactInformation;
 	
 	@OneToOne(mappedBy = "resume", fetch = FetchType.LAZY)

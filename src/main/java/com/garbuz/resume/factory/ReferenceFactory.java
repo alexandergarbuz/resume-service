@@ -28,7 +28,7 @@ public class ReferenceFactory {
 		references.add(new Reference(resume, "Aditya Prakash", "Aditya@Prakash.com", "555-555-5555", "Project Manager @ American Family Insurance"));
 		references.add(new Reference(resume, "Jeff Fletcher", "Jeff@Fletcher.com", "555-555-5555", "Sr. Database Developer @ CPM Healthgrades"));
 		references.forEach(reference -> {
-			Reference ref = dao.saveOrCreateNew(reference);
+			Reference ref = dao.saveAndFlush(reference);
 			LOG.info("Saved {}", ref);
 		});
 		return references;
