@@ -54,5 +54,31 @@ public class ResumeDao extends BaseDaoImpl<Resume> {
 		LOG.debug("Loaded {}", resume);
 		return resume;
 	}
-	
+
+    public long getCountOfResumes() {
+    	LOG.debug("Counting number of resumes");
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+        Root<Resume> root = criteriaQuery.from(Resume.class);
+        criteriaQuery.select(criteriaBuilder.count(root));
+        long count = getEntityManager().createQuery(criteriaQuery).getSingleResult();
+        LOG.debug("Found {}", count);
+        return count;
+    }
+    
+    public Resume getResumeWithLowestId() {
+    	LOG.debug("Getting resume with lowest id");
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Resume> criteriaQuery = criteriaBuilder.createQuery(Resume.class);
+        Root<Resume> root = criteriaQuery.from(Resume.class);
+
+        criteriaQuery.select(root);
+        criteriaQuery.orderBy(criteriaBuilder.asc(root.get(Resume_.id)));
+
+        Resume r = getEntityManager().createQuery(criteriaQuery)
+                            .setMaxResults(1)
+                            .getSingleResult();
+        LOG.debug("Found {} ", r);
+        return r;
+    }
 }

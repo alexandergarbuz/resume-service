@@ -19,17 +19,15 @@ public class InitController {
 	
 	@GetMapping("/data")
 	public ModelAndView showResume() {
-		Long resumeId = 1L;
-		
-		Resume resume = this.resumeService.findResume(resumeId);
-		if(resume == null) {
-			resume = resumeService.initializeData();
-		}
+//		Resume resume = resumeService.initializeData();
+//		return new ModelAndView("redirect:/resume/show/" + resume.getId());
+		Resume resume = resumeService.initializeData();
+
 		ModelAndView mv = new ModelAndView();
 		String viewName = "resumePage";
 		mv.setViewName(viewName);
 		mv.addObject("resume", resume);		
-		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.RESUME_PAGE);
+		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.RESUME_FRAGMENT);
 		return mv;
 	}
 	

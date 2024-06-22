@@ -4,7 +4,6 @@ INSERT INTO contact_information VALUES (1,1,'405 Burnt Sienna Dr.','Middleton','
 
 INSERT INTO summary VALUES (1,1,'Looking for leadership position in a technology driven organization where I can utilize my problem solving, mentoring and communication skills.','Senior IT professional with more than 25 years of combined software development, leadership and management experience in insurance, healthcare, telecommunications, and e-commerce industries');
 
-
 INSERT INTO education VALUES (1,1,'Cardinal Stritch University, Madison WI','Master of Business Administration','2006-06-01','2004-12-01','');
 INSERT INTO education VALUES (2,1,'Nizhny Novgorod State Architecture Academy, Nizhny Novgorod, Russia','Bachelor of Science in Civil Engineering and Managemen','1996-07-01','1991-09-01','Graduated with honors (GPA 4.0)');
 
@@ -17,8 +16,6 @@ INSERT INTO recommendation VALUES (3,1,'Alex is one of the best managers I have 
 INSERT INTO reference VALUES (1,1,'erick@hallick.com','Erick Hallick','555-555-5555','Executive VP of Operations @ CPM Healthgrades');
 INSERT INTO reference VALUES (2,1,'Aditya@Prakash.com','Aditya Prakash','555-555-5555','Project Manager @ American Family Insurance');
 INSERT INTO reference VALUES (3,1,'Jeff@Fletcher.com','Jeff Fletcher','555-555-5555','Sr. Database Developer @ CPM Healthgrades');
-
-
 
 INSERT INTO job VALUES (1,1,'Ford Credit','Remote','Sr. Java Developer / Consultant','2024-04-01','2021-08-01');
 INSERT INTO job VALUES (2,1,'CDW','Madison, WI','Sr. Java Developer','2021-06-01','2015-09-01');
@@ -90,7 +87,6 @@ INSERT INTO job_responsibility VALUES (54,11,'Mentored web designers on various 
 INSERT INTO job_responsibility VALUES (55,12,'Led and organized work processes on multiple construction sites. Managed the communication process and served as a single point of contact for the customers and subcontractors');
 INSERT INTO job_responsibility VALUES (56,12,'Organized and coordinated work of multiple organizations involved in the construction process');
 INSERT INTO job_responsibility VALUES (57,12,'Produced technical and financial documentation in accordance with the local laws and government regulations');
-
 
 INSERT INTO skill_group VALUES (1,1,'Languages');
 INSERT INTO skill_group VALUES (2,1,'Technologies');

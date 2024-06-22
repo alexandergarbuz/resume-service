@@ -29,7 +29,7 @@ public class ResumeController {
 		ModelAndView mv = new ModelAndView();
 		String viewName = "resumePage";
 		mv.setViewName(viewName);
-		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.RESUME_PAGE);
+		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.RESUME_FRAGMENT);
 		
 		Resume resume = this.resumeService.findResume(resumeId);
 		mv.addObject("resume", resume);
