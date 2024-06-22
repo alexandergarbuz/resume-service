@@ -1,6 +1,6 @@
--- DROP SCHEMA IF EXISTS resume_manager_db;
--- CREATE SCHEMA resume_manager_db;
--- USE resume_manager_db;
+DROP SCHEMA IF EXISTS resume_manager_db;
+CREATE SCHEMA resume_manager_db;
+USE resume_manager_db;
 
 -- ALTER DATABASE resume_manager_db 
 -- DEFAULT CHARACTER SET utf8 
@@ -8,10 +8,6 @@
 
 -- CREATE USER 'resume_user'@'%' IDENTIFIED BY 'resume_password';
 -- GRANT ALL PRIVILEGES ON resume_manager_db.* TO 'resume_user'@'%';
-
-
-CREATE DATABASE IF NOT EXISTS resume_manager_db;
-USE resume_manager_db;
 
 DROP TABLE IF EXISTS certification;
 DROP TABLE IF EXISTS certification_seq;
@@ -106,13 +102,13 @@ CREATE TABLE summary_seq (
 ) ENGINE=InnoDB;
 
 CREATE TABLE education (
-  end_date date DEFAULT NULL,
-  start_date date DEFAULT NULL,
   id bigint NOT NULL,
   resume_id bigint DEFAULT NULL,
-  comments varchar(255) DEFAULT NULL,
-  degree varchar(255) DEFAULT NULL,
   name varchar(255) DEFAULT NULL,
+  degree varchar(255) DEFAULT NULL,
+  end_date date DEFAULT NULL,
+  start_date date DEFAULT NULL,
+  comments varchar(255) DEFAULT NULL,
   PRIMARY KEY (id),
   KEY FK_Education_Resume (resume_id),
   CONSTRAINT FK_Education_Resume FOREIGN KEY (resume_id) REFERENCES resume (id)
@@ -123,13 +119,13 @@ CREATE TABLE education_seq (
 ) ENGINE=InnoDB;
 
 CREATE TABLE job (
-  end_date date DEFAULT NULL,
-  start_date date DEFAULT NULL,
   id bigint NOT NULL,
   resume_id bigint DEFAULT NULL,
   company_name varchar(255) DEFAULT NULL,
   location varchar(255) DEFAULT NULL,
   title varchar(255) DEFAULT NULL,
+  end_date date DEFAULT NULL,
+  start_date date DEFAULT NULL,
   PRIMARY KEY (id),
   KEY FK_Job_Resume (resume_id),
   CONSTRAINT FK_Job_Resume FOREIGN KEY (resume_id) REFERENCES resume (id)
@@ -209,3 +205,15 @@ CREATE TABLE skill_group_seq (
 CREATE TABLE skill_seq (
   next_val bigint DEFAULT NULL
 ) ENGINE=InnoDB;
+
+INSERT INTO resume_seq VALUES (1);
+INSERT INTO certification_seq VALUES (1);
+INSERT INTO contact_information_seq VALUES (1);
+INSERT INTO summary_seq VALUES (1);
+INSERT INTO education_seq VALUES (1);
+INSERT INTO job_responsibility_seq VALUES (1);
+INSERT INTO job_seq VALUES (1);
+INSERT INTO recommendation_seq VALUES (1);
+INSERT INTO reference_seq VALUES (1);
+INSERT INTO skill_group_seq VALUES (1);
+INSERT INTO skill_seq VALUES (1);

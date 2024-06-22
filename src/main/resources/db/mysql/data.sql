@@ -1,42 +1,37 @@
-
-USE resume_manager_db;
-
-INSERT INTO resume_seq VALUES (51);
-INSERT INTO certification_seq VALUES (51);
-INSERT INTO contact_information_seq VALUES (51);
-INSERT INTO summary_seq VALUES (51);
-INSERT INTO education_seq VALUES (101);
-INSERT INTO job_responsibility_seq VALUES (151);
-INSERT INTO job_seq VALUES (101);
-INSERT INTO recommendation_seq VALUES (101);
-INSERT INTO reference_seq VALUES (101);
-INSERT INTO skill_group_seq VALUES (101);
-INSERT INTO skill_seq VALUES (151);
-
 INSERT INTO resume VALUES (1,'Alexander','Garbuz');
-
-INSERT INTO certification VALUES ('2011-01-01',1,1,'University of Wisconsin, Madison','Master Certificate in Project Management');
 
 INSERT INTO contact_information VALUES (1,1,'405 Burnt Sienna Dr.','Middleton','alexander.garbuz@gmail.com','608-628-2448','WI','53562');
 
 INSERT INTO summary VALUES (1,1,'Looking for leadership position in a technology driven organization where I can utilize my problem solving, mentoring and communication skills.','Senior IT professional with more than 25 years of combined software development, leadership and management experience in insurance, healthcare, telecommunications, and e-commerce industries');
 
-INSERT INTO education VALUES ('2006-06-01','2004-12-01',1,1,'','Master of Business Administration','Cardinal Stritch University, Madison WI');
-INSERT INTO education VALUES ('1996-07-01','1991-09-01',2,1,'Graduated with honors (GPA 4.0)','Bachelor of Science in Civil Engineering and Managemen','Nizhny Novgorod State Architecture Academy, Nizhny Novgorod, Russia');
+
+INSERT INTO education VALUES (1,1,'Cardinal Stritch University, Madison WI','Master of Business Administration','2006-06-01','2004-12-01','');
+INSERT INTO education VALUES (2,1,'Nizhny Novgorod State Architecture Academy, Nizhny Novgorod, Russia','Bachelor of Science in Civil Engineering and Managemen','1996-07-01','1991-09-01','Graduated with honors (GPA 4.0)');
+
+INSERT INTO certification VALUES ('2011-01-01',1,1,'University of Wisconsin, Madison','Master Certificate in Project Management');
+
+INSERT INTO recommendation VALUES (1,1,'One of the most desirable characteristics in an employee is someone who takes complete ownership of the problem they are working on. It is very rare to find, but Alex had this in spades. I don\'t think a week went by without Alex knocking on my door with a new idea on how to improve the work we were doing and our company. Alex was asked to implement most of his ideas immediately and he made significant improvements to the processes and project management around our CRM database build projects. Communication and transparency with clients improved dramatically and I received several compliments regarding the improvements. When I declined to implement one of Alex\'s ideas he accepted my decision without issue. He was a joy to work with. I would hire Alex again without reservation.','Erick Hallick','Executive VP of Operations @ CPM Healthgrades','Managed Alexander directly');
+INSERT INTO recommendation VALUES (2,1,'Alex is focused and has a strategic approach to project management, which resulted in success deliverables assigned as part of the App migration program. Alex had shown responsiveness for the projects that he is responsible from end to end. During the App migration, program implementation I had pleasure to collaborate around agile principles, scrum framework including best project practices to ensure success of each other deliverables. He had shown great technical acumen that the project team members ran brainstorming ideas with him around challenges and blockers. Alex showed great people skills on how to motivate people or dial back when great necessary to make sure that project is completed on time. Alex would be great asset to any team.','Aditya Prakash','Project Manager @ American Family Insurance','Worked with Alexander on the same team');
+INSERT INTO recommendation VALUES (3,1,'Alex is one of the best managers I have had the pleasure to work for. He truly believes it is his responsibility to look out for his team and to remove obstacles so that they may succeed, as well as ensure that objectives are accomplished. When I started with CPM there was an environmental issue that was affecting my performance, and while Alex could not eliminate the issue he did come up with ways to mitigate it and he followed up to see if there was an improvement. Alex lead the expansion of the development team, doubling its size; and he also created a project management team. Through all of this, Alex kept a sense of humor and helped everyone on the teams manage heavy workloads and tight deadlines. I\'ve enjoyed working for Alex and look forward to more opportunities to do so.','Jeff Fletcher','Sr. Database Developer @ CPM Healthgrades','Reported directly to Alexander');
+
+INSERT INTO reference VALUES (1,1,'erick@hallick.com','Erick Hallick','555-555-5555','Executive VP of Operations @ CPM Healthgrades');
+INSERT INTO reference VALUES (2,1,'Aditya@Prakash.com','Aditya Prakash','555-555-5555','Project Manager @ American Family Insurance');
+INSERT INTO reference VALUES (3,1,'Jeff@Fletcher.com','Jeff Fletcher','555-555-5555','Sr. Database Developer @ CPM Healthgrades');
 
 
-INSERT INTO job VALUES ('2024-04-01','2021-08-01',1,1,'Ford Credit','Remote','Sr. Java Developer / Consultant');
-INSERT INTO job VALUES ('2021-06-01','2015-09-01',2,1,'CDW','Madison, WI','Sr. Java Developer');
-INSERT INTO job VALUES ('2019-07-01','2006-05-01',3,1,'Edgewood College','Madison, WI','Instructor – (Part-time)');
-INSERT INTO job VALUES ('2015-09-01','2013-02-01',4,1,'American Family Insurance','Madison, WI','Technical Lead / Consultant');
-INSERT INTO job VALUES ('2013-10-01','2010-11-01',5,1,'CPM HealthGrades','Madison, WI','Director of Database Development and Project Management ');
-INSERT INTO job VALUES ('2010-09-01','2007-05-01',6,1,'Amazon.com','Madison, WI','Sr. Software Developer / Architect');
-INSERT INTO job VALUES ('2006-05-01','2007-02-01',7,1,'TDS Telecom','Madison, WI','Technical Lead (3 month contract)');
-INSERT INTO job VALUES ('2007-02-01','2005-08-01',8,1,'Great Lakes Educational Loan Services Inc.','Madison, WI','Senior Programmer/Analyst');
-INSERT INTO job VALUES ('2005-08-01','2004-12-01',9,1,'Isthmus Group Inc.','Madison, WI','IT Consultant');
-INSERT INTO job VALUES ('2004-12-01','2002-02-01',10,1,'US Cellular.','Madison, WI','Programmer Analyst ');
-INSERT INTO job VALUES ('2002-02-01','2000-11-01',11,1,'Aesention','Madison, WI','Web Developer');
-INSERT INTO job VALUES ('2000-08-01','1996-06-01',12,1,'Promstroy Construction Ltd','Nizhny Novgorod, Russia','Project Manager');
+
+INSERT INTO job VALUES (1,1,'Ford Credit','Remote','Sr. Java Developer / Consultant','2024-04-01','2021-08-01');
+INSERT INTO job VALUES (2,1,'CDW','Madison, WI','Sr. Java Developer','2021-06-01','2015-09-01');
+INSERT INTO job VALUES (3,1,'Edgewood College','Madison, WI','Instructor – (Part-time)','2019-07-01','2006-05-01');
+INSERT INTO job VALUES (4,1,'American Family Insurance','Madison, WI','Technical Lead / Consultant','2015-09-01','2013-02-01');
+INSERT INTO job VALUES (5,1,'CPM HealthGrades','Madison, WI','Director of Database Development and Project Management ','2013-10-01','2010-11-01');
+INSERT INTO job VALUES (6,1,'Amazon.com','Madison, WI','Sr. Software Developer / Architect','2010-09-01','2007-05-01');
+INSERT INTO job VALUES (7,1,'TDS Telecom','Madison, WI','Technical Lead (3 month contract)','2006-05-01','2007-02-01');
+INSERT INTO job VALUES (8,1,'Great Lakes Educational Loan Services Inc.','Madison, WI','Senior Programmer/Analyst','2007-02-01','2005-08-01');
+INSERT INTO job VALUES (9,1,'Isthmus Group Inc.','Madison, WI','IT Consultant','2005-08-01','2004-12-01');
+INSERT INTO job VALUES (10,1,'US Cellular.','Madison, WI','Programmer Analyst ','2004-12-01','2002-02-01');
+INSERT INTO job VALUES (11,1,'Aesention','Madison, WI','Web Developer','2002-02-01','2000-11-01');
+INSERT INTO job VALUES (12,1,'Promstroy Construction Ltd','Nizhny Novgorod, Russia','Project Manager','2000-08-01','1996-06-01');
 
 INSERT INTO job_responsibility VALUES (1,1,'Developed and maintained a number of micro-services using Spring Boot and Oracle. Helped the team to migrate from ADFS (Active Directory Federation Service) to Azure AD; Participated in building POC for deploying services to GCP (Google Could Platform) utilizing Google Apigee platform as abstraction layer to provide access to backend service. Used S3 SDK to access and store objects in AWS storage;');
 INSERT INTO job_responsibility VALUES (2,1,'Led successful adaptation of Agile development practices such as test driven development, pair programming, iterative development, and continuous integration. Used GitHub, Jenkins, and Gradle to implement continuous integration/continues deployment environment. Utilized Checkmarx and FOSSA to ensure code quality and security compliance. Developed a suite of automated functional/acceptance tests using Postman. Built performance/load tests using Apache JMeter. Ensured targeted test coverage using JaCoCo code coverage reports;');
@@ -95,15 +90,6 @@ INSERT INTO job_responsibility VALUES (54,11,'Mentored web designers on various 
 INSERT INTO job_responsibility VALUES (55,12,'Led and organized work processes on multiple construction sites. Managed the communication process and served as a single point of contact for the customers and subcontractors');
 INSERT INTO job_responsibility VALUES (56,12,'Organized and coordinated work of multiple organizations involved in the construction process');
 INSERT INTO job_responsibility VALUES (57,12,'Produced technical and financial documentation in accordance with the local laws and government regulations');
-
-
-INSERT INTO recommendation VALUES (1,1,'One of the most desirable characteristics in an employee is someone who takes complete ownership of the problem they are working on. It is very rare to find, but Alex had this in spades. I don\'t think a week went by without Alex knocking on my door with a new idea on how to improve the work we were doing and our company. Alex was asked to implement most of his ideas immediately and he made significant improvements to the processes and project management around our CRM database build projects. Communication and transparency with clients improved dramatically and I received several compliments regarding the improvements. When I declined to implement one of Alex\'s ideas he accepted my decision without issue. He was a joy to work with. I would hire Alex again without reservation.','Erick Hallick','Executive VP of Operations @ CPM Healthgrades','Managed Alexander directly');
-INSERT INTO recommendation VALUES (2,1,'Alex is focused and has a strategic approach to project management, which resulted in success deliverables assigned as part of the App migration program. Alex had shown responsiveness for the projects that he is responsible from end to end. During the App migration, program implementation I had pleasure to collaborate around agile principles, scrum framework including best project practices to ensure success of each other deliverables. He had shown great technical acumen that the project team members ran brainstorming ideas with him around challenges and blockers. Alex showed great people skills on how to motivate people or dial back when great necessary to make sure that project is completed on time. Alex would be great asset to any team.','Aditya Prakash','Project Manager @ American Family Insurance','Worked with Alexander on the same team');
-INSERT INTO recommendation VALUES (3,1,'Alex is one of the best managers I have had the pleasure to work for. He truly believes it is his responsibility to look out for his team and to remove obstacles so that they may succeed, as well as ensure that objectives are accomplished. When I started with CPM there was an environmental issue that was affecting my performance, and while Alex could not eliminate the issue he did come up with ways to mitigate it and he followed up to see if there was an improvement. Alex lead the expansion of the development team, doubling its size; and he also created a project management team. Through all of this, Alex kept a sense of humor and helped everyone on the teams manage heavy workloads and tight deadlines. I\'ve enjoyed working for Alex and look forward to more opportunities to do so.','Jeff Fletcher','Sr. Database Developer @ CPM Healthgrades','Reported directly to Alexander');
-
-INSERT INTO reference VALUES (1,1,'erick@hallick.com','Erick Hallick','555-555-5555','Executive VP of Operations @ CPM Healthgrades');
-INSERT INTO reference VALUES (2,1,'Aditya@Prakash.com','Aditya Prakash','555-555-5555','Project Manager @ American Family Insurance');
-INSERT INTO reference VALUES (3,1,'Jeff@Fletcher.com','Jeff Fletcher','555-555-5555','Sr. Database Developer @ CPM Healthgrades');
 
 
 INSERT INTO skill_group VALUES (1,1,'Languages');
@@ -180,7 +166,4 @@ INSERT INTO skill VALUES (63,7,' Docker');
 INSERT INTO skill VALUES (64,7,' AWS');
 INSERT INTO skill VALUES (65,7,' Subversion');
 INSERT INTO skill VALUES (66,7,' Git');
-
-
-
 
