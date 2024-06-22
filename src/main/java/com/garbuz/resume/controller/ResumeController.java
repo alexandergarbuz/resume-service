@@ -22,6 +22,8 @@ import com.garbuz.resume.service.ResumeService;
 @RequestMapping("/resume")
 public class ResumeController {
 	
+	private static final String VIEW_RESUME_PAGE = "resumePage";
+
 	private static final Logger LOG = LoggerFactory.getLogger(ResumeController.class);
 
 	@Autowired
@@ -31,8 +33,7 @@ public class ResumeController {
 	public ModelAndView showAll() {
 		LOG.info("Show all resumes");
 		ModelAndView mv = new ModelAndView();
-		String viewName = "resumePage";
-		mv.setViewName(viewName);
+		mv.setViewName(VIEW_RESUME_PAGE);
 		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.RESUME_LIST_FRAGMENT);
 		
 		List<Resume> resumes = this.resumeService.findAllResumes();
@@ -46,22 +47,20 @@ public class ResumeController {
 		LOG.info("Show resume request for resumeId={}", id);
 		Long resumeId = Long.valueOf(id);
 		ModelAndView mv = new ModelAndView();
-		String viewName = "resumePage";
-		mv.setViewName(viewName);
+		mv.setViewName(VIEW_RESUME_PAGE);
 		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.RESUME_FRAGMENT);
 		
-		Resume resume = this.resumeService.findResume(resumeId);
+		Resume resume = this.resumeService.findCompleteResumeById(resumeId);
 		mv.addObject("resume", resume);
 		LOG.info("Displaying {}", resume);
 		return mv;
 	}
     @GetMapping("/create")
-    public ModelAndView createResumeForm(Model model) {
-		String viewName = "resumePage";
+    public ModelAndView showCreateResumeForm() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject(new Resume());
-		mv.setViewName(viewName);
-		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.RESUME_EDIT_FRAGMENT);
+		mv.setViewName(VIEW_RESUME_PAGE);
+		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.RESUME_CREATE_FRAGMENT);
 		return mv;
     }
 
@@ -72,20 +71,33 @@ public class ResumeController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editResumeForm(@PathVariable("id") Long id, Model model) {
-        Resume resume = resumeService.findResume(id);
-        model.addAttribute("resume", resume);
-        return "resumeForm";
+    public ModelAndView showEditResumeForm(@PathVariable("id") Long id) {
+    	LOG.info("Displaying resume for {}", id);
+        Resume resume = resumeService.findResumeById(id);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject(resume);
+		mv.setViewName(VIEW_RESUME_PAGE);
+		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.RESUME_EDIT_FRAGMENT);
+		return mv;
     }
 
-    @PostMapping("/edit/{id}")
-    public String updateResume(@PathVariable("id") Long id, @ModelAttribute("resume") Resume resume) {
-        resume.setId(id);
+    @PostMapping("/edit")
+    public String updateResume(@ModelAttribute("resume") Resume resume) {
         resumeService.saveOrCreateNew(resume);
         return "redirect:/resume/showAll";
     }
 
     @GetMapping("/delete/{id}")
+    public ModelAndView showDeleteResumeForm(@PathVariable("id") Long id) {
+        Resume resume = resumeService.findResumeById(id);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject(resume);
+		mv.setViewName(VIEW_RESUME_PAGE);
+		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.RESUME_DELETE_FRAGMENT);
+		return mv;
+    }
+    
+    @PostMapping("/delete/{id}")
     public String deleteResume(@PathVariable("id") Long id) {
         resumeService.remove(id);
         return "redirect:/resume/showAll";

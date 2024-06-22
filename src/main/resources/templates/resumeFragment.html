@@ -1,5 +1,6 @@
 <div class="container">
 
+		<div th:if="${resume.contactInformation != null}">
 		<div id="contactInformationSection">
 			<h1 th:text="${resume.firstName} + ' ' + ${resume.lastName}">Name</h1>
 			<ul>
@@ -8,11 +9,14 @@
 			<li><i class="fa fa-phone"></i> <span th:text="${resume.contactInformation.phone}"/></li>
 			</ul>
 		</div>
+		</div>
+		<div th:if="${resume.summary != null}">
 		<div id="summarySection">
 			<h2>Objective</h2>
 			<div><span th:text="${resume.summary.objective}"/></div>
 			<h2>Summary</h2>
 			<div><span th:text="${resume.summary.summary}"/></div>
+		</div>
 		</div>
 		<div id="skillsSection">
 			<h1>Skills</h1>

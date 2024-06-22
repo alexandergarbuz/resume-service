@@ -1,20 +1,28 @@
 <div class="container">
 
     <div class="container mt-5">
-        <h1 class="mb-4">Resume Form</h1>
-        <form th:action="@{/resume/create}" th:object="${resume}" method="post">
-            <input type="hidden" th:field="*{id}" />
-            <div class="form-group">
-                <label for="firstName">First Name:</label>
-                <input type="text" class="form-control" id="firstName" th:field="*{firstName}" />
+    <h2>Edit Resume</h2>
+    <form th:action="@{/resume/edit}" th:object="${resume}" method="post" class="form-horizontal">
+    	<input type="hidden" th:field="*{id}" />
+        <div class="form-group">
+            <label for="firstName" class="col-sm-2 control-label">First Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="firstName" th:field="*{firstName}" placeholder="First Name">
             </div>
-            <div class="form-group">
-                <label for="lastName">Last Name:</label>
-                <input type="text" class="form-control" id="lastName" th:field="*{lastName}" />
+        </div>
+        <div class="form-group">
+            <label for="lastName" class="col-sm-2 control-label">Last Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="lastName" th:field="*{lastName}" placeholder="Last Name">
             </div>
-            <!-- Add more fields as necessary -->
-            <button type="submit" class="btn btn-primary">Save</button>
-            <a class="btn btn-default" th:href="@{/resume/showAll}">Cancel</a>
-        </form>
+        </div>
+        <!-- Add other fields as necessary -->
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a class="btn btn-default" th:href="@{/resume/showAll}">Cancel</a>
+            </div>
+        </div>
+    </form>
     </div>
 </div>

@@ -58,12 +58,19 @@ public class ResumeService {
 	public List<Resume> findAllResumes() {
 		LOG.info("Loading all resumes");
 		List<Resume> resumes = this.resumeDao.findAll();
-		LOG.info("Loaded {} ", resumes);
+		LOG.info("Loaded {} resumes", CollectionUtils.size(resumes));
 		return resumes;
 	}
-	public Resume findResume(final Long id) {
+	
+	public Resume findCompleteResumeById(final Long id) {
 		LOG.info("Loading resume for {}", id);
 		Resume r = this.resumeDao.findCompleteResumeById(id);
+		LOG.info("Loaded {} ", r);
+		return r;
+	}
+	public Resume findResumeById(final Long id) {
+		LOG.info("Loading resume for {}", id);
+		Resume r = this.resumeDao.findById(id);
 		LOG.info("Loaded {} ", r);
 		return r;
 	}
@@ -74,7 +81,7 @@ public class ResumeService {
 		return savedResume;
 	}
 	public void remove(final Long id) {
-		Resume resume = findResume(id);
+		Resume resume = findResumeById(id);
 		if(resume != null) {
 			remove(resume);
 		}

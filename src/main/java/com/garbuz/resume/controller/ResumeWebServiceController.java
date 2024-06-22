@@ -36,7 +36,7 @@ public class ResumeWebServiceController {
     @GetMapping("/show/{id}")
     public ResponseEntity<Resume> showResume(@PathVariable(name="id", required = true) final String id) {
         Long resumeId = Long.valueOf(id);
-        Resume resume = this.resumeService.findResume(resumeId);
+        Resume resume = this.resumeService.findCompleteResumeById(resumeId);
         LOG.debug("Showing resume for {}", resumeId);
         return new ResponseEntity<>(resume, HttpStatus.OK);
     }

@@ -30,7 +30,7 @@ public class Resume extends BaseEntity {
 	@Column(name = "last_name")
 	private String lastName;
 	
-	@OneToOne(mappedBy = "resume",  fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(mappedBy = "resume",  fetch = FetchType.LAZY)
 	private ContactInformation contactInformation;
 	
 	@OneToOne(mappedBy = "resume", fetch = FetchType.LAZY)

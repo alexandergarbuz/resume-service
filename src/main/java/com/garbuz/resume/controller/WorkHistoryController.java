@@ -38,7 +38,7 @@ public class WorkHistoryController {
 		Long resumeId = Long.valueOf(id);
 
 	
-		Resume resume = this.resumeService.findResume(resumeId);
+		Resume resume = this.resumeService.findCompleteResumeById(resumeId);
 		final String lastName = resume.getLastName();
 		final String firstName = resume.getFirstName();
 		
