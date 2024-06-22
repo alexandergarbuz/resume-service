@@ -25,7 +25,7 @@ public class CertificationFactory {
 	
 	public List<Certification> createDefaultCertifications(final Resume resume) {
 		List<Certification> certifications = new ArrayList<>(); 
-		certifications.add(dao.saveOrCreateNew(new Certification("Master Certificate in Project Management", "University of Wisconsin, Madison", LocalDate.of(2011, 1, 1), resume))); 
+		certifications.add(dao.saveAndFlush(new Certification("Master Certificate in Project Management", "University of Wisconsin, Madison", LocalDate.of(2011, 1, 1), resume))); 
 
 		LOG.info("Created {}", certifications);
 		return certifications;

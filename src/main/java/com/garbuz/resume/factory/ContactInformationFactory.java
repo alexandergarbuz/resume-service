@@ -20,7 +20,7 @@ public class ContactInformationFactory {
 	}
 	
 	public ContactInformation createDefaultContactInformations(final Resume resume) {
-		ContactInformation contactInformation = dao.saveOrCreateNew(new ContactInformation(resume, "alexander.garbuz@gmail.com","608-628-2448", "405 Burnt Sienna Dr.", "Middleton", "WI", "53562"));
+		ContactInformation contactInformation = dao.saveAndFlush(new ContactInformation(resume, "alexander.garbuz@gmail.com","608-628-2448", "405 Burnt Sienna Dr.", "Middleton", "WI", "53562"));
 		LOG.info("Created {}", contactInformation);
 		return contactInformation;
 	}

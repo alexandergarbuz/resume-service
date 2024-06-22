@@ -130,7 +130,7 @@ public class JobFactory {
 	protected Job createJob(Resume resume, String title, String companyName, String location, LocalDate start, LocalDate end, String[] responsibilities) {
 		final Job job = jobDao.saveAndFlush(new Job(resume, title, companyName, location, start, end));
 		for(String r : responsibilities) {
-			jobResponsibilityDao.saveOrCreateNew(new JobResponsibility(r, job));
+			jobResponsibilityDao.saveAndFlush(new JobResponsibility(r, job));
 		}
 		LOG.info("Created {}", job);
 		return job;

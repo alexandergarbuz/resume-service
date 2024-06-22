@@ -13,8 +13,6 @@ import jakarta.transaction.Transactional;
 @Transactional
 public interface JobDao extends JpaRepository<Job, Long> {
 
-	public List<Job> findByResume_FirstNameAndResume_LastName(final String lastName, final String firstName);
+	public List<Job> findByResume_LastNameAndResume_FirstName(final String lastName, final String firstName);
 	
-	public List<Job> findlByResumeId(final Long resumeId);
-
 }
