@@ -1,0 +1,20 @@
+<div class="container">
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Resume Form</h1>
+        <form th:action="@{/resume/create}" th:object="${resume}" method="post">
+            <input type="hidden" th:field="*{id}" />
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" class="form-control" id="firstName" th:field="*{firstName}" />
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" class="form-control" id="lastName" th:field="*{lastName}" />
+            </div>
+            <!-- Add more fields as necessary -->
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a class="btn btn-default" th:href="@{/resume/showAll}">Cancel</a>
+        </form>
+    </div>
+</div>

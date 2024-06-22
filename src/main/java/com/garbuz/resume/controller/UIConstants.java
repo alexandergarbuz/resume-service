@@ -7,5 +7,7 @@ public final class UIConstants {
 	public final static String DEFAULT_TEMPLATE = "contentTemplate";
 	
 	public final static String RESUME_FRAGMENT = "resumeFragment";
+	public final static String RESUME_LIST_FRAGMENT = "resumeListFragment";
+	public final static String RESUME_EDIT_FRAGMENT = "resumeEditFragment";
 	public final static String WORK_HISTORY_FRAGMENT = "workHistoryFragment";
 }

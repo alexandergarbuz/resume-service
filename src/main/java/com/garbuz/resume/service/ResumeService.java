@@ -55,7 +55,12 @@ public class ResumeService {
 	@Autowired
 	private JobFactory jobFactory;
 	
-
+	public List<Resume> findAllResumes() {
+		LOG.info("Loading all resumes");
+		List<Resume> resumes = this.resumeDao.findAll();
+		LOG.info("Loaded {} ", resumes);
+		return resumes;
+	}
 	public Resume findResume(final Long id) {
 		LOG.info("Loading resume for {}", id);
 		Resume r = this.resumeDao.findCompleteResumeById(id);
@@ -68,7 +73,17 @@ public class ResumeService {
 		LOG.info("Saved {} ", savedResume);
 		return savedResume;
 	}
-	
+	public void remove(final Long id) {
+		Resume resume = findResume(id);
+		if(resume != null) {
+			remove(resume);
+		}
+	}
+	public void remove(final Resume resumeToRemove) {
+		LOG.info("Removing {}", resumeToRemove);
+		this.resumeDao.remove(resumeToRemove);
+		LOG.info("Removed");
+	}	
 	public List<Reference> findReferencesByLastAndFirstName(final String lastName, final String firstName) {
 		LOG.debug("Loading for {} {}", lastName, firstName);
 		List<Reference> references = this.referenceDao.findReferencesByLastAndFirstName(lastName, firstName);

@@ -1,0 +1,29 @@
+<div class="container">
+
+		<div id="resumeListSection">
+			<h1 class="mb-4">Resumes</h1>
+			<table class="table table-striped table-bordered">
+		        <thead>
+		            <tr>
+		                <th>ID</th>
+		                <th>First Name</th>
+		                <th>Last Name</th>
+		                <th><a th:href="@{/resume/create}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Create New Resume</a></th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <tr th:each="resume : ${resumeList}">
+		                <td th:text="${resume.id}">1</td>
+		                <td th:text="${resume.firstName}">John</td>
+		                <td th:text="${resume.lastName}">Doe</td>
+		                <td>
+		                    <a class="btn btn-info btn-sm" th:href="@{/resume/show/{id}(id=${resume.id})}"><i class="fa fa-search"></i> View</a>
+		                    <a class="btn btn-info btn-sm" th:href="@{/resume/edit/{id}(id=${resume.id})}"><i class="fa  fa-pencil"></i> Edit</a>
+		                    <a class="btn btn-danger btn-sm" th:href="@{/resume/delete/{id}(id=${resume.id})}"><i class="fa fa-remove"></i> Delete</a>
+		                </td>
+		            </tr>
+		        </tbody>
+	        </table>
+			
+		</div>
+</div>

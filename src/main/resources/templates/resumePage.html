@@ -5,8 +5,11 @@
 	<title>Resume</title>
     <link rel="stylesheet" th:href="@{/css/default.css}">
     <link rel="stylesheet" th:href="@{/bootstrap-3.4.1/css/bootstrap.css}">
+    <!-- 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    
+     -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -68,10 +71,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><i class="fa fa-home"></i></a>
+            <a class="navbar-brand" th:href="@{/}"><i class="fa fa-home"></i> Start</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
+                
+                <li><a th:href="@{/resume/showAll}"><i class="fa fa-search"></i> View All</a></li>
+                
                 <li><a href="#summarySection"><i class="fa fa-file"></i> Summary</a></li>
                 <li><a href="#workHistorySection"><i class="fa fa-list"></i> Work Experience</a></li>
                 <li><a href="#recommendationsSection"><i class="fa fa-comments"></i> Recommendations</a></li>
