@@ -30,6 +30,15 @@ blockquote {
 	list-style-type: none;
 }
 
+#educationSection dl, #certificationSection dl {
+	padding-left: 30px;
+	padding-top: 10px;
+}
+
+#educationSection dd, #certificationSection dd {
+	font-style: italic;
+}
+
 #referencesSection ul li {
 	list-style-type: none;
 	padding-bottom: 5px;
