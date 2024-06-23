@@ -4,7 +4,7 @@
 			<h1 th:text="${resume.firstName} + ' ' + ${resume.lastName}">Name</h1>
 			<ul>
 			<li><i class="fa fa-home"></i> <span th:text="${resume.contactInformation.address}"/> <span th:text="${resume.contactInformation.city}"/>, <span th:text="${resume.contactInformation.state}"/> <span th:text="${resume.contactInformation.zip}"/></li>
-			<li><i class="fa fa-envelope"></i> <a th:href="'mailto:'+${resume.contactInformation.email}" th:text="${resume.contactInformation.email}"/></a></li>
+			<li><i class="fa fa-envelope"></i> <a th:href="'mailto:'+${resume.contactInformation.email}" th:text="${resume.contactInformation.email}"/></li>
 			<li><i class="fa fa-phone"></i> <span th:text="${resume.contactInformation.phone}"/></li>
 			</ul>
 		</div>
@@ -48,12 +48,10 @@
 		<div id="workHistorySection">
 			<h1>Work History</h1>
 			<div th:each="job: ${resume.jobs}" th:id="'job' +${job.id}">
-				<p>
 					<strong><span th:text="${job.title} + ' @ ' + ${job.companyName} + ' (' + ${job.start.year} +' - ' + ${job.end.year} + ')' "/></strong> 
 					<ul>
 						<li th:each="jr:${job.responsibilities}"><p th:text="${jr.text}"/></li>
 					</ul>
-				</p>
 			</div>
 		</div>
 		<div id="recommendationsSection">
@@ -75,7 +73,7 @@
 			<div th:each="r : ${resume.references}" th:id="'reference' +${r.id}">
 				<p><strong><span  th:text="${r.name}"/></strong> (<span th:text="${r.title}"/>)</p>
 				<ul>
-					<li><i class="fa fa-envelope"></i> <a th:href="'mailto:'+${r.email}" th:text="${r.email}"/></a></li>
+					<li><i class="fa fa-envelope"></i> <a th:href="'mailto:'+${r.email}" th:text="${r.email}"/></li>
 					<li><i class="fa fa-phone"></i> <span th:text="${r.phone}"/></li>
 				</ul>
 			</div>
