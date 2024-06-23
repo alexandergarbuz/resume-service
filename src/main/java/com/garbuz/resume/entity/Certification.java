@@ -17,8 +17,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="Certification")
 @JsonIgnoreProperties({"resume"})
-public class Certification extends BaseEntity{
-	private static final long serialVersionUID = 1L;
+public class Certification {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)	

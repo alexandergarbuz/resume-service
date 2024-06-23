@@ -19,8 +19,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="Skill_Group")
 @JsonIgnoreProperties({"resume"})
-public class SkillGroup extends BaseEntity{
-	private static final long serialVersionUID = 1L;
+public class SkillGroup  {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)	

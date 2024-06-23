@@ -20,8 +20,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Job")
 @JsonIgnoreProperties({"resume"})
-public class Job extends BaseEntity{
-	private static final long serialVersionUID = 1L;
+public class Job  {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)	

@@ -17,8 +17,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "job_responsibility")
 @JsonIgnoreProperties({"job"})
-public class JobResponsibility extends BaseEntity{
-	private static final long serialVersionUID = 1L;
+public class JobResponsibility  {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)	

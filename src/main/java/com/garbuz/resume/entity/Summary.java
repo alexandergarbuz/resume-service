@@ -17,8 +17,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="Summary")
 @JsonIgnoreProperties("resume")
-public class Summary extends BaseEntity {
-	private static final long serialVersionUID = 1L;
+public class Summary {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)	
