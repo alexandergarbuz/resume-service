@@ -27,11 +27,11 @@
 			<dl>
 				<div th:each="school : ${resume.educations}" th:id="'education' +${school.id}">
 					<dt>
-						<p><strong><span  th:text="${school.name} + ' (' + ${school.startDate.year} + ' - ' + ${school.endDate.year} + ')'"/></strong></p>
+						<span th:text="${school.degree}"/>
 					</dt>
 					<dd>
-						<p><em><span th:text="${school.degree}"/></em></p>
-						<p><span th:text="${school.comments}"/></p>
+						<span  th:text="${school.name} + ' (' + ${school.startDate.year} + ' - ' + ${school.endDate.year} + ')'"/><br/>
+						<span th:text="${school.comments}"/>
 					</dd>
 				</div>
 			</dl>
@@ -39,16 +39,16 @@
 		<div id="certificationSection">
 			<h1>Certifications</h1>
 			<dl>
-				<div th:each="r : ${resume.certifications}" th:id="'education' +${r.id}">
-					<dt><p><strong><span  th:text="${r.name}"/></strong></p></dt>
-					<dd><p><em><span th:text="${r.authority} + ' (' + ${r.date.year} + ')'"/></em></p></dd>
+				<div th:each="r : ${resume.certifications}" th:id="'certification' +${r.id}">
+					<dt><span  th:text="${r.name}"/></dt>
+					<dd><span th:text="${r.authority} + ' (' + ${r.date.year} + ')'"/></dd>
 				</div>		
 			</dl>
 		</div>
 		<div id="workHistorySection">
 			<h1>Work History</h1>
 			<div th:each="job: ${resume.jobs}" th:id="'job' +${job.id}">
-					<strong><span th:text="${job.title} + ' @ ' + ${job.companyName} + ' (' + ${job.start.year} +' - ' + ${job.end.year} + ')' "/></strong> 
+					<h3><span th:text="${job.title} + ' @ ' + ${job.companyName} + ' (' + ${job.start.year} +' - ' + ${job.end.year} + ')' "/></h3> 
 					<ul>
 						<li th:each="jr:${job.responsibilities}"><p th:text="${jr.text}"/></li>
 					</ul>
