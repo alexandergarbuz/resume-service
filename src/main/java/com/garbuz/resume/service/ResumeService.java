@@ -73,23 +73,20 @@ public class ResumeService {
 	}
 	
 	public List<Reference> findReferencesByLastAndFirstName(final String lastName, final String firstName) {
-		LOG.debug("Loading for {} {}", lastName, firstName);
+		LOG.info("Loading for {} {}", lastName, firstName);
 		List<Reference> references = this.referenceDao.findByResume_LastNameAndResume_FirstName(lastName, firstName);
 		LOG.info("Loaded {} references", CollectionUtils.size(references));
 		return references;
 	}
 	public List<Job> findJobsByLastAndFirstName(final String lastName, final String firstName) {
-		LOG.debug("Loading for {} {}", lastName, firstName);
-		
+		LOG.info("Loading for {} {}", lastName, firstName);
 		List<Job> jobs = jobDao.findByResume_LastNameAndResume_FirstName(lastName, firstName);
 		LOG.info("Loaded {} jobs", CollectionUtils.size(jobs));
 		return jobs;
 	}
 	public List<SkillGroup> findSkillsByResumeId(final Long resumeId) {
 		LOG.info("Loading skills for resumeId={}", resumeId);
-		
 		List<SkillGroup> skills = this.skillGroupDao.findByResumeId(resumeId);
-		
 		LOG.info("Loaded {} skills", CollectionUtils.size(skills));
 		return skills;
 	}	
@@ -107,6 +104,8 @@ public class ResumeService {
 	}
 	public Resume generateData() {
 
+		LOG.info("Generating data");
+		
 		Resume resume = resumeFactory.createDefaultResume();
 		resume.setContactInformation(contactInformationFactory.createDefaultContactInformations(resume));
 		resume.setSummary(summaryFactory.createDefaultSummarys(resume));
@@ -116,6 +115,9 @@ public class ResumeService {
 		resume.setCertifications(certificationFactory.createDefaultCertifications(resume));
 		resume.setRecommendations(recommendationFactory.createDefaultRecommendations(resume));
 		resume.setReferences(referenceFactory.createDefaultReferences(resume));
+		
+		LOG.info("Data generation complete");
+		
 		return resume;
 	}
 }
