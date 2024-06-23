@@ -1,107 +1,92 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 	<title>Resume</title>
     <link rel="stylesheet" th:href="@{/css/default.css}">
-    <link rel="stylesheet" th:href="@{/bootstrap-3.4.1/css/bootstrap.css}">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+    	rel="stylesheet" 
+    	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+    	crossorigin="anonymous"/>
+
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-    <style>
-        body {
-            padding-top: 70px; /* Adjust based on the height of your navbar */
-        }
-        blockquote {
-        	font-weight: normal;
-        }
-        
-        #contactInformationSection ul {
- 			list-style-type:none; 
- 			padding-left: 30px; 
- 			padding-top: 20px; 
- 			padding-bottom: 20px;
-        }
-        #contactInformationSection ul li {
- 			padding-top: 10px; 
-        }
-        
-        #skillsSection ul {
-        	list-style-type:none; 
-        } 
-        
-        #referencesSection ul li {
-        	list-style-type:none;
-        	padding-bottom: 5px;
-        }
-        p.recommendationAutor {
-        	padding-left: 30px;
-        	padding-top: 10px;
-        }
-        #recommendationsSection div.recommendation {
-        	
-        	border-left: 4px solid #000;
-        	border-radius:5px; 
-        	background-color: #f5f5f5;
-        	margin-top: 20px; 
-        	margin-bottom: 20px; 
-        	padding-top: 10px; 
-        	padding-bottom: 5px; 
-        	padding-left: 30px;
-        	padding-right: 10px;
-        	font-size: 120%;
-        }
-    </style> 
+
     
 </head>
 <body>
+<div id="topNavigationSection" class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+      <div class="container">
+        <a class="navbar-brand" th:href="@{/}"><i class="fa fa-home"></i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" th:href="@{/#summarySection}"><i class="fa fa-file"></i> Summary</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/#workHistorySection}"><i class="fa fa-list"></i> Work Experience</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/#recommendationsSection}"><i class="fa fa-comments"></i> Recommendations</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/#referencesSection	}"><i class="fa fa-user"></i> References</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-gear"></i> Microservices API 
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li class="dropdown-header">Micro Services</li>
+                
+              <li><a class="dropdown-item" th:href="@{/api/resume/show/1}" target="_blank">Resume <i class="fa fa-external-link"></i></a></li>
+              <li><a class="dropdown-item" th:href="@{/api/resume/skills/1}" target="_blank">Skills <i class="fa fa-external-link"></i></a></li>
+              <li><a class="dropdown-item" th:href="@{/api/resume/references?firstName=Alexander&lastName=Garbuz}" target="_blank">References <i class="fa fa-external-link"></i></a></li>
+              <li><a class="dropdown-item" th:href="@{/api/resume/work-history/Garbuz/Alexander}" target="_blank">Work History <i class="fa fa-external-link"></i></a></li>
+                
+              <li><hr class="dropdown-divider"></li>
+              <li class="dropdown-header">Swagger</li>
+              <li><a class="dropdown-item" th:href="@{/swagger-ui.html}" target="_blank">Swagger (OpenAPI ) <i class="fa fa-external-link"></i></a></li>
+                        
+              <li><hr class="dropdown-divider"></li>
+              <li role="separator" class="divider"></li>
+              <li class="dropdown-header">MVC Client</li>
+              <li><a  class="dropdown-item"th:href="@{/work-history/show/1}">Work History</a></li>
+              </ul>
+            </li>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><i class="fa fa-home"></i></a>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
         </div>
-        <div class="collapse navbar-collapse" id="navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#summarySection"><i class="fa fa-file"></i> Summary</a></li>
-                <li><a href="#workHistorySection"><i class="fa fa-list"></i> Work Experience</a></li>
-                <li><a href="#recommendationsSection"><i class="fa fa-comments"></i> Recommendations</a></li>
-                <li><a href="#referencesSection"><i class="fa fa-user"></i> References</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i> Microservices API <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-	                    <li class="dropdown-header">Micro Services</li>
-	                    <li><a th:href="@{/api/resume/show/1}" target="_blank">Resume <i class="fa fa-external-link"></i></a></li>
-                        <li><a th:href="@{/api/resume/skills/1}" target="_blank">Skills <i class="fa fa-external-link"></i></a></li>
-                        <li><a th:href="@{/api/resume/references?firstName=Alexander&lastName=Garbuz}" target="_blank">References <i class="fa fa-external-link"></i></a></li>
-                        <li><a th:href="@{/api/resume/work-history/Garbuz/Alexander}" target="_blank">Work History <i class="fa fa-external-link"></i></a></li>
-                        
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-header">Swagger</li>
-                        <li><a th:href="@{/swagger-ui.html}" target="_blank">Swagger (OpenAPI ) <i class="fa fa-external-link"></i></a></li>
-                        
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-header">MVC Client</li>
-                        <li><a th:href="@{/work-history/show/1}">Work History</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+      </div>
+    </nav>
+</div>
 
 
 <div th:insert="~{${contentTemplate}}"></div>
 
 
+
+
+<div id="footerSection" class="container border-top mt-5 py-5">
+    <div>
+      		&copy; 2024&nbsp;
+			<a href="http://garbuz.com/" class="text-body-secondary" target="_blank"><i class="fa fa-internet-explorer"></i></a>&nbsp;
+			<a href="https://www.linkedin.com/in/garbuz/" class="text-body-secondary" target="_blank"><i class="fa fa-linkedin-square"></i></a>&nbsp;
+			<a href="mailto:alexander.garbuz@gmail.com" class="text-body-secondary"><i class="fa fa-envelope"></i></a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+	crossorigin="anonymous"></script>
 </body>
 </html>

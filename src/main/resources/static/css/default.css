@@ -1,6 +1,52 @@
+/*
 body, h1, h2, h3, td, p, div, span, li, a {
 	font-family: Verdana, Arial, serif;
 }
+
 body, h1, h2, h3, td, p, div, span, li {
 	color: #000;
+}
+*/
+body {
+	padding-top: 70px; /* Adjust based on the height of your navbar */
+}
+
+blockquote {
+	font-weight: normal;
+}
+
+#contactInformationSection ul {
+	list-style-type: none;
+	padding-left: 30px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#contactInformationSection ul li {
+	padding-top: 10px;
+}
+
+#skillsSection ul {
+	list-style-type: none;
+}
+
+#referencesSection ul li {
+	list-style-type: none;
+	padding-bottom: 5px;
+}
+
+p.recommendationAutor {
+	padding-left: 30px;
+	padding-top: 10px;
+}
+
+#recommendationsSection div.recommendation {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	padding-left: 30px;
+	padding-right: 10px;
+	font-style:italic;
+	font-size: 100%;
 }
