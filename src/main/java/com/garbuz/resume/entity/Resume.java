@@ -15,8 +15,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 @Entity
 @Table(name="Resume")
-public class Resume extends BaseEntity {
-	private static final long serialVersionUID = 1L;
+public class Resume {
 
 	@Id
 	@Column(name="id")

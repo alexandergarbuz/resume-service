@@ -16,8 +16,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="Reference")
 @JsonIgnoreProperties({ "resume" })
-public class Reference extends BaseEntity{
-	private static final long serialVersionUID = 1L;
+public class Reference  {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)	
