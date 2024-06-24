@@ -1,0 +1,26 @@
+
+<div id="skillsarusel">
+    <div id="textCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+        	<div th:each="sg, status: ${resume.skills}">
+            	<button type="button" data-bs-target="#textCarousel" th:data-bs-slide-to="${sg.id}" th:class="(${status.first}) ? 'active' : ''" th:aria-current="(${status.first}) ? 'true' : ''" th:aria-label="${sg.name}"></button>
+            </div>
+        </div>
+        <div class="carousel-inner">
+            <div th:each="sg, status: ${resume.skills}" th:class="(${status.first}) ? 'carousel-item active' : 'carousel-item'">
+                <div class="d-block w-80 text-center p-5">
+                    <h3><span th:text="${sg.name}"/></h3>
+                    <p><span th:each="s, status :${sg.skills}" th:text="${s.name} + (${status.last} ? '' : ', ')"/></p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#textCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#textCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true1"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
