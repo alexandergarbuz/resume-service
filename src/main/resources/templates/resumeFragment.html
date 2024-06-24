@@ -1,4 +1,4 @@
-<div class="container">
+<div id="resumeSection" class="container">
 
 		<div id="contactInformationSection">
 			<h1 th:text="${resume.firstName} + ' ' + ${resume.lastName}">Name</h1>
@@ -15,7 +15,7 @@
 			<div><span th:text="${resume.summary.summary}"/></div>
 		</div>
 		<div id="skillsSection">
-			<h1>Skills</h1>
+			<h2>Skills</h2>
 			<ul>
 				<li th:each="sg: ${resume.skills}" th:id="'skillGroup' +${sg.id}">
 					<p><strong><span  th:text="${sg.name} + ':'"/></strong> <span th:each="s, status :${sg.skills}" th:text="${s.name} + (${status.last} ? ';' : ', ')"/></p>
@@ -23,7 +23,7 @@
 			</ul>
 		</div>
 		<div id="educationSection">
-			<h1>Education</h1>
+			<h2>Education</h2>
 			<dl>
 				<div th:each="school : ${resume.educations}" th:id="'education' +${school.id}">
 					<dt>
@@ -37,7 +37,7 @@
 			</dl>
 		</div>
 		<div id="certificationSection">
-			<h1>Certifications</h1>
+			<h2>Certifications</h2>
 			<dl>
 				<div th:each="r : ${resume.certifications}" th:id="'certification' +${r.id}">
 					<dt><span  th:text="${r.name}"/></dt>
@@ -46,7 +46,7 @@
 			</dl>
 		</div>
 		<div id="workHistorySection">
-			<h1>Work History</h1>
+			<h2>Work History</h2>
 			<div th:each="job: ${resume.jobs}" th:id="'job' +${job.id}">
 					<h3><span th:text="${job.title} + ' @ ' + ${job.companyName} + ' (' + ${job.start.year} +' - ' + ${job.end.year} + ')' "/></h3> 
 					<ul>
@@ -55,7 +55,7 @@
 			</div>
 		</div>
 		<div id="recommendationsSection">
-			<h1>Recommendations</h1>
+			<h2>Recommendations</h2>
 			<div th:each="r : ${resume.recommendations}" th:id="'recommendation' +${r.id}">
 				<div class="recommendation">
 					<i class="fa fa-angle-double-left"></i> <span th:text="${r.text}"/> <i class="fa fa-angle-double-right"></i>
@@ -68,10 +68,10 @@
 			</div>
 		</div>
 		<div id="referencesSection">
-			<h1>References</h1>
+			<h2>References</h2>
 			<p>(Contact information will be available upon request)</p>
 			<div th:each="r : ${resume.references}" th:id="'reference' +${r.id}">
-				<p><strong><span  th:text="${r.name}"/></strong> (<span th:text="${r.title}"/>)</p>
+				<p><span class="reference-name" th:text="${r.name}"/> (<span class="reference-title" th:text="${r.title}"/>)</p>
 				<ul>
 					<li><i class="fa fa-envelope"></i> <a th:href="'mailto:'+${r.email}" th:text="${r.email}"/></li>
 					<li><i class="fa fa-phone"></i> <span th:text="${r.phone}"/></li>

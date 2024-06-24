@@ -1,14 +1,12 @@
 <div class="container">
 		<div id="workHistorySection">
-			<h1>Work History</h1>
+			<h2>Work History</h2>
 			<p>This data is pulled from another REST service and then converted into web page.</p>
 			<div th:each="job: ${jobs}" th:id="'job' +${job.id}">
-				<p>
-					<strong><span th:text="${job.title} + ' @ ' + ${job.companyName}"/></strong><br/>
-					<span th:text="${job.location}"/> (<span th:text="${job.start}"/> - <span th:text="${job.end}"/>)
+					<h4 th:text="${job.title} + ' @ ' + ${job.companyName}"/></h4>
+					<p class="job-location"><span th:text="${job.location}"/> (<span th:text="${job.start}"/> - <span th:text="${job.end}"/>)</p>
 					<ul>
-						<li th:each="jr:${job.responsibilities}"><p th:text="${jr.text}"/></li>
+						<li th:each="jr:${job.responsibilities}" th:text="${jr.text}"/>
 					</ul>
-				</p>
 			</div>
 </div>

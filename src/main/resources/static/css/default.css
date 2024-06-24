@@ -44,6 +44,15 @@ blockquote {
 	padding-bottom: 5px;
 }
 
+#referencesSection span.reference-name {
+	font-weight: bold;
+	color: var(--bs-gray-900);
+}
+#referencesSection span.reference-title {
+	font-style: italic;
+	color: var(--bs-gray-700);
+}
+
 p.recommendationAutor {
 	padding-left: 30px;
 	padding-top: 10px;
@@ -58,4 +67,10 @@ p.recommendationAutor {
 	padding-right: 10px;
 	font-style:italic;
 	font-size: 100%;
+}
+
+#workHistorySection p.job-location {
+	padding-left: 10px;
+	font-style: italic;
+	color: var(--bs-gray-800);
 }
