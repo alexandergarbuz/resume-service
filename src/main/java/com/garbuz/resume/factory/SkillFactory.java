@@ -31,13 +31,14 @@ public class SkillFactory {
 	public List<SkillGroup> createDefaulsSkills(final Resume resume) {
 		
 		List<SkillGroup> skills = new ArrayList<>();
-		skills.add(createGroup(resume, "Languages", "Java, C#, Visual Basic, Visual Basic .NET, PHP, HTML/DHTML, XML/XSL, SQL, CSS, JavaScript, VBScript, CFML, UML"));
-		skills.add(createGroup(resume, "Technologies", "J2EE, JSP, Servlets, JavaBeans, JDBC, EJB, ASP, ASP.NET, CGI, ADO, ColdFusion"));
+		skills.add(createGroup(resume, "Languages", "Java, PHP, SQL, HTML, XML, XSL, CSS, JavaScript, CFML, UML"));
+		skills.add(createGroup(resume, "Technologies", "REST API, API Gateways, J2EE, JSP, Servlets, JPA, JDBC"));
 		skills.add(createGroup(resume, "Databases", "Microsoft SQL, Oracle, DB2, MySQL"));
 		skills.add(createGroup(resume, "OS", "Microsoft Windows, Linux"));
-		skills.add(createGroup(resume, "Servers", "IIS, Apache, Tomcat, JBoss WildFly, New Atlanta ServletExec, JRun, WebLogic"));
-		skills.add(createGroup(resume, "Frameworks", "Struts, Spring, Spring Boot, Hibernate, iBATIS SQL Maps, iBATIS DAO, JUnit, Apache Cactus, EasyMock, Mockito, Selenium, Arquillian"));
-		skills.add(createGroup(resume, "Tools", "IBM Rational Application Developer (RAD), IBM Web Sphere Application Developer Studio (WSAD), Eclipse, IntelliJ IDEA, NetBeans, iReports, VisualCaffe, Borland JBuilder, Ant, Maven, Cruise Control, Continuum, Jenkins, Docker, AWS, Subversion, Git"));
+		skills.add(createGroup(resume, "Servers", "IIS, Apache, Tomcat, WildFly, IBM WebSphere Liberty"));
+		skills.add(createGroup(resume, "Frameworks", "Spring, Spring Boot, Struts, Hibernate, JUnit, Apache Cactus, EasyMock, Mockito, Selenium, Arquillian, jQuery"));
+		skills.add(createGroup(resume, "Tools", "Maven, Ant, Gradle, Jenkins, Docker, AWS, Subversion, GitHub, Eclipse, IntelliJ IDEA, Apache JMeter"));
+		skills.add(createGroup(resume, "Methodologies", "Agile, Extreme programming, Scrum, Kanban"));
 		
 		return skills;
 	}

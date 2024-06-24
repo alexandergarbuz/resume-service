@@ -29,24 +29,38 @@ public class JobFactory {
 
 	public List<Job> createDefaultJobs(final Resume resume) {
 		List<Job> jobs = new ArrayList<>();
-		jobs.add(createJob(resume, "Sr. Java Developer / Consultant", "Ford Credit", "Remote", LocalDate.of(2021, 8, 1), LocalDate.of(2024, 4, 1),
+		jobs.add(createJob(resume, "Sr. Java Developer", "Ford Credit", "Remote", LocalDate.of(2021, 8, 1), LocalDate.of(2024, 4, 1),
 			new String[] {
-				"Developed and maintained a number of micro-services using Spring Boot and Oracle. Helped the team to migrate from ADFS (Active Directory Federation Service) to Azure AD; Participated in building POC for deploying services to GCP (Google Could Platform) utilizing Google Apigee platform as abstraction layer to provide access to backend service. Used S3 SDK to access and store objects in AWS storage;",
-				"Led successful adaptation of Agile development practices such as test driven development, pair programming, iterative development, and continuous integration. Used GitHub, Jenkins, and Gradle to implement continuous integration/continues deployment environment. Utilized Checkmarx and FOSSA to ensure code quality and security compliance. Developed a suite of automated functional/acceptance tests using Postman. Built performance/load tests using Apache JMeter. Ensured targeted test coverage using JaCoCo code coverage reports;",
-				"Maintained legacy Java web application utilizing Servlets, Velocity templates, jQuery, DB2 and IBM WebSphere Liberty server;",
-				"Actively participated in project planning and management, created estimates, and provided status reports to management. Planned, organized and led meetings and training sessions. Mentored less experienced developers, conducted design and code reviews, performed analysis for senior management;", 
-				"Provided on-call support;"
+				"Developed and maintained several REST API microservices using JSON, Java 11, Spring Boot, Hibernate, JPA and Oracle databases following company Service-Oriented Architecture and Application Design guidelines and coding standards;",
+				"Implemented continuous integration/continuous deployment (CI/CD) environments using GitHub, Jenkins, Docker, and Gradle, ensuring streamlined software delivery processes;",
+				"Used Pivotal Cloud Foundry (PCF) platform to build, deploy and manage applications in Azure cloud environment;",
+				"Ensured code quality and security compliance by utilizing SonarQube, Checkmarx and FOSSA for code analysis, and developed a suite of automated functional/acceptance tests using Postman;",
+				"Built performance/load tests using Apache JMeter and monitored application performance post-enhancements;",
+				"Maintained a legacy Java web application utilizing Servlets, Velocity templates, JavaScript, jQuery, DB2 database, and IBM WebSphere Liberty server;",
+				"Used a variety of APIs and libraries such as Apache Commons, Lombok, Log4j to expedite the development process and avoid code duplication;",
+				"Utilized various design patterns to effectively design software that is easy to support and maintain;",
+				"Worked on migration from ADFS (Active Directory Federation Services) to Azure AD, enhancing authentication and access control mechanisms;",
+				"Participated in building a proof of concept (POC) for deploying services to Google Cloud Platform (GCP) utilizing Google Apigee as an abstraction layer to provide access to backend services;",
+				"Leveraged AWS S3 SDK to efficiently access and store objects in Amazon S3, optimizing data management processes;",
+				"Led the successful adaptation of Agile development practices, including test-driven development, pair programming, iterative development, and continuous integration, resulting in improved software quality and development efficiency;",
+				"Successfully trained team members on Agile practices, fostering a collaborative and efficient working environment;",
+				"Actively participated in project planning and management, providing accurate estimates and status reports to management;",
+				"Organized and led meetings and training sessions, mentoring less experienced developers, conducting design and code reviews, and providing insightful analysis for senior management;",
+				"Provided on-call support, ensuring the reliability and availability of critical systems;"
 		}));
 		jobs.add(createJob(resume, "Sr. Java Developer", "CDW", "Madison, WI", LocalDate.of(2015, 9, 1), LocalDate.of(2021, 6, 1),
 			new String[] {
 				"Worked on a number of projects delivering both new functionality as well as providing maintenance and support for the existing applications;",
-				"Helped define technical requirements and estimated assigned tasks. Used JPA and Hibernate to store and retrieve information from MS SQL Server databases. Used Prime Faces JSF implementation to build responsive UI layer for web based applications.",
-				"Developed a number of RESTful web services to share information between multiple applications and platforms (web and mobile);",
-				"Utilized Agile development practices such as test driven development, iterative development, continuous integration. Designed and developed functional testing framework using Arquillian and Selenium. Used Maven and Jenkins to set up continuous integration environment builds. Ensured targeted test coverage using JaCoCo code coverage reports integrated into Maven builds;",
+				"Assisted in defining technical requirements and estimating technical tasks;",
+				"Utilized Prime Faces JSF implementation to build responsive UI layer for web based applications. Leveraged Java 8, JPA and Hibernate to store and retrieve information from MS SQL Server databases;",
+				"Developed REST web services to facilitate seamless information exchange between various applications and platforms, including web and mobile;",
+				"Utilized Agile development practices such as test driven development, iterative development, continuous integration. Designed and developed functional testing framework using Arquillian and Selenium. Used Maven and Jenkins to set up continuous integration environment builds. Ensured targeted test coverage using JaCoCo  code coverage reports integrated into Maven builds;",
+				"Redesigned existing functional testing framework using Arquillian, Selenium WebDriver, and JUnit to simplify the process of writing functional tests by testers who may not have solid Java development skills;",
 				"Worked closely with the product owners and customers and participated in all phases of the project delivery starting with the project initiation, requirements gathering and analysis, estimating, as well as developing and testing of the delivered functionality;",
-				"Participated in the hiring process, perform initial technical screening on the phone and conduct in-person interviews;",
-				"Worked with contractors, conducted code reviews, mentored less experienced developers;",
-				"Provided on-call support for the clients. Used DynaTrace to document and troubleshoot issues with the applications we supported."
+				"Participated in the hiring process, conducting initial technical screenings over the phone and leading in-person interviews;",
+				"Built automated client presentation builder application for the sales team;",
+				"Collaborated with contractors, conducted code reviews, and provided mentorship to junior developers;",
+				"Provided on-call support for clients, utilizing DynaTrace to document and troubleshoot application issues;"
 		}));
 		jobs.add(createJob(resume, "Instructor – (Part-time)", "Edgewood College", "Madison, WI", LocalDate.of(2006, 5, 1), LocalDate.of(2019, 7, 1),
 				new String[] {

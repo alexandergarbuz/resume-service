@@ -23,7 +23,11 @@ blockquote {
 }
 
 #contactInformationSection ul li {
-	padding-top: 10px;
+	padding-top: 5px;
+}
+
+#summarySection p{
+	padding-left: 30px;
 }
 
 #skillsSection ul {
