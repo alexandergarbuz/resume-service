@@ -57,10 +57,6 @@ blockquote {
 	color: var(--bs-gray-700);
 }
 
-p.recommendationAutor {
-	padding-left: 30px;
-	padding-top: 10px;
-}
 
 #recommendationsSection div.recommendation {
 	margin-top: 20px;
@@ -72,6 +68,25 @@ p.recommendationAutor {
 	font-style:italic;
 	font-size: 100%;
 }
+
+#recommendationsSection div.recommendation-avatar-block {
+	display:flex;
+	align-items: center;
+}
+
+#recommendationsSection p.recommendation-autor {
+	padding-left: 10px;
+	padding-top: 10px;
+}
+#recommendationsSection img {
+	border-radius:50%;
+	border:1px solid var(--bs-gray-500);
+	max-width: 60px; /* Limit maximum width to 150 pixels */
+	max-height: 60px; /* Limit maximum height to 150 pixels */
+	width: auto; /* Allow the width to adjust proportionally */
+	height: auto; /* Allow the height to adjust proportionally */
+}
+
 
 #workHistorySection p.job-location {
 	padding-left: 10px;
