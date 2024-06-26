@@ -31,6 +31,10 @@ public class Recommendation  {
 	private String authorTitle;
 	@Column(name="relationship")
 	private String relationship;
+	@Column(name="linked_in_url")
+	private String linkedInUrl;
+	@Column(name="avatar_url")
+	private String avatarUrl;
 	@Column(name="text", length = 1000)
 	private String text;	
 	
@@ -38,12 +42,14 @@ public class Recommendation  {
 	public Recommendation() {
 	}
 
-	public Recommendation(Resume resume, String author, String authorTitle, String relationship, String text) {
+	public Recommendation(Resume resume, String author, String authorTitle, String relationship, String text, String linkedInUrl, String avatarUrl) {
 		this.resume = resume;
 		this.author = author;
 		this.authorTitle = authorTitle;
 		this.relationship = relationship;
 		this.text = text;
+		this.linkedInUrl = linkedInUrl;
+		this.avatarUrl = avatarUrl;
 	}
 
 	public Long getId() {
@@ -83,9 +89,26 @@ public class Recommendation  {
 	public void setText(String text) {
 		this.text = text;
 	}
+	
+	public String getLinkedInUrl() {
+		return linkedInUrl;
+	}
+
+	public void setLinkedInUrl(String linkedInUrl) {
+		this.linkedInUrl = linkedInUrl;
+	}
+
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(author, authorTitle, id, relationship, text);
+		return Objects.hash(author, authorTitle, avatarUrl, id, linkedInUrl, relationship, text);
 	}
 
 	@Override
@@ -98,15 +121,14 @@ public class Recommendation  {
 			return false;
 		Recommendation other = (Recommendation) obj;
 		return Objects.equals(author, other.author) && Objects.equals(authorTitle, other.authorTitle)
-				&& Objects.equals(id, other.id) && Objects.equals(relationship, other.relationship)
+				&& Objects.equals(avatarUrl, other.avatarUrl) && Objects.equals(id, other.id)
+				&& Objects.equals(linkedInUrl, other.linkedInUrl) && Objects.equals(relationship, other.relationship)
 				&& Objects.equals(text, other.text);
 	}
 
 	@Override
 	public String toString() {
 		return "Recommendation [id=" + id + ", author=" + author + ", authorTitle=" + authorTitle + ", relationship="
-				+ relationship + ", text=" + text + "]";
+				+ relationship + ", linkedInUrl=" + linkedInUrl + ", avatarUrl=" + avatarUrl + ", text=" + text + "]";
 	}
-
-	
 }

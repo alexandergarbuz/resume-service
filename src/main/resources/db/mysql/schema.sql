@@ -155,6 +155,8 @@ CREATE TABLE recommendation (
   author varchar(255) DEFAULT NULL,
   author_title varchar(255) DEFAULT NULL,
   relationship varchar(255) DEFAULT NULL,
+  avatar_url VARCHAR(255) DEFAULT NULL,
+  linked_in_url VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (id),
   KEY FK_Recommendation_Resume (resume_id),
   CONSTRAINT FK_Recommendation_Resume FOREIGN KEY (resume_id) REFERENCES resume (id)
