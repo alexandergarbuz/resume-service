@@ -3,16 +3,16 @@
 		<div id="contactInformationSection">
 			<h1 th:text="${resume.firstName} + ' ' + ${resume.lastName}">Name</h1>
 			<ul>
-				<li><i class="fa fa-home"></i> <span th:text="${resume.contactInformation.address}"/> <span th:text="${resume.contactInformation.city}"/>, <span th:text="${resume.contactInformation.state}"/> <span th:text="${resume.contactInformation.zip}"/></li>
-				<li><i class="fa fa-envelope"></i> <a th:href="'mailto:'+${resume.contactInformation.email}" th:text="${resume.contactInformation.email}"/></li>
-				<li><i class="fa fa-phone"></i> <span th:text="${resume.contactInformation.phone}"/></li>
+				<li><i class="fa fa-home"></i> <span th:text="${resume.address}"/> <span th:text="${resume.city}"/>, <span th:text="${resume.state}"/> <span th:text="${resume.zip}"/></li>
+				<li><i class="fa fa-envelope"></i> <a th:href="'mailto:'+${resume.email}" th:text="${resume.email}"/></li>
+				<li><i class="fa fa-phone"></i> <span th:text="${resume.phone}"/></li>
 			</ul>
 		</div>
 		<div id="summarySection">
 			<h2>Objective</h2>
-			<p th:text="${resume.summary.objective}"/></p>
+			<p th:text="${resume.objective}"/></p>
 			<h3>Summary</h3>
-			<p th:text="${resume.summary.summary}"/></p>
+			<p th:text="${resume.summary}"/></p>
 		</div>
 		<div id="skillsSection">
 			<h2>Skills</h2>

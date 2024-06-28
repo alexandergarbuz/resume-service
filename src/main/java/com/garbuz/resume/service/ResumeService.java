@@ -13,14 +13,12 @@ import com.garbuz.resume.entity.Reference;
 import com.garbuz.resume.entity.Resume;
 import com.garbuz.resume.entity.SkillGroup;
 import com.garbuz.resume.factory.CertificationFactory;
-import com.garbuz.resume.factory.ContactInformationFactory;
 import com.garbuz.resume.factory.EducationFactory;
 import com.garbuz.resume.factory.JobFactory;
 import com.garbuz.resume.factory.RecommendationFactory;
 import com.garbuz.resume.factory.ReferenceFactory;
 import com.garbuz.resume.factory.ResumeFactory;
 import com.garbuz.resume.factory.SkillFactory;
-import com.garbuz.resume.factory.SummaryFactory;
 import com.garbuz.resume.repository.JobDao;
 import com.garbuz.resume.repository.ReferenceDao;
 import com.garbuz.resume.repository.ResumeDao;
@@ -40,10 +38,6 @@ public class ResumeService {
 	private SkillGroupDao skillGroupDao;
 	@Autowired
 	private ResumeFactory resumeFactory;
-	@Autowired
-	private SummaryFactory summaryFactory;
-	@Autowired
-	private ContactInformationFactory contactInformationFactory;
 	@Autowired
 	private CertificationFactory certificationFactory;
 	
@@ -107,8 +101,6 @@ public class ResumeService {
 		LOG.info("Generating data");
 		
 		Resume resume = resumeFactory.createDefaultResume();
-		resume.setContactInformation(contactInformationFactory.createDefaultContactInformations(resume));
-		resume.setSummary(summaryFactory.createDefaultSummarys(resume));
 		resume.setSkills(skillFactory.createDefaulsSkills(resume));
 		resume.setJobs(jobFactory.createDefaultJobs(resume));
 		resume.setEducations(educationFactory.createDefaultSchools(resume));
