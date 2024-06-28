@@ -12,12 +12,6 @@ USE resume_manager_db;
 DROP TABLE IF EXISTS certification;
 DROP TABLE IF EXISTS certification_seq;
 
-DROP TABLE IF EXISTS contact_information;
-DROP TABLE IF EXISTS contact_information_seq;
-
-DROP TABLE IF EXISTS summary;
-DROP TABLE IF EXISTS summary_seq;
-
 DROP TABLE IF EXISTS education;
 DROP TABLE IF EXISTS education_seq;
 
@@ -47,6 +41,14 @@ CREATE TABLE resume (
   id bigint NOT NULL,
   first_name varchar(255) DEFAULT NULL,
   last_name varchar(255) DEFAULT NULL,
+  objective varchar(500) DEFAULT NULL,
+  summary varchar(1000) DEFAULT NULL,
+  address varchar(255) DEFAULT NULL,
+  city varchar(255) DEFAULT NULL,
+  email varchar(255) DEFAULT NULL,
+  phone varchar(255) DEFAULT NULL,
+  state varchar(2) DEFAULT NULL,
+  zip varchar(5) DEFAULT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
@@ -69,37 +71,6 @@ CREATE TABLE certification_seq (
   next_val bigint DEFAULT NULL
 ) ENGINE=InnoDB;
 
-CREATE TABLE contact_information (
-  id bigint NOT NULL,
-  resume_id bigint DEFAULT NULL,
-  address varchar(255) DEFAULT NULL,
-  city varchar(255) DEFAULT NULL,
-  email varchar(255) DEFAULT NULL,
-  phone varchar(255) DEFAULT NULL,
-  state varchar(2) DEFAULT NULL,
-  zip varchar(5) DEFAULT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY UK_Contact_information_Resume (resume_id),
-  CONSTRAINT FK_Contact_information_Resume FOREIGN KEY (resume_id) REFERENCES resume (id)
-) ENGINE=InnoDB;
-
-CREATE TABLE contact_information_seq (
-  next_val bigint DEFAULT NULL
-) ENGINE=InnoDB;
-
-CREATE TABLE summary (
-  id bigint NOT NULL,
-  resume_id bigint DEFAULT NULL,
-  objective varchar(500) DEFAULT NULL,
-  summary varchar(1000) DEFAULT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY UK_Summary_Resume (resume_id),
-  CONSTRAINT FK_Summary_Resume FOREIGN KEY (resume_id) REFERENCES resume (id)
-) ENGINE=InnoDB;
-
-CREATE TABLE summary_seq (
-  next_val bigint DEFAULT NULL
-) ENGINE=InnoDB;
 
 CREATE TABLE education (
   id bigint NOT NULL,
@@ -210,8 +181,6 @@ CREATE TABLE skill_seq (
 
 INSERT INTO resume_seq VALUES (1);
 INSERT INTO certification_seq VALUES (1);
-INSERT INTO contact_information_seq VALUES (1);
-INSERT INTO summary_seq VALUES (1);
 INSERT INTO education_seq VALUES (1);
 INSERT INTO job_responsibility_seq VALUES (1);
 INSERT INTO job_seq VALUES (1);
