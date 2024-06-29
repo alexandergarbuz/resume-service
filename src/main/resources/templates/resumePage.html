@@ -20,7 +20,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item"><a class="nav-link" aria-current="page" th:href="@{/#summarySection}"><i class="fa fa-file"></i> Summary</a></li>
+            <li class="nav-item"><a class="nav-link" aria-current="page" th:href="@{/#}"><i class="fa fa-file"></i> Summary</a></li>
+            <li class="nav-item"><a class="nav-link" aria-current="page" th:href="@{/#educationSection}"><i class="fa fa-graduation-cap"></i> Education</a></li>
             <li class="nav-item"><a class="nav-link" th:href="@{/#workHistorySection}"><i class="fa fa-list"></i> Work History</a></li>
             <li class="nav-item"><a class="nav-link" th:href="@{/#recommendationsSection}"><i class="fa fa-comments"></i> Recommendations</a></li>
             <li class="nav-item"><a class="nav-link" th:href="@{/#referencesSection	}"><i class="fa fa-user"></i> References</a></li>
@@ -30,8 +31,10 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li class="dropdown-header">Micro Services</li>
-	              <li><a class="dropdown-item" th:href="@{/api/resume/show/1}" target="_blank">Resume <i class="fa fa-external-link"></i></a></li>
+	              <li><a class="dropdown-item" th:href="@{/api/resume/show/1}" target="_blank">Complete Resume <i class="fa fa-external-link"></i></a></li>
 	              <li><a class="dropdown-item" th:href="@{/api/resume/skills/1}" target="_blank">Skills <i class="fa fa-external-link"></i></a></li>
+	              <li><a class="dropdown-item" th:href="@{/api/resume/educations?firstName=Alexander&lastName=Garbuz}" target="_blank">Education<i class="fa fa-external-link"></i></a></li>
+	              <li><a class="dropdown-item" th:href="@{/api/resume/recommendations?firstName=Alexander&lastName=Garbuz}" target="_blank">Recommendations <i class="fa fa-external-link"></i></a></li>
 	              <li><a class="dropdown-item" th:href="@{/api/resume/references?firstName=Alexander&lastName=Garbuz}" target="_blank">References <i class="fa fa-external-link"></i></a></li>
 	              <li><a class="dropdown-item" th:href="@{/api/resume/work-history/Garbuz/Alexander}" target="_blank">Work History <i class="fa fa-external-link"></i></a></li>
 	              <li><hr class="dropdown-divider"></li>

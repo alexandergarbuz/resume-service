@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.garbuz.resume.entity.Education;
 import com.garbuz.resume.entity.Job;
+import com.garbuz.resume.entity.Recommendation;
 import com.garbuz.resume.entity.Reference;
 import com.garbuz.resume.entity.Resume;
 import com.garbuz.resume.entity.SkillGroup;
@@ -19,7 +21,9 @@ import com.garbuz.resume.factory.RecommendationFactory;
 import com.garbuz.resume.factory.ReferenceFactory;
 import com.garbuz.resume.factory.ResumeFactory;
 import com.garbuz.resume.factory.SkillFactory;
+import com.garbuz.resume.repository.EducationDao;
 import com.garbuz.resume.repository.JobDao;
+import com.garbuz.resume.repository.RecommendationDao;
 import com.garbuz.resume.repository.ReferenceDao;
 import com.garbuz.resume.repository.ResumeDao;
 import com.garbuz.resume.repository.SkillGroupDao;
@@ -31,7 +35,11 @@ public class ResumeService {
 	@Autowired
 	private ResumeDao resumeDao;
 	@Autowired
+	private EducationDao educationDao;
+	@Autowired
 	private ReferenceDao referenceDao;
+	@Autowired
+	private RecommendationDao recommendationDao;
 	@Autowired
 	private JobDao jobDao;
 	@Autowired
@@ -65,7 +73,18 @@ public class ResumeService {
 		LOG.info("Saved {} ", savedResume);
 		return savedResume;
 	}
-	
+	public List<Education> findEducationsByLastAndFirstName(final String lastName, final String firstName) {
+		LOG.info("Loading for {} {}", lastName, firstName);
+		List<Education> educations = this.educationDao.findByResume_LastNameAndResume_FirstName(lastName, firstName);
+		LOG.info("Loaded {} Education", CollectionUtils.size(educations));
+		return educations;
+	}	
+	public List<Recommendation> findRecommendationsByLastAndFirstName(final String lastName, final String firstName) {
+		LOG.info("Loading for {} {}", lastName, firstName);
+		List<Recommendation> recommendations = this.recommendationDao.findByResume_LastNameAndResume_FirstName(lastName, firstName);
+		LOG.info("Loaded {} recommendations", CollectionUtils.size(recommendations));
+		return recommendations;
+	}
 	public List<Reference> findReferencesByLastAndFirstName(final String lastName, final String firstName) {
 		LOG.info("Loading for {} {}", lastName, firstName);
 		List<Reference> references = this.referenceDao.findByResume_LastNameAndResume_FirstName(lastName, firstName);
