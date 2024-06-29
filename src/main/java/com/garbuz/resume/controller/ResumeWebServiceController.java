@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.garbuz.resume.entity.Education;
 import com.garbuz.resume.entity.Job;
+import com.garbuz.resume.entity.Recommendation;
 import com.garbuz.resume.entity.Reference;
 import com.garbuz.resume.entity.Resume;
 import com.garbuz.resume.entity.SkillGroup;
@@ -43,7 +45,25 @@ public class ResumeWebServiceController {
         LOG.debug("Showing resume for {}", resumeId);
         return new ResponseEntity<>(resume, HttpStatus.OK);
     }
-
+    
+    @Operation(summary = "View education by first and last name")
+    @GetMapping("/educations")
+    public ResponseEntity<List<Education>> showEducations(
+            @RequestParam(name="firstName") String firstName,
+            @RequestParam(name="lastName") final String lastName) {
+        final List<Education> educations = this.resumeService.findEducationsByLastAndFirstName(lastName, firstName);
+        return new ResponseEntity<>(educations, HttpStatus.OK);
+    }
+    
+    @Operation(summary = "View recommendations by first and last name")
+    @GetMapping("/recommendations")
+    public ResponseEntity<List<Recommendation>> showRecommendations(
+            @RequestParam(name="firstName") String firstName,
+            @RequestParam(name="lastName") final String lastName) {
+        final List<Recommendation> references = this.resumeService.findRecommendationsByLastAndFirstName(lastName, firstName);
+        return new ResponseEntity<>(references, HttpStatus.OK);
+    }
+    
     @Operation(summary = "View references by first and last name")
     @GetMapping("/references")
     public ResponseEntity<List<Reference>> showReferences(
