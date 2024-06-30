@@ -48,6 +48,7 @@ jobs:
           mkdir -p target/classes
           echo "git.commit.sha=${{ github.sha }}" >> target/classes/version.properties
           echo "git.commit.message=${{ github.event.head_commit.message }}" >> target/classes/version.properties
+          mkdir -p src/main/resources/statis/templates/
           echo "git.commit.sha=${{ github.sha }}" >> src/main/resources/statis/templates/version.properties.html
           echo "git.commit.message=${{ github.event.head_commit.message }}" >> src/main/resources/statis/templates/version.properties.html
           
