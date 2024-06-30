@@ -118,4 +118,4 @@ jobs:
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
         
       - name: Redeploy AWS service
-        run: aws ecs update-service --cluster dev-resume-cluster --service dev-resume-service-3 --force-new-deployment
+        run: aws ecs update-service --cluster dev-resume-cluster --service dev-resume-service --force-new-deployment
