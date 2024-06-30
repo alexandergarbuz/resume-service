@@ -43,6 +43,12 @@ jobs:
         with:
           cosign-release: 'v2.2.4'
 
+      - name: Generate version.properties file in target/classes
+        run: |
+          mkdir -p target/classes
+          echo "git.commit.sha=${{ github.sha }}" >> target/classes/version.properties
+          echo "git.commit.message=${{ github.event.head_commit.message }}" >> target/classes/version.properties
+
       # Set up BuildKit Docker container builder to be able to build
       # multi-platform images and export cache
       # https://github.com/docker/setup-buildx-action
