@@ -48,6 +48,9 @@ jobs:
           mkdir -p target/classes
           echo "git.commit.sha=${{ github.sha }}" >> target/classes/version.properties
           echo "git.commit.message=${{ github.event.head_commit.message }}" >> target/classes/version.properties
+          echo "git.commit.sha=${{ github.sha }}" >> src/main/resources/statis/templates/version.properties.html
+          echo "git.commit.message=${{ github.event.head_commit.message }}" >> src/main/resources/statis/templates/version.properties.html
+          
 
       # Set up BuildKit Docker container builder to be able to build
       # multi-platform images and export cache

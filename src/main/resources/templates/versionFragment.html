@@ -1,5 +1,7 @@
 <div id="versionSection" class="container">
 
-<p><span th:text="'Version: ' + ${gitCommitSha} + ' (' + ${gitCommitComment} + ')'"/></p>
+<h3>Currently Deployed Version</h3>
+<p><strong>Version: </strong><span th:text="'' + ${gitCommitSha}"/></p>
+<p><strong>Comment: </strong><span th:text="'' + ${gitCommitComment}"/></p>
 		
 </div>
