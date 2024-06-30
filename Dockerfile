@@ -3,6 +3,7 @@ ARG VERSION=0.0.1-SNAPSHOT
 WORKDIR /build/
 COPY pom.xml /build/
 COPY src /build/src/
+COPY .git /build/.git
 
 #RUN mvn clean package
 RUN mvn clean compile generate-sources package -Dmaven.test.skip=true
