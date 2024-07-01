@@ -44,6 +44,9 @@ jobs:
         uses: sigstore/cosign-installer@59acb6260d9c0ba8f4a2f9d9b48431a222b68e20 #v3.5.0
         with:
           cosign-release: 'v2.2.4'
+          
+      - name: Show directory structure before generating version.properties
+        run: ls -la
 
       - name: Generate version.properties file
         run: |
@@ -53,6 +56,10 @@ jobs:
           mkdir -p src/main/resources/static/templates/
           echo "git.commit.sha=${{ github.sha }}" > src/main/resources/static/templates/version.properties.html
           echo "git.commit.message=${{ github.event.head_commit.message }}" >> src/main/resources/static/templates/version.properties.html
+
+      - name: Show directory structure after generating version.properties
+        run: ls -la  target/classes
+
           
 
       # Set up BuildKit Docker container builder to be able to build
