@@ -46,7 +46,7 @@ jobs:
           cosign-release: 'v2.2.4'
           
       - name: Show directory structure before generating version.properties
-        run: ls -la
+        run: tree -a -L 3
 
       - name: Generate version.properties file
         run: |
@@ -54,12 +54,14 @@ jobs:
           echo "git.commit.sha=${{ github.sha }}" > target/classes/version.properties
           echo "git.commit.message=${{ github.event.head_commit.message }}" >> target/classes/version.properties
           mkdir -p src/main/resources/static/templates/
-          echo "git.commit.sha=${{ github.sha }}" > src/main/resources/static/templates/version.properties.html
-          echo "git.commit.message=${{ github.event.head_commit.message }}" >> src/main/resources/static/templates/version.properties.html
+          echo "git.commit.sha=${{ github.sha }}" > src/main/resources/version.properties
+          echo "git.commit.message=${{ github.event.head_commit.message }}" >> src/main/resources/version.properties
 
       - name: Show directory structure after generating version.properties
-        run: ls -la  target/classes
-
+        run: tree -a -L 3
+        
+      - name: Show directory structure after generating version.properties
+        run: ls -la  src/main/resources
           
 
       # Set up BuildKit Docker container builder to be able to build
