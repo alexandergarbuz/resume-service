@@ -44,24 +44,14 @@ jobs:
         uses: sigstore/cosign-installer@59acb6260d9c0ba8f4a2f9d9b48431a222b68e20 #v3.5.0
         with:
           cosign-release: 'v2.2.4'
-          
-      - name: Show directory structure before generating version.properties
-        run: tree -a -L 3
 
+      # Creating version.properties file to save the last commit from Git as version
       - name: Generate version.properties file
         run: |
-          mkdir -p target/classes
-          echo "git.commit.sha=${{ github.sha }}" > target/classes/version.properties
-          echo "git.commit.message=${{ github.event.head_commit.message }}" >> target/classes/version.properties
-          mkdir -p src/main/resources/static/templates/
           echo "git.commit.sha=${{ github.sha }}" > src/main/resources/version.properties
           echo "git.commit.message=${{ github.event.head_commit.message }}" >> src/main/resources/version.properties
-
-      - name: Show directory structure after generating version.properties
-        run: tree -a -L 3
-        
-      - name: Show directory structure after generating version.properties
-        run: ls -la  src/main/resources
+          echo "git.branch=${{ github.ref_name }}" >> src/main/resources/version.properties
+          echo "build.timestamp=$(date +'%Y-%m-%d %H:%M:%S')" >> src/main/resources/version.properties
           
 
       # Set up BuildKit Docker container builder to be able to build

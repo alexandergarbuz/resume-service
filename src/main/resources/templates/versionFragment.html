@@ -1,7 +1,9 @@
 <div id="versionSection" class="container">
 
 <h3>Currently Deployed Version</h3>
-<p><strong>Version: </strong><span th:text="'' + ${gitCommitSha}"/></p>
-<p><strong>Comment: </strong><span th:text="'' + ${gitCommitComment}"/></p>
+<p><strong>Version: </strong><span th:text="'' + ${version}"/></p>
+<p><strong>Comment: </strong><span th:text="'' + ${comment}"/></p>
+<p><strong>Branch: </strong><span th:text="'' + ${branch}"/></p>
+<p><strong>Timestamp: </strong><span th:text="'' + ${timestamp}"/></p>
 		
 </div>

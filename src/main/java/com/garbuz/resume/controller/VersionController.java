@@ -16,20 +16,27 @@ public class VersionController {
     @Autowired
     private PropertiesReader propertyReader;
     
-    
 	@GetMapping("/version")
 	public ModelAndView showVersion() {
-		String gitCommitSha = this.propertyReader.getCommitSha();
-		String gitCommitComment = this.propertyReader.getCommitComment();		
-		LOG.info("Show version {}", gitCommitSha);
-		LOG.info("Show versioncomment {}", gitCommitComment);
+		final String version = propertyReader.getProperty("git.commit.sha");
+		final String lastComment = propertyReader.getProperty("git.commit.message");
+		final String branch = propertyReader.getProperty("git.branch");
+		final String timestamp = propertyReader.getProperty("build.timestamp");
+		
+		LOG.info("Version {}", version);
+		LOG.info("Last comment {}", lastComment);
+		LOG.info("Branch {}", branch);
+		LOG.info("Time {}", timestamp);
+
 		ModelAndView mv = new ModelAndView();
 		String viewName = "resumePage";
 		mv.setViewName(viewName);
 		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.VERSION_FRAGMENT);
 
-		mv.addObject("gitCommitSha", gitCommitSha);
-		mv.addObject("gitCommitComment", gitCommitComment);
+		mv.addObject("version", version);
+		mv.addObject("comment", lastComment);
+		mv.addObject("branch", branch);
+		mv.addObject("timestamp", timestamp);
 
 		return mv;
 	}

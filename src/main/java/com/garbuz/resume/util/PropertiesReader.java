@@ -13,11 +13,8 @@ public class PropertiesReader {
     public PropertiesReader(Environment environment) {
         this.environment = environment;
     }
-
-    public String getCommitSha() {
-        return environment.getProperty("git.commit.sha");
-    }
-    public String getCommitComment() {
-        return environment.getProperty("git.commit.message");
+    
+    public String getProperty(final String propertyName) {
+    	return environment.getProperty(propertyName);
     }
 }
