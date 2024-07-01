@@ -19,7 +19,7 @@ env:
   IMAGE_NAME: alexandergarbuz/resume-service
   IMAGE_VERSION: v1.0.0-dev
   AWS_CLUSTER_NAME: dev-resume-cluster
-  AWS_SERVICE_NAME: dev-resume-servic
+  AWS_SERVICE_NAME: dev-resume-service
 
 
 jobs:
