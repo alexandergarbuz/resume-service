@@ -18,6 +18,8 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: alexandergarbuz/resume-service
   IMAGE_VERSION: v1.0.0-dev
+  AWS_CLUSTER_NAME: dev-resume-cluster
+  AWS_SERVICE_NAME: dev-resume-servic
 
 
 jobs:
@@ -118,4 +120,4 @@ jobs:
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
         
       - name: Redeploy AWS service
-        run: aws ecs update-service --cluster dev-resume-cluster --service dev-resume-service --force-new-deployment
+        run: aws ecs update-service --cluster ${{ env.AWS_CLUSTER_NAME }} --service ${{ env.AWS_SERVICE_NAME }} --force-new-deployment
