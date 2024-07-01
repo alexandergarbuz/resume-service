@@ -18,6 +18,8 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: alexandergarbuz/resume-service
   IMAGE_VERSION: v1.0.0-dev
+  AWS_CLUSTER_NAME: dev-resume-cluster
+  AWS_SERVICE_NAME: dev-resume-service
 
 
 jobs:
@@ -42,6 +44,15 @@ jobs:
         uses: sigstore/cosign-installer@59acb6260d9c0ba8f4a2f9d9b48431a222b68e20 #v3.5.0
         with:
           cosign-release: 'v2.2.4'
+
+      # Creating version.properties file to save the last commit from Git as version
+      - name: Generate version.properties file
+        run: |
+          echo "git.commit.sha=${{ github.sha }}" > src/main/resources/version.properties
+          echo "git.commit.message=${{ github.event.head_commit.message }}" >> src/main/resources/version.properties
+          echo "git.branch=${{ github.ref_name }}" >> src/main/resources/version.properties
+          echo "build.timestamp=$(date +'%Y-%m-%d %H:%M:%S')" >> src/main/resources/version.properties
+          
 
       # Set up BuildKit Docker container builder to be able to build
       # multi-platform images and export cache
@@ -108,4 +119,4 @@ jobs:
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
         
       - name: Redeploy AWS service
-        run: aws ecs update-service --cluster resume-cluster --service resume-service-3 --force-new-deployment
+        run: aws ecs update-service --cluster ${{ env.AWS_CLUSTER_NAME }} --service ${{ env.AWS_SERVICE_NAME }} --force-new-deployment

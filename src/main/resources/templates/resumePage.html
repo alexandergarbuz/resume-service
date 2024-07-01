@@ -24,6 +24,7 @@
             <li class="nav-item"><a class="nav-link" th:href="@{/#workHistorySection}"><i class="fa fa-list"></i> Work History</a></li>
             <li class="nav-item"><a class="nav-link" th:href="@{/#recommendationsSection}"><i class="fa fa-comments"></i> Recommendations</a></li>
             <li class="nav-item"><a class="nav-link" th:href="@{/#referencesSection	}"><i class="fa fa-user"></i> References</a></li>
+            
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-gear"></i> Microservices API 
@@ -42,7 +43,9 @@
 	              <li><a class="dropdown-item" th:href="@{/swagger-ui.html}" target="_blank">Swagger (OpenAPI ) <i class="fa fa-external-link"></i></a></li>
 	              <li><hr class="dropdown-divider"></li>
 	              <li class="dropdown-header">MVC Client</li>
-	              <li><a  class="dropdown-item" th:href="@{/work-history/show/1}">Work History</a></li>
+	              <li><a  class="dropdown-item" th:href="@{/work-history/show/1}"><i class="fa fa-list"></i> Work History</a></li>
+	              <li><hr class="dropdown-divider"></li>
+	              <li><a   class="dropdown-item" th:href="@{/version}"><i class="fa fa-github"></i> Current Version</a></li>
               </ul>
             </li>
 
@@ -59,14 +62,13 @@
 
 
 <div id="footerSection" class="container border-top mt-5 py-5">
-    <div>
     	<span>
       		&copy; 2024&nbsp;
-			<a href="https://garbuz.com/" class="text-body-secondary" target="_blank"><i class="fa fa-internet-explorer"></i></a>&nbsp;
-			<a href="https://www.linkedin.com/in/garbuz/" class="text-body-secondary" target="_blank"><i class="fa fa-linkedin-square"></i></a>&nbsp;
-			<a href="mailto:alexander.garbuz@gmail.com" class="text-body-secondary"><i class="fa fa-envelope"></i></a>
+			<a href="https://garbuz.com/" title="View my web site" class="text-body-secondary" target="_blank"><i class="fa fa-internet-explorer"></i></a>&nbsp;
+			<a href="https://www.linkedin.com/in/garbuz/" title="View my Linkedin profile" class="text-body-secondary" target="_blank"><i class="fa fa-linkedin-square"></i></a>&nbsp;
+			<a href="mailto:alexander.garbuz@gmail.com" title="Email me" class="text-body-secondary"><i class="fa fa-envelope"></i></a>&nbsp;
+			<a th:href="@{/version}" title="View current version" class="text-body-secondary"><i class="fa fa-github"></i></a>
 		</span>
-    </div>
 </div>
 
 	<script th:src="@{/js/jquery-3.7.1.min.js}"></script>
