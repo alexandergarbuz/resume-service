@@ -19,12 +19,12 @@ public class InitController {
 	@GetMapping("/defaultData")
 	public ModelAndView initDefaultData() {
 		resumeService.initializeData();
-		return new ModelAndView("redirect:/resume/showAll");
+		return new ModelAndView(UIConstants.REDIRECT_SHOW_ALL);
 	}
 	@GetMapping("/additionalData")
 	public ModelAndView initAdditionalData() {
 		resumeService.generateAdditionalData(5);
-		return new ModelAndView("redirect:/resume/showAll");
+		return new ModelAndView(UIConstants.REDIRECT_SHOW_ALL);
 	}	
 
 }
