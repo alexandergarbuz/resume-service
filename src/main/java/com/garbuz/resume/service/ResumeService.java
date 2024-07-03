@@ -1,5 +1,6 @@
 package com.garbuz.resume.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -143,5 +144,25 @@ public class ResumeService {
 		LOG.info("Data generation complete");
 		
 		return resume;
+	}
+	public List<Resume> generateAdditionalData(int numberOfResumesToGenerate) {
+
+		LOG.info("Generating additional data");
+		List<Resume> additionalData = new ArrayList<>();
+		
+		for (int i = 0; i < numberOfResumesToGenerate; i++) {
+			Resume template = resumeFactory.createTemplateResume();
+			template.setSkills(skillFactory.createDefaulsSkills(template));
+			template.setJobs(jobFactory.createDefaultJobs(template));
+			template.setEducations(educationFactory.createDefaultSchools(template));
+			template.setCertifications(certificationFactory.createDefaultCertifications(template));
+			template.setRecommendations(recommendationFactory.createDefaultRecommendations(template));
+			template.setReferences(referenceFactory.createDefaultReferences(template));
+			additionalData.add(template);
+		}
+		
+		LOG.info("Additional data generation complete");
+		
+		return additionalData;
 	}
 }

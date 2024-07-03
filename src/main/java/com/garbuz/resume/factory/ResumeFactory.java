@@ -33,6 +33,20 @@ public class ResumeFactory {
 		LOG.info("Created {}", contactInformation);
 		return contactInformation;
 	}
-	
+	public Resume createTemplateResume() {
+		Resume contactInformation = dao.saveAndFlush(new Resume(
+				"Alexander", 
+				"Garbuz",
+				"Template Resume.",
+				"Senior IT professional with more than 25 years of combined software development, leadership and management experience in insurance, healthcare, telecommunications, and e-commerce industries",
+				"alexander.garbuz@gmail.com",
+				"608-628-2448", 
+				"405 Burnt Sienna Dr.", 
+				"Middleton", 
+				"WI", 
+				"53562"));
+		LOG.info("Created {}", contactInformation);
+		return contactInformation;
+	}	
 	
 }
