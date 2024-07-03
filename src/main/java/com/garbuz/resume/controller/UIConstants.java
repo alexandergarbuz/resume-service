@@ -3,6 +3,8 @@ package com.garbuz.resume.controller;
 public final class UIConstants {
 	
 	private UIConstants() {}
+	
+	public final static String REDIRECT_SHOW_ALL = "redirect:/resume/showAll";
 
 	public final static String DEFAULT_TEMPLATE = "contentTemplate";
 	
