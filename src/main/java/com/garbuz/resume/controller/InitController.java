@@ -16,11 +16,15 @@ public class InitController {
 	@Autowired
 	private ResumeService resumeService;
 	
-	@GetMapping("/data")
-	public ModelAndView showResume() {
+	@GetMapping("/defaultData")
+	public ModelAndView initDefaultData() {
 		resumeService.initializeData();
 		return new ModelAndView("redirect:/resume/showAll");
 	}
-	
+	@GetMapping("/additionalData")
+	public ModelAndView initAdditionalData() {
+		resumeService.generateAdditionalData(5);
+		return new ModelAndView("redirect:/resume/showAll");
+	}	
 
 }

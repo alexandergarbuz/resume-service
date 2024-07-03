@@ -1,5 +1,32 @@
 <div id="resumeSection" class="container">
 
+<div class="row">
+<div class="col-md-2 col-sm-4">
+
+		<ul class="nav flex-column">
+		  <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-file"></i> Summary</a></li>
+		  <li class="nav-item"><a class="nav-link" href="#educationSection"><i class="fa fa-graduation-cap"></i> Education</a></li>
+		  <li class="nav-item"><a class="nav-link" href="#workHistorySection"><i class="fa fa-list"></i> Work History</a></li>
+		  <li class="nav-item"><a class="nav-link" href="#recommendationsSection"><i class="fa fa-comments"></i> Recommendations</a></li>
+		  <li class="nav-item"><a class="nav-link" href="#referencesSection	"><i class="fa fa-user"></i> References</a></li>
+		  <li class="nav-item dropdown">
+		    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fa fa-gear"></i> Microservices</a>
+		    <ul class="dropdown-menu">
+	              <li><a class="dropdown-item" th:href="@{/api/resume/show/} + ${resume.id}" target="_blank">Complete Resume <i class="fa fa-external-link"></i></a></li>
+	              <li><hr class="dropdown-divider"></li>
+	              <li><a class="dropdown-item" th:href="@{/api/resume/skills/} + ${resume.id}" target="_blank">Skills <i class="fa fa-external-link"></i></a></li>
+	              <li><a class="dropdown-item" th:href="@{/api/resume/educations?firstName=Alexander&lastName=Garbuz}" target="_blank">Education<i class="fa fa-external-link"></i></a></li>
+	              <li><a class="dropdown-item" th:href="@{/api/resume/recommendations?firstName=Alexander&lastName=Garbuz}" target="_blank">Recommendations <i class="fa fa-external-link"></i></a></li>
+	              <li><a class="dropdown-item" th:href="@{/api/resume/references?firstName=Alexander&lastName=Garbuz}" target="_blank">References <i class="fa fa-external-link"></i></a></li>
+	              <li><a class="dropdown-item" th:href="@{/api/resume/work-history/Garbuz/Alexander}" target="_blank">Work History <i class="fa fa-external-link"></i></a></li>
+		    </ul>
+		  </li>
+		</ul>
+</div>
+<div class="col-md-10 col-sm-8">
+
+
+
 		<div id="breadcrumbsSection" aria-label="breadcrumb">
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
@@ -7,7 +34,6 @@
 		    <li class="breadcrumb-item active" aria-current="page"><span th:text="${resume.firstName} + ' ' + ${resume.lastName}"></span></li>
 		  </ol>
 		</div>
-
 
 		<div id="contactInformationSection">
 			<h1 th:text="${resume.firstName} + ' ' + ${resume.lastName}">Name</h1>
@@ -91,4 +117,9 @@
 				</ul>
 			</div>
 		</div>
+
+
+</div>
+</div>
+
 </div>
