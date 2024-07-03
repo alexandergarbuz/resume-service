@@ -1,5 +1,14 @@
 <div id="resumeSection" class="container">
 
+		<div id="breadcrumbsSection" aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+		    <li class="breadcrumb-item"><a th:href="@{/resume/showAll}">Resumes</a></li>
+		    <li class="breadcrumb-item active" aria-current="page"><span th:text="${resume.firstName} + ' ' + ${resume.lastName}"></span></li>
+		  </ol>
+		</div>
+
+
 		<div id="contactInformationSection">
 			<h1 th:text="${resume.firstName} + ' ' + ${resume.lastName}">Name</h1>
 			<ul>

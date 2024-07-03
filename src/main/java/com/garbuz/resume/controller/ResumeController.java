@@ -1,5 +1,8 @@
 package com.garbuz.resume.controller;
 
+import java.util.List;
+
+import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,8 @@ public class ResumeController {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(ResumeController.class);
 
+	private static final String VIEW_RESUME_PAGE = "resumePage";
+	
 	@Autowired
 	private ResumeService resumeService;
 	
@@ -27,13 +32,24 @@ public class ResumeController {
 		LOG.info("Show resume request for resumeId={}", id);
 		Long resumeId = Long.valueOf(id);
 		ModelAndView mv = new ModelAndView();
-		String viewName = "resumePage";
-		mv.setViewName(viewName);
+		mv.setViewName(VIEW_RESUME_PAGE);
 		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.RESUME_FRAGMENT);
 		
 		Resume resume = this.resumeService.findResume(resumeId);
 		mv.addObject("resume", resume);
 		LOG.info("Displaying {}", resume);
+		return mv;
+	}
+	@GetMapping("/showAll")
+	public ModelAndView showAll() {
+		LOG.info("Show all resumes");
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName(VIEW_RESUME_PAGE);
+		mv.getModel().put(UIConstants.DEFAULT_TEMPLATE, UIConstants.RESUME_LIST_FRAGMENT);
+		
+		List<Resume> resumes = this.resumeService.findAllResumes();
+		mv.addObject("resumeList", resumes);
+		LOG.info("Displaying {} resumes", CollectionUtils.size(resumes));
 		return mv;
 	}
 }

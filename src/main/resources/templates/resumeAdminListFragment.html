@@ -1,0 +1,23 @@
+<div id="resumeListSection" class="container">
+
+	<h2>Resumes</h2>
+	<div id="resumeList">
+	        <div class="row">
+	        	<div class="col mb-3">#</div>
+	        	<div class="col mb-3">Last Name</div>
+	        	<div class="col mb-3">First Name</div>
+	        	<div class="col mb-3"><a th:href="@{/admin/resume/create}" class="btn btn-success"><i class="fa fa-plus"></i> Create</a></div>
+	        </div>
+	        <div class="row"  th:each="resume : ${resumeList}">
+	        	<div class="col mb-3"><span  th:text="${resume.id}"/></div>
+	        	<div class="col mb-3"><span th:text="${resume.lastName}"/></div>
+	        	<div class="col mb-3"><span th:text="${resume.firstName}"/></div>
+	        	<div class="col mb-3">
+	        		<a th:href="@{/resume/show} + '/' + ${resume.id}" class="btn btn-secondary"><i class="fa fa-file"></i> View</a>&nbsp;
+	        		<a th:href="@{/admin/resume/edit} + '/' + ${resume.id}" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</a>&nbsp;
+	        		<a th:href="@{/admin/resume/delete} + '/' + ${resume.id}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</a>
+	        	</div>
+	        </div>
+	</div>
+
+</div>

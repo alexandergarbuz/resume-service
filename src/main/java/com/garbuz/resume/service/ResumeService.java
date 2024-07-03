@@ -67,11 +67,24 @@ public class ResumeService {
 		LOG.info("Loaded {} ", r);
 		return r;
 	}
+	public List<Resume> findAllResumes() {
+		LOG.info("Loading all resmes");
+		List<Resume> resumes = resumeDao.findAll();
+		LOG.info("Loaded {} resumes", CollectionUtils.size(resumes));
+		return resumes;
+	}
 	public Resume saveOrCreateNew(final Resume resumeToSave) {
 		LOG.info("Saving {}", resumeToSave);
 		final Resume savedResume = this.resumeDao.saveAndFlush(resumeToSave);
 		LOG.info("Saved {} ", savedResume);
 		return savedResume;
+	}
+	public void remove(final Long id) {
+		LOG.info("Removing resume for {}", id);
+		Resume resumeToDelete = resumeDao.getReferenceById(id);
+		//this.resumeDao.deleteById(id);
+		//this.resumeDao.flush();
+		LOG.info("Removed resume {} ", id);		
 	}
 	public List<Education> findEducationsByLastAndFirstName(final String lastName, final String firstName) {
 		LOG.info("Loading for {} {}", lastName, firstName);

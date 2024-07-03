@@ -1,0 +1,63 @@
+<div class="container">
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Create New Resume</h1>
+        <form th:action="@{/admin/resume/create}" th:object="${resume}" method="post">
+            <input type="hidden" th:field="*{id}" />
+	        <div class="row">
+	        	<div class="col mb-3">
+	        		<label for="firstName" class="control-label">First Name</label>
+	        		<input type="text" class="form-control" id="firstName" th:field="*{firstName}" placeholder="First Name" required/>
+	        	</div>
+	        	<div class="col mb-3">
+	        		<label for="lastName" class="control-label">Last Name</label>
+	        		<input type="text" class="form-control" id="lastName" th:field="*{lastName}" placeholder="Last Name" required/>
+	        	</div>
+	        </div>
+	        <div class="row">
+		        <div class="mb-3">
+		        	<label for="summary" class="control-label">Summary</label>
+		            <textarea class="form-control" id="objective" th:field="*{objective}" placeholder="Objective" required></textarea>
+		        </div>
+	        </div>
+	        <div class="row">
+		        <div class="mb-3">
+		            <label for="summary" class="control-label">Summary</label>
+		            <textarea type="text" class="form-control" id="summary" th:field="*{summary}" placeholder="Summary" required></textarea>
+		        </div>
+	        </div>
+	        <div class="row">
+	        	<div class="col mb-3">
+		            <label for="email" class="control-label">Email</label>
+		            <input type="text" class="form-control" id="email" th:field="*{email}" placeholder="Email" required/>       	
+	        	</div>
+	        	<div class="col mb-3">
+		            <label for="phone" class="control-label">Phone</label>
+		            <input type="text" class="form-control" id="phone" th:field="*{phone}" placeholder="Phone" required/>        	
+	        	</div>
+	        </div>
+			<div class="row">
+		        <div class="col mb-3">
+		            <label for="address" class="control-label">Address</label>
+		            <input type="text" class="form-control" id="address" th:field="*{address}" placeholder="Address" required/>
+		        </div>		
+			</div>
+			<div class="row">
+		        <div class="col mb-3">
+		            <label for="city" class="control-label">City</label>
+		            <input type="text" class="form-control" id="city" th:field="*{city}" placeholder="City" required/>
+		        </div>
+		        <div class="col mb-3">
+		            <label for="state" class="control-label">State</label>
+		            <input type="text" class="form-control" id="state" th:field="*{state}" placeholder="State" required/>
+		        </div>
+		        <div class="col mb-3">
+		            <label for="zip" class="control-label">Zip</label>
+		            <input type="text" class="form-control" id="state" th:field="*{zip}" placeholder="Zip" required/>
+		        </div> 			
+			</div>  
+            <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Create</button>
+            <a class="btn btn-secondary" th:href="@{/admin/resume/showAll}">Cancel</a>
+        </form>
+    </div>
+</div>

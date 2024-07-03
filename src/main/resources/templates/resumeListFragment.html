@@ -1,112 +1,19 @@
-<div id="resumeSection" class="container">
+<div id="resumeListSection" class="container">
 
-<table id="resumeTable" class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+		<div id="breadcrumbsSection" aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Resumes</li>
+		  </ol>
+		</div>
 
+	<div id="resumeList">
+	        <div th:each="resume : ${resumeList}">
+	        	<div th:id="'resumeListItem' + ${resume.id}">
+	        		<span  th:text="${resume.id}"/> <a th:href="@{/resume/show} + '/' + ${resume.id}"><span th:text="${resume.lastName}"/> <span th:text="${resume.firstName}"/></a>
+	        		<p><span th:text="${resume.objective}"/></p>
+	        	</div>
+	        </div>
+	</div>
 
-		<div id="contactInformationSection">
-			<h1 th:text="${resume.firstName} + ' ' + ${resume.lastName}">Name</h1>
-			<ul>
-			<li><i class="fa fa-home"></i> <span th:text="${resume.contactInformation.address}"/> <span th:text="${resume.contactInformation.city}"/>, <span th:text="${resume.contactInformation.state}"/> <span th:text="${resume.contactInformation.zip}"/></li>
-			<li><i class="fa fa-envelope"></i> <a th:href="'mailto:'+${resume.contactInformation.email}" th:text="${resume.contactInformation.email}"/></li>
-			<li><i class="fa fa-phone"></i> <span th:text="${resume.contactInformation.phone}"/></li>
-			</ul>
-		</div>
-		<div id="summarySection">
-			<h2>Objective</h2>
-			<div><span th:text="${resume.summary.objective}"/></div>
-			<h2>Summary</h2>
-			<div><span th:text="${resume.summary.summary}"/></div>
-		</div>
-		<div id="skillsSection">
-			<h2>Skills</h2>
-			<ul>
-				<li th:each="sg: ${resume.skills}" th:id="'skillGroup' +${sg.id}">
-					<p><strong><span  th:text="${sg.name} + ':'"/></strong> <span th:each="s, status :${sg.skills}" th:text="${s.name} + (${status.last} ? ';' : ', ')"/></p>
-				</li>
-			</ul>
-		</div>
-		<div id="educationSection">
-			<h2>Education</h2>
-			<dl>
-				<div th:each="school : ${resume.educations}" th:id="'education' +${school.id}">
-					<dt>
-						<span th:text="${school.degree}"/>
-					</dt>
-					<dd>
-						<span  th:text="${school.name} + ' (' + ${school.startDate.year} + ' - ' + ${school.endDate.year} + ')'"/><br/>
-						<span th:text="${school.comments}"/>
-					</dd>
-				</div>
-			</dl>
-		</div>
-		<div id="certificationSection">
-			<h2>Certifications</h2>
-			<dl>
-				<div th:each="r : ${resume.certifications}" th:id="'certification' +${r.id}">
-					<dt><span  th:text="${r.name}"/></dt>
-					<dd><span th:text="${r.authority} + ' (' + ${r.date.year} + ')'"/></dd>
-				</div>		
-			</dl>
-		</div>
-		<div id="workHistorySection">
-			<h2>Work History</h2>
-			<div th:each="job: ${resume.jobs}" th:id="'job' +${job.id}">
-					<h3><span th:text="${job.title} + ' @ ' + ${job.companyName} + ' (' + ${job.start.year} +' - ' + ${job.end.year} + ')' "/></h3> 
-					<ul>
-						<li th:each="jr:${job.responsibilities}"><p th:text="${jr.text}"/></li>
-					</ul>
-			</div>
-		</div>
-		<div id="recommendationsSection">
-			<h2>Recommendations</h2>
-			<div th:each="r : ${resume.recommendations}" th:id="'recommendation' +${r.id}">
-				<div class="recommendation">
-					<i class="fa fa-angle-double-left"></i> <span th:text="${r.text}"/> <i class="fa fa-angle-double-right"></i>
-					<p class="recommendationAutor">				
-					<strong><span  th:text="${r.author}"/></strong> <em><span th:text="${r.authorTitle}"/></em><br/>
-						<em><span th:text="${r.relationship}"/></em>
-					</p>
-				</div>
-
-			</div>
-		</div>
-		<div id="referencesSection">
-			<h2>References</h2>
-			<p>(Contact information will be available upon request)</p>
-			<div th:each="r : ${resume.references}" th:id="'reference' +${r.id}">
-				<p><span class="reference-name" th:text="${r.name}"/> (<span class="reference-title" th:text="${r.title}"/>)</p>
-				<ul>
-					<li><i class="fa fa-envelope"></i> <a th:href="'mailto:'+${r.email}" th:text="${r.email}"/></li>
-					<li><i class="fa fa-phone"></i> <span th:text="${r.phone}"/></li>
-				</ul>
-			</div>
-		</div>
 </div>
