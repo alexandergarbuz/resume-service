@@ -100,7 +100,11 @@
 		    <artifactId>html2pdf</artifactId>
 		    <version>5.0.4</version>
 		</dependency>
-
+		<dependency>
+		    <groupId>org.xhtmlrenderer</groupId>
+		    <artifactId>flying-saucer-pdf</artifactId>
+		    <version>9.8.0</version>
+		</dependency>
 		<!-- Testing utilities -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

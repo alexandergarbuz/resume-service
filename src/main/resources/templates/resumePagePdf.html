@@ -1,8 +1,53 @@
-<!doctype html>
 <html lang="en" xmlns="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="ISO-8859-1"/>
 	<title>Alexander Garbuz Resume Service</title>
+    
+	<style>
+
+body, h1, h2, h3, td, p, div, span, li, a {
+	font-family: sans-serif;
+}
+body, h1, h2, h3, td, p, div, span, li {
+	color: #000;
+}
+blockquote {
+	font-weight: normal;
+}
+#contactInformationSection ul {
+	list-style-type: none;
+	padding-left: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#contactInformationSection ul li {
+	padding-top: 5px;
+}
+
+#summarySection p{
+	padding-left: 30px;
+}
+
+#skillsSection ul {
+	list-style-type: none;
+}
+
+#educationSection dl, #certificationSection dl {
+	padding-left: 30px;
+	padding-top: 10px;
+}
+
+#educationSection dd, #certificationSection dd {
+	font-style: italic;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#workHistorySection li {
+	padding-bottom: 5px;
+}
+	</style>
     
 </head>
 <body>
@@ -20,9 +65,9 @@
 		</div>
 		<div id="summarySection">
 			<h2>Objective</h2>
-			<p th:text="${resume.objective}"/></p>
-			<h3>Summary</h3>
-			<p th:text="${resume.summary}"/></p>
+			<p th:text="${resume.objective}"></p>
+			<h2>Summary</h2>
+			<p th:text="${resume.summary}"></p>
 		</div>
 		<div id="skillsSection">
 			<h2>Skills</h2>
@@ -36,9 +81,7 @@
 			<h2>Education</h2>
 			<dl>
 				<div th:each="school : ${resume.educations}" th:id="'education' +${school.id}">
-					<dt>
-						<strong><span th:text="${school.degree}"/></strong>
-					</dt>
+					<dt><strong><span th:text="${school.degree}"/></strong></dt>
 					<dd>
 						<span  th:text="${school.name} + ' (' + ${school.startDate.year} + ' - ' + ${school.endDate.year} + ')'"/><br/>
 						<span th:text="${school.comments}"/>
