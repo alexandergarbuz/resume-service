@@ -7,8 +7,7 @@ import java.io.IOException;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-
-import com.itextpdf.html2pdf.HtmlConverter;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
 @Component
 public class PdfConvertor {
@@ -20,9 +19,17 @@ public class PdfConvertor {
     }
 
     public byte[] generatePdf(final String templateName, final Context context) throws IOException {
-        String htmlContent = templateEngine.process(templateName, context);
+        String renderedHtmlContent = templateEngine.process(templateName, context);
+
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        HtmlConverter.convertToPdf(htmlContent, outputStream);
+
+        // Initialize ITextRenderer
+        ITextRenderer renderer = new ITextRenderer();
+        renderer.setDocumentFromString(renderedHtmlContent);
+        renderer.layout();
+        renderer.createPDF(outputStream, true); // Enable PDF/A-1 mode if needed
+
+        renderer.finishPDF();
         return outputStream.toByteArray();
     }
 }
