@@ -34,6 +34,8 @@
 		    <li class="breadcrumb-item active" aria-current="page"><span th:text="${resume.firstName} + ' ' + ${resume.lastName}"></span></li>
 		  </ol>
 		</div>
+		
+		<p><a th:href="@{/download-resume-pdf?resumeId=} + ${resume.id}">Download as PDF</a></p>
 
 		<div id="contactInformationSection">
 			<h1 th:text="${resume.firstName} + ' ' + ${resume.lastName}">Name</h1>
