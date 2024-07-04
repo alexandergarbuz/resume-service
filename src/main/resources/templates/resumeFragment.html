@@ -21,6 +21,12 @@
 	              <li><a class="dropdown-item" th:href="@{/api/resume/work-history/Garbuz/Alexander}" target="_blank">Work History <i class="fa fa-external-link"></i></a></li>
 		    </ul>
 		  </li>
+		  <li class="nav-item dropdown">
+		    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fa fa-download"></i> Download</a>
+		    <ul class="dropdown-menu">
+	            <li><a  class="dropdown-item" th:href="@{/download-resume-pdf?resumeId=} + ${resume.id}"> <i class="fa fa-file-pdf-o"></i> Download PDF</a></li>
+		    </ul>
+		  </li>
 		</ul>
 </div>
 <div class="col-md-10 col-sm-8">
@@ -35,7 +41,6 @@
 		  </ol>
 		</div>
 		
-		<p><a th:href="@{/download-resume-pdf?resumeId=} + ${resume.id}">Download as PDF</a></p>
 
 		<div id="contactInformationSection">
 			<h1 th:text="${resume.firstName} + ' ' + ${resume.lastName}">Name</h1>
