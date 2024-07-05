@@ -23,11 +23,10 @@ public class PdfConvertor {
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-        // Initialize ITextRenderer
         ITextRenderer renderer = new ITextRenderer();
         renderer.setDocumentFromString(renderedHtmlContent);
         renderer.layout();
-        renderer.createPDF(outputStream, true); // Enable PDF/A-1 mode if needed
+        renderer.createPDF(outputStream, true);
 
         renderer.finishPDF();
         return outputStream.toByteArray();
