@@ -1,7 +1,7 @@
-CREATE DATABASE  IF NOT EXISTS `resume_manager_db` 
+CREATE DATABASE  IF NOT EXISTS `dev_resume_manager_db` 
 /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ 
 /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `resume_manager_db`;
+USE `dev_resume_manager_db`;
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
 -- Host: localhost    Database: resume_manager_db
