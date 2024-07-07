@@ -11,5 +11,8 @@ RUN cp target/resume-service-${VERSION}.jar target/application.jar
 FROM openjdk
 WORKDIR /app/
 
+# Expose port 80 to the outside world
+EXPOSE 80
+
 COPY --from=BUILDER /build/target/application.jar /app/
 CMD java -jar /app/application.jar 
