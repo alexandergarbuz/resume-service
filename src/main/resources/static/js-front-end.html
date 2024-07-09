@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Java Script Fetch Demo</title>
+<title>Java Script Front End</title>
+	<link rel="icon" href="./img/favicon.ico"/>
     <link href="./bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet"/>
 	<link href="./font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 	<link href="./css/default.css" rel="stylesheet"/>
@@ -9,14 +10,16 @@
 <body>
 <div class="container">
 	
-	<div>
-		<form id="loginForm" onsubmit="onSubmit()">
+	<div id="loginFormSection">
+		<form id="loginForm" onsubmit="onSubmit(event)">
 		<div class="row g-3">
 			<div class="col-4 mb-3"></div>
 			<div class="col-4 mb-3">
 				<select id="serverName" class="form-select">
-				  <option value="localhost" selected>Local</option>
-				  <option value="dev-resume-service.aws.garbuz.com">Remote</option>
+					<option selected>Select server to connect</option>
+				  	<option value="http://localhost">Local</option>
+				  	<option value="https://dev-resume-service.aws.garbuz.com">dev-resume-service.aws.garbuz.com</option>
+				  	<option value="https://resume-service.aws.garbuz.com">resume-service.aws.garbuz.com</option>
 				</select>				
 			</div>
 			<div class="col-4 mb-3"></div>
@@ -24,7 +27,7 @@
 		<div class="row g-3">
 			<div class="col-4 mb-3"></div>
 			<div class="col-2 mb-3">
-				<input type="text" id="email" name="email" class="form-control"  placeholder="Email"/>
+				<input type="text" id="email" name="email" class="form-control" value="alexander.garbuz@gmail.com" placeholder="Email"/>
 			</div>
 			<div class="col-2 mb-3">
 				<input type="password" id="password" name="password"   placeholder="Password" class="form-control"/>
@@ -35,22 +38,24 @@
 			<div class="col-4 mb-3"></div>
 			<div class="col-4 mb-3">
 				<input type="submit" id="loginButton"   class="btn btn-primary" value="Login"/>
-				<input type="button" id="populateButton" class="btn btn-primary" value="Populate Form" onclick="populateForm();"/>
-				<input type="button" id="clearButton" class="btn btn-primary" value="Clear Data" onclick="clearData();"/>
+				<a href="#" id="populateButton" class="btn btn-primary" onclick="populateForm();">Populate Form</a>
+				<a href="#" id="clearButton" class="btn btn-primary" onclick="clearData();">Clear Data</a>
 			</div>
 			<div class="col-4 mb-3"></div>
 		</div>
 		</form>  
 	</div>
+	
+	
 	<br/>
 	<div id="displayPanel" class="row g-3">
 		<div class="row g-3">
-			<div class="col-5 mb-3"></div>
+			<div class="col-5 mb-3">
+			</div>
 			<div class="col-2 mb-3">
-				<button id="loadDataButton"  class="btn btn-secondary" onclick="loadData()" style="visibility:hidden">Load Resume Data</button>
+				<a href="#" id="loadDataButton" class="btn btn-secondary" onclick="loadData()" style="visibility:hidden">View Resume List</a>
 			</div>
 			<div class="col-5 mb-3"></div>
-			 
 		</div>	
 		<div class="col-6 mb-3">
 			<div id="display"></div>		
@@ -66,8 +71,6 @@
 </div>
 
 <script>
-//const resumeServiceEndpoint = "http://localhost/api/resume/show/1";
-//const loginServiceEndpoint = "http://localhost/api/js/login";
 
 function getCookie(name) {
     var cookieArr = document.cookie.split(";");
@@ -115,12 +118,12 @@ function showResponse(data) {
 	var html = "<h3>Received Data</h3>";
 	html += "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
 	if(authCookie != null) {
-		html += "<pre>Auth Cookie Token:" + authCookie + "</pre>";
+		html += "<pre>Cookie:" + authCookie + "</pre>";
 	}
 	displaySrcDiv.innerHTML=html;
 	
 }
-function showLoadedData(data) {
+function showLoadedResume(data) {
 	var displayDiv = document.getElementById("display");
 	var firstName = data.firstName;
 	var lastName = data.lastName;
@@ -176,20 +179,49 @@ function showLoadedData(data) {
 	displayDiv.innerHTML=html;
 }
 
-function loadData() {
-	var endpoint = "http://" + document.getElementById("serverName").value + "/api/resume/show/1";
+function showLoadedResumeList(data) {
+	var displayDiv = document.getElementById("display");
+	var html = "";
+    html += `
+        <h3>Resume List</h3>
+        <ul>`;
+   	data.forEach(resume => {
+	   html += `<li><a href='#' onclick='loadResume(${resume.id})' >${resume.firstName} ${resume.lastName}</a></li>`;
+   });
+   html += `<ul>`;
+	displayDiv.innerHTML=html;
+}
+
+function getServerName() {
+	return document.getElementById("serverName").value;
+}
+
+function loadResume(id) {
+	var endpoint = getServerName() + "/api/js/show/" + id;
 	fetch(endpoint).then(function (response) {
 		return response.json();		
 	}).then(function (data){
 		showResponse(data);
-		showLoadedData(data);
+		showLoadedResume(data);
+	}).catch(function (error) {
+		console.log("There was a problem with pulling data: ", error);
+	});
+}
+
+function loadData() {
+	var endpoint = getServerName() + "/api/js/showAll";
+	fetch(endpoint).then(function (response) {
+		return response.json();		
+	}).then(function (data){
+		showResponse(data);
+		showLoadedResumeList(data);
 	}).catch(function (error) {
 		console.log("There was a problem with pulling data: ", error);
 	});
 }
 
 function postData() {
-	var endpoint = "http://" + document.getElementById("serverName").value + "/api/js/login";
+	var endpoint = getServerName() + "/api/js/login";
 	var email = document.getElementById("email");
 	var password = document.getElementById("password");
 	var data = {
@@ -222,8 +254,6 @@ function onSubmit(event) {
 	event.preventDefault();
 	postData();	
 }
-
-document.getElementById("loginForm").addEventListener("submit", onSubmit);
 </script>
 
 </body>

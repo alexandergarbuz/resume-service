@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.garbuz.resume.entity.Resume;
 import com.garbuz.resume.model.LoginDTO;
@@ -60,12 +59,13 @@ public class JavaScriptController {
     @PostMapping("/login")
     public ResponseEntity<LoginDTO> login(@RequestBody LoginDTO dto, HttpServletRequest request, HttpServletResponse response) {
     	LOG.debug("Logging in {}", dto);
-    	final String token = request.getSession().getId();
+    	final String token = request.getSession().getId().substring(0, 4) + "AGARB";
     	final Cookie cookie = new Cookie("auth-token", token);
     	if("alexander.garbuz@gmail.com".equals(dto.getEmail())) {
     		dto.setName("Alex Garbuz");
         	dto.setToken(token);
         	dto.setLoggedin(true);
+        	dto.setPassword("*****");
         	//setting cookie for one week because why not?
             cookie.setMaxAge(7 * 24 * 60 * 60); 
     	} else {
