@@ -3,6 +3,7 @@ package com.garbuz.resume.controller;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,16 +62,21 @@ public class JavaScriptController {
     	LOG.debug("Logging in {}", dto);
     	final String token = request.getSession().getId().substring(0, 4) + "AGARB";
     	final Cookie cookie = new Cookie("auth-token", token);
-    	if("alexander.garbuz@gmail.com".equals(dto.getEmail())) {
+    	if(StringUtils.equalsIgnoreCase("alexander.garbuz@gmail.com",dto.getEmail()) && StringUtils.equalsIgnoreCase("pass", dto.getPassword())) {
     		dto.setName("Alex Garbuz");
         	dto.setToken(token);
         	dto.setLoggedin(true);
         	dto.setPassword("*****");
+        	
         	//setting cookie for one week because why not?
             cookie.setMaxAge(7 * 24 * 60 * 60); 
     	} else {
+    		dto.setName("");
+    		dto.setError("Invalid credentials");
         	dto.setToken("Invaid token");
         	dto.setLoggedin(false);
+        	dto.setPassword("*****");
+        	
         	//setting expiration time to 0 to remove the cookit
         	cookie.setMaxAge(0);
     	}

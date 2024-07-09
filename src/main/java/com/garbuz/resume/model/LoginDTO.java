@@ -6,6 +6,7 @@ public class LoginDTO {
     private String password;
     private String token;
     private boolean loggedin;
+    private String error;
 	public String getName() {
 		return name;
 	}
@@ -37,9 +38,17 @@ public class LoginDTO {
 	public void setToken(String token) {
 		this.token = token;
 	}
+	
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
+	}
 	@Override
 	public String toString() {
-		return "LoginDTO [name=" + name + ", email=" + email + ", password=" + password + ", token=" + token + ", loggedin=" + loggedin + "]";
+		return "LoginDTO [name=" + name + ", email=" + email + ", password=" + password + ", token=" + token
+				+ ", loggedin=" + loggedin + ", error=" + error + "]";
 	}
 
 	
