@@ -1,5 +1,8 @@
 package com.garbuz.resume.controller;
 
+import java.util.List;
+
+import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.garbuz.resume.entity.Resume;
 import com.garbuz.resume.model.LoginDTO;
@@ -43,6 +47,15 @@ public class JavaScriptController {
         return new ResponseEntity<>(resume, HttpStatus.OK);
     }
     
+    @Operation(summary = "View all resumes")
+	@GetMapping("/showAll")
+	public ResponseEntity<List<Resume>> showAll() {
+		LOG.debug("Show all resumes");
+		List<Resume> resumes = this.resumeService.findAllResumes();
+		LOG.info("Displaying {} resumes", CollectionUtils.size(resumes));
+		return new ResponseEntity<>(resumes, HttpStatus.OK);
+	}
+    
     @Operation(summary = "Loging in user")
     @PostMapping("/login")
     public ResponseEntity<LoginDTO> login(@RequestBody LoginDTO dto, HttpServletRequest request, HttpServletResponse response) {
@@ -50,6 +63,7 @@ public class JavaScriptController {
     	final String token = request.getSession().getId();
     	final Cookie cookie = new Cookie("auth-token", token);
     	if("alexander.garbuz@gmail.com".equals(dto.getEmail())) {
+    		dto.setName("Alex Garbuz");
         	dto.setToken(token);
         	dto.setLoggedin(true);
         	//setting cookie for one week because why not?
