@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Java Script Fetch Demo</title>
+    <link href="./bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="./font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+	<link href="./css/default.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+	
+	<div>
+		<form id="loginForm" onsubmit="onSubmit()">
+		<div class="row g-3">
+			<div class="col-4 mb-3"></div>
+			<div class="col-4 mb-3">
+				<select id="serverName" class="form-select">
+				  <option value="localhost" selected>Local</option>
+				  <option value="dev-resume-service.aws.garbuz.com">Remote</option>
+				</select>				
+			</div>
+			<div class="col-4 mb-3"></div>
+		</div>
+		<div class="row g-3">
+			<div class="col-4 mb-3"></div>
+			<div class="col-2 mb-3">
+				<input type="text" id="email" name="email" class="form-control"  placeholder="Email"/>
+			</div>
+			<div class="col-2 mb-3">
+				<input type="password" id="password" name="password"   placeholder="Password" class="form-control"/>
+			</div>
+			<div class="col-4 mb-3"></div>
+		</div>
+		<div class="row g-3">
+			<div class="col-4 mb-3"></div>
+			<div class="col-4 mb-3">
+				<input type="submit" id="loginButton"   class="btn btn-primary" value="Login"/>
+				<input type="button" id="populateButton" class="btn btn-primary" value="Populate Form" onclick="populateForm();"/>
+				<input type="button" id="clearButton" class="btn btn-primary" value="Clear Data" onclick="clearData();"/>
+			</div>
+			<div class="col-4 mb-3"></div>
+		</div>
+		</form>  
+	</div>
+	<br/>
+	<div id="displayPanel" class="row g-3">
+		<div class="row g-3">
+			<div class="col-5 mb-3"></div>
+			<div class="col-2 mb-3">
+				<button id="loadDataButton"  class="btn btn-secondary" onclick="loadData()" style="visibility:hidden">Load Resume Data</button>
+			</div>
+			<div class="col-5 mb-3"></div>
+			 
+		</div>	
+		<div class="col-6 mb-3">
+			<div id="display"></div>		
+		</div>
+		<div class="col-6 mb-3">
+			<div id="displaySrc"></div>
+		</div>
+	</div>
+	
+	
+	
+
+</div>
+
+<script>
+//const resumeServiceEndpoint = "http://localhost/api/resume/show/1";
+//const loginServiceEndpoint = "http://localhost/api/js/login";
+
+function getCookie(name) {
+    var cookieArr = document.cookie.split(";");
+    for(var i = 0; i < cookieArr.length; i++) {
+        var cookiePair = cookieArr[i].split("=");
+        if(name === cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+    return null;
+}
+
+function populateForm() {
+	var email = document.getElementById("email");
+	var password = document.getElementById("password");
+	email.value = "alexander.garbuz@gmail.com";
+	password.value = "pass";
+}
+
+function enableLoadDataButton() {
+	var loadDataButton = document.getElementById("loadDataButton");
+	loadDataButton.className="btn btn-success";
+	loadDataButton.style.visibility = 'visible';
+}
+function disableLoadDataButton() {
+	var loadDataButton = document.getElementById("loadDataButton");
+	loadDataButton.className="btn btn-secondary";
+	loadDataButton.style.visibility = 'hidden';
+}
+
+function clearData() {
+	var displayDiv = document.getElementById("display");
+	var displaySrcDiv = document.getElementById("displaySrc");
+	var email = document.getElementById("email");
+	var password = document.getElementById("password");
+	email.value = "";
+	password.value = "";
+	displayDiv.innerHTML="";
+	displaySrcDiv.innerHTML="";
+	disableLoadDataButton();
+}
+function showResponse(data) {
+	var authCookie = getCookie("auth-token");
+	var displaySrcDiv = document.getElementById("displaySrc");
+	var html = "<h3>Received Data</h3>";
+	html += "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
+	if(authCookie != null) {
+		html += "<pre>Auth Cookie Token:" + authCookie + "</pre>";
+	}
+	displaySrcDiv.innerHTML=html;
+	
+}
+function showLoadedData(data) {
+	var displayDiv = document.getElementById("display");
+	var firstName = data.firstName;
+	var lastName = data.lastName;
+	var summary = data.summary;
+	var email = data.email;
+	var phone = data.phone;
+	var html = "";
+    html += `
+        <h3>${firstName} ${lastName}</h3>
+        <p><a href="mailto:${email}">${email}</a></p>
+        <p>${phone}</p>
+        <p>${summary}</p>
+    	<h4>Education</h4>
+    	<dl>`;
+	
+	data.educations.forEach(school => {
+        var startDate = new Date(school.startDate);
+        var endDate = new Date(school.endDate);
+        var startYear = startDate.getFullYear();
+        var endYear = endDate.getFullYear();
+		html += `
+		<dt>${school.name} ( ${startYear}  - ${endYear} ) </dt>
+		<dd>${school.degree}</dd>
+		${school.comments != '' ? '<dd>'+ school.comments + '</dd>': ''}
+		`;
+	});
+	html+= `</dl>
+	<h3>Skills</h3>
+	<ul>
+	`;
+	data.skills.forEach(group => {
+		html += `<li> <strong>${group.name}:</strong> `;
+		group.skills.forEach(skill => {
+			html += `${skill.name},`
+		})
+		html += `</li>`;
+	});
+	html += `</ul>
+	<h3>Work History</h3>
+	`;
+	data.jobs.forEach(job => {
+		var start = new Date(job.start).getFullYear();
+		var end = new Date(job.end).getFullYear();
+		html += `
+		<p><strong>${job.title}</strong> (${start} - ${end})</p>
+		<p>${job.companyName} (${job.location})</p>
+		<ul>`;
+		job.responsibilities.forEach(r => {
+			html+= `<li>${r.text}</li>`;
+		});
+		html += `</ul>`
+	})
+	displayDiv.innerHTML=html;
+}
+
+function loadData() {
+	var endpoint = "http://" + document.getElementById("serverName").value + "/api/resume/show/1";
+	fetch(endpoint).then(function (response) {
+		return response.json();		
+	}).then(function (data){
+		showResponse(data);
+		showLoadedData(data);
+	}).catch(function (error) {
+		console.log("There was a problem with pulling data: ", error);
+	});
+}
+
+function postData() {
+	var endpoint = "http://" + document.getElementById("serverName").value + "/api/js/login";
+	var email = document.getElementById("email");
+	var password = document.getElementById("password");
+	var data = {
+			email: email.value,
+			password: password.value
+	}
+	fetch(endpoint, {
+		method:"POST",
+		headers: {"Content-Type": "application/json"},
+		body: JSON.stringify(data)
+	}).then(function (response){
+        if (!response.ok) {
+            throw new Error("Response was not ok " + response.statusText);
+        }
+		return response.json();
+	}).then(function(data){
+		var loggedIn = (data.loggedin);
+		if(loggedIn) {
+			enableLoadDataButton();
+			showResponse(data);
+		} else {
+			showResponse(data);
+		}
+	}).catch(function(error){
+		console.log("There was a problem with pulling data: ", error);
+	})
+	
+}
+function onSubmit(event) {
+	event.preventDefault();
+	postData();	
+}
+
+document.getElementById("loginForm").addEventListener("submit", onSubmit);
+</script>
+
+</body>
+</html>
