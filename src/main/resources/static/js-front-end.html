@@ -67,7 +67,7 @@
 			<div class="col-4 mb-3"></div>
 			<div class="col-4 mb-3">
 				<select id="serverName" class="form-select">
-					<option selected>Select server to connect</option>
+					<option value="" selected>Select server to connect</option>
 				  	<option value="http://localhost">Local</option>
 				  	<option value="https://dev-resume-service.aws.garbuz.com">dev-resume-service.aws.garbuz.com</option>
 				  	<option value="https://resume-service.aws.garbuz.com">resume-service.aws.garbuz.com</option>
@@ -283,6 +283,11 @@ function loadData() {
 }
 
 function performLogin() {
+	if( getServerName() == "") {
+		showErrorMessage("Select server to connect");
+		return;
+	}
+	
 	var endpoint = getServerName() + "/api/js/login";
 	var email = document.getElementById("email");
 	var password = document.getElementById("password");
