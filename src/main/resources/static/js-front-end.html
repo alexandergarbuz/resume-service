@@ -98,6 +98,13 @@
 	</div>
 	
 	<br/>
+	
+	<div class="d-flex justify-content-center">
+		<div id="delaySpinner" class="spinner-border" role="status">
+			<span class="sr-only">Loading...</span>
+		</div>	
+	</div>
+	
 	<div id="displayPanel" class="row g-3">
 		<div class="row g-3">
 			<div class="col-5 mb-3">
@@ -121,6 +128,12 @@
 </div>
 
 <script>
+function hideSpinner() {
+	document.getElementById("delaySpinner").style.visibility = "hidden";
+}
+function showSpinner() {
+	document.getElementById("delaySpinner").style.visibility = "visible";
+}
 function showErrorMessage(messageText) {
 	var element = document.getElementById("errorContainer");
 	var message = document.getElementById("errorMessage");
@@ -260,26 +273,36 @@ function getServerName() {
 
 function loadResume(id) {
 	var endpoint = getServerName() + "/api/js/show/" + id;
-	fetch(endpoint).then(function (response) {
-		return response.json();		
-	}).then(function (data){
-		showResponse(data);
-		showLoadedResume(data);
-	}).catch(function (error) {
-		console.log("There was a problem with pulling data: ", error);
-	});
+	showSpinner();
+	setTimeout(()=>{
+		fetch(endpoint).then(function (response) {
+			return response.json();		
+		}).then(function (data){
+			hideSpinner();
+			showResponse(data);
+			showLoadedResume(data);
+		}).catch(function (error) {
+			hideSpinner();
+			console.log("There was a problem with pulling data: ", error);
+		});		
+	}, 500);
 }
 
 function loadData() {
 	var endpoint = getServerName() + "/api/js/showAll";
-	fetch(endpoint).then(function (response) {
-		return response.json();		
-	}).then(function (data){
-		showResponse(data);
-		showLoadedResumeList(data);
-	}).catch(function (error) {
-		console.log("There was a problem with pulling data: ", error);
-	});
+	showSpinner();
+	setTimeout(()=>{
+		fetch(endpoint).then(function (response) {
+			return response.json();		
+		}).then(function (data){
+			hideSpinner();
+			showResponse(data);
+			showLoadedResumeList(data);
+		}).catch(function (error) {
+			hideSpinner();
+			console.log("There was a problem with pulling data: ", error);
+		});		
+	}, 500);
 }
 
 function performLogin() {
@@ -295,33 +318,44 @@ function performLogin() {
 			email: email.value,
 			password: password.value
 	}
-	fetch(endpoint, {
-		method:"POST",
-		headers: {"Content-Type": "application/json"},
-		body: JSON.stringify(data)
-	}).then(function (response){
-        if (!response.ok) {
-            throw new Error("Response was not ok " + response.statusText);
-        }
-		return response.json();
-	}).then(function(data){
-		var loggedIn = (data.loggedin);
-		if(loggedIn) {
-			enableLoadDataButton();
-			showResponse(data);
-		} else {
-			showErrorMessage(data.error);
-			showResponse(data);
-		}
-	}).catch(function(error){
-		console.log("There was a problem with pulling data: ", error);
-	})
-	
+	showSpinner();
+	setTimeout(()=>{
+		fetch(endpoint, {
+			method:"POST",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify(data)
+		}).then(function (response){
+	        if (!response.ok) {
+	            throw new Error("Response was not ok " + response.statusText);
+	        }
+			return response.json();
+		}).then(function(data){
+			hideSpinner();
+			var loggedIn = (data.loggedin);
+			if(loggedIn) {
+				enableLoadDataButton();
+				showResponse(data);
+			} else {
+				showErrorMessage(data.error);
+				showResponse(data);
+			}
+		}).catch(function(error){
+			hideSpinner();
+			console.log("There was a problem with pulling data: ", error);
+		})		
+	}, 500);
+
 }
 function onSubmit(event) {
 	event.preventDefault();
 	performLogin();	
 }
+(()=>{
+	window.onload = ()=>{
+		hideSpinner();	
+	};
+	
+})();
 </script>
 
 </body>
