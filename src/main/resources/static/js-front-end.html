@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Java Script Front End</title>
+	<link rel="icon" href="./img/favicon.ico"/>
+    <link href="./bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="./font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+	<link href="./css/default.css" rel="stylesheet"/>
+	
+	<style>
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+	
+	</style>
+</head>
+<body>
+
+<div class="container">
+
+	<div id="errorContainer"  class="modal">
+		<div class="modal-content">
+			<span class="close" onclick="hideErrorMessage()">&times;</span>
+			<h3>Error</h3>
+			<p id="errorMessage"></p>
+			<a href="#" onclick="hideErrorMessage()">Dismiss</a>
+		</div>
+	</div>
+	
+	<div id="loginFormSection">
+		<form id="loginForm" onsubmit="onSubmit(event)">
+		<div class="row g-3">
+			<div class="col-4 mb-3"></div>
+			<div class="col-4 mb-3">
+				<select id="serverName" class="form-select">
+					<option value="" selected>Select server to connect</option>
+				  	<option value="http://localhost">Local</option>
+				  	<option value="https://dev-resume-service.aws.garbuz.com">dev-resume-service.aws.garbuz.com</option>
+				  	<option value="https://resume-service.aws.garbuz.com">resume-service.aws.garbuz.com</option>
+				</select>				
+			</div>
+			<div class="col-4 mb-3"></div>
+		</div>
+		<div class="row g-3">
+			<div class="col-4 mb-3"></div>
+			<div class="col-2 mb-3">
+				<input type="text" id="email" name="email" class="form-control" value="alexander.garbuz@gmail.com" placeholder="Email"/>
+			</div>
+			<div class="col-2 mb-3">
+				<input type="password" id="password" name="password"   placeholder="Password" class="form-control"/>
+			</div>
+			<div class="col-4 mb-3"></div>
+		</div>
+		<div class="row g-3">
+			<div class="col-4 mb-3"></div>
+			<div class="col-4 mb-3">
+				<input type="submit" id="loginButton"   class="btn btn-primary" value="Login"/>
+				<a href="#" id="clearButton" class="btn btn-primary opacity-75" onclick="clearData();">Clear Data</a>
+				<a href="#" id="populateButton" class="btn btn-secondary" onclick="populateForm();">Populate Form</a>
+			</div>
+			<div class="col-4 mb-3"></div>
+		</div>
+		</form>  
+	</div>
+	
+	<br/>
+	<div id="displayPanel" class="row g-3">
+		<div class="row g-3">
+			<div class="col-5 mb-3">
+			</div>
+			<div class="col-2 mb-3">
+				<a href="#" id="loadDataButton" class="btn btn-success" onclick="loadData()" style="visibility:hidden">View Resume List</a>
+			</div>
+			<div class="col-5 mb-3"></div>
+		</div>	
+		<div class="col-6 mb-3">
+			<div id="display"></div>		
+		</div>
+		<div class="col-6 mb-3">
+			<div id="displaySrc"></div>
+		</div>
+	</div>
+	
+	
+	
+
+</div>
+
+<script>
+function showErrorMessage(messageText) {
+	var element = document.getElementById("errorContainer");
+	var message = document.getElementById("errorMessage");
+	element.style.visibility = "visible";
+	element.style.display = "block";
+	message.innerText = messageText;
+}
+function hideErrorMessage() {
+	var element = document.getElementById("errorContainer");
+	var message = document.getElementById("errorMessage");
+	element.style.visibility = "hidden";
+	element.style.display = "none";
+	message.innerText = "";
+}
+
+function getCookie(name) {
+    var cookieArr = document.cookie.split(";");
+    for(var i = 0; i < cookieArr.length; i++) {
+        var cookiePair = cookieArr[i].split("=");
+        if(name === cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+    return null;
+}
+
+function populateForm() {
+	var email = document.getElementById("email");
+	var password = document.getElementById("password");
+	email.value = "alexander.garbuz@gmail.com";
+	password.value = "pass";
+}
+
+function enableLoadDataButton() {
+	var loadDataButton = document.getElementById("loadDataButton");
+	loadDataButton.style.visibility = "visible";
+}
+function disableLoadDataButton() {
+	var loadDataButton = document.getElementById("loadDataButton");
+	loadDataButton.style.visibility = "hidden";
+}
+
+function clearData() {
+	var displayDiv = document.getElementById("display");
+	var displaySrcDiv = document.getElementById("displaySrc");
+	var email = document.getElementById("email");
+	var password = document.getElementById("password");
+	email.value = "";
+	password.value = "";
+	displayDiv.innerHTML="";
+	displaySrcDiv.innerHTML="";
+	disableLoadDataButton();
+}
+function showResponse(data) {
+	var authCookie = getCookie("auth-token");
+	var displaySrcDiv = document.getElementById("displaySrc");
+	var html = "<h3>Received Data</h3>";
+	html += "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
+	if(authCookie != null) {
+		html += "<pre>Cookie:" + authCookie + "</pre>";
+	}
+	displaySrcDiv.innerHTML=html;
+	
+}
+function showLoadedResume(data) {
+	var displayDiv = document.getElementById("display");
+	var firstName = data.firstName;
+	var lastName = data.lastName;
+	var summary = data.summary;
+	var email = data.email;
+	var phone = data.phone;
+	var html = "";
+    html += `
+        <h3>${firstName} ${lastName}</h3>
+        <p><a href="mailto:${email}">${email}</a></p>
+        <p>${phone}</p>
+        <p>${summary}</p>
+    	<h4>Education</h4>
+    	<dl>`;
+	
+	data.educations.forEach(school => {
+        var startDate = new Date(school.startDate);
+        var endDate = new Date(school.endDate);
+        var startYear = startDate.getFullYear();
+        var endYear = endDate.getFullYear();
+		html += `
+		<dt>${school.name} ( ${startYear}  - ${endYear} ) </dt>
+		<dd>${school.degree}</dd>
+		${school.comments != '' ? '<dd>'+ school.comments + '</dd>': ''}
+		`;
+	});
+	html+= `</dl>
+	<h3>Skills</h3>
+	<ul>
+	`;
+	data.skills.forEach(group => {
+		html += `<li> <strong>${group.name}:</strong> `;
+		group.skills.forEach(skill => {
+			html += `${skill.name},`
+		})
+		html += `</li>`;
+	});
+	html += `</ul>
+	<h3>Work History</h3>
+	`;
+	data.jobs.forEach(job => {
+		var start = new Date(job.start).getFullYear();
+		var end = new Date(job.end).getFullYear();
+		html += `
+		<p><strong>${job.title}</strong> (${start} - ${end})</p>
+		<p>${job.companyName} (${job.location})</p>
+		<ul>`;
+		job.responsibilities.forEach(r => {
+			html+= `<li>${r.text}</li>`;
+		});
+		html += `</ul>`
+	})
+	displayDiv.innerHTML=html;
+}
+
+function showLoadedResumeList(data) {
+	var displayDiv = document.getElementById("display");
+	var html = "";
+    html += `
+        <h3>Resume List</h3>
+        <ul>`;
+   	data.forEach(resume => {
+	   html += `<li><a href='#' onclick='loadResume(${resume.id})' >${resume.firstName} ${resume.lastName}</a></li>`;
+   });
+   html += `<ul>`;
+	displayDiv.innerHTML=html;
+}
+
+function getServerName() {
+	return document.getElementById("serverName").value;
+}
+
+function loadResume(id) {
+	var endpoint = getServerName() + "/api/js/show/" + id;
+	fetch(endpoint).then(function (response) {
+		return response.json();		
+	}).then(function (data){
+		showResponse(data);
+		showLoadedResume(data);
+	}).catch(function (error) {
+		console.log("There was a problem with pulling data: ", error);
+	});
+}
+
+function loadData() {
+	var endpoint = getServerName() + "/api/js/showAll";
+	fetch(endpoint).then(function (response) {
+		return response.json();		
+	}).then(function (data){
+		showResponse(data);
+		showLoadedResumeList(data);
+	}).catch(function (error) {
+		console.log("There was a problem with pulling data: ", error);
+	});
+}
+
+function performLogin() {
+	if( getServerName() == "") {
+		showErrorMessage("Select server to connect");
+		return;
+	}
+	
+	var endpoint = getServerName() + "/api/js/login";
+	var email = document.getElementById("email");
+	var password = document.getElementById("password");
+	var data = {
+			email: email.value,
+			password: password.value
+	}
+	fetch(endpoint, {
+		method:"POST",
+		headers: {"Content-Type": "application/json"},
+		body: JSON.stringify(data)
+	}).then(function (response){
+        if (!response.ok) {
+            throw new Error("Response was not ok " + response.statusText);
+        }
+		return response.json();
+	}).then(function(data){
+		var loggedIn = (data.loggedin);
+		if(loggedIn) {
+			enableLoadDataButton();
+			showResponse(data);
+		} else {
+			showErrorMessage(data.error);
+			showResponse(data);
+		}
+	}).catch(function(error){
+		console.log("There was a problem with pulling data: ", error);
+	})
+	
+}
+function onSubmit(event) {
+	event.preventDefault();
+	performLogin();	
+}
+</script>
+
+</body>
+</html>

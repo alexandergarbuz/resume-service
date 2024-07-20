@@ -6,6 +6,6 @@ ALTER DATABASE resume_manager_db
 DEFAULT CHARACTER SET utf8 
 DEFAULT COLLATE utf8_general_ci;
 
-CREATE USER 'resume_user'@'%' IDENTIFIED BY 'resume_password';
+CREATE USER IF NOT EXISTS 'resume_user'@'%' IDENTIFIED BY 'resume_password';
 
 GRANT ALL PRIVILEGES ON resume_manager_db.* TO 'resume_user'@'%';
