@@ -12,19 +12,25 @@ data "aws_subnets" "default" {
     values = [data.aws_vpc.default.id]
   }
 }
-
+//
+// Create a new ECS cluster and call it 'dev_resume_service'
+//
 resource "aws_ecs_cluster" "dev_resume_service" {
   name = "dev-resume-service-tf"
 }
-
+//
+// Create a new load balancer and call it 'resume_service_lb'
+//
 resource "aws_lb" "resume_service_lb" {
-  name               = "resume-service-lb"
+  name               = "resume-service-lb"// this is the name under which it will be registered in AWS
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.lb_sg.id]
   subnets            = data.aws_subnets.default.ids
 }
-
+//
+// This security group will be used for MySQL
+//
 resource "aws_security_group" "service_sg" {
   name        = "service-sg"
   description = "Allow all HTTP(s) traffic"
@@ -153,20 +159,20 @@ resource "aws_lb_target_group" "app" {
   vpc_id      = data.aws_vpc.default.id
   target_type = "ip"
 }
-/*
+
 resource "aws_lb_listener" "frontend_https" {
   load_balancer_arn = aws_lb.resume_service_lb.arn
   port              = 443
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = aws_acm_certificate.cert.arn
+  certificate_arn   = "arn:aws:acm:us-east-2:471112670997:certificate/5d123a51-6ad4-4bd6-9e37-ef001ca72296"//aws_acm_certificate.cert.arn
 
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.app.arn
   }
 }
-*/
+
 resource "aws_lb_listener" "frontend_http" {
   load_balancer_arn = aws_lb.resume_service_lb.arn
   port              = 80
@@ -179,7 +185,6 @@ resource "aws_lb_listener" "frontend_http" {
 }
 
 
-
 /*
 resource "aws_acm_certificate" "cert" {
   domain_name       = "aws.garbuz.com"
@@ -189,7 +194,10 @@ resource "aws_acm_certificate" "cert" {
     create_before_destroy = true
   }
 }
-
+*/
+/*
+ * This would be used if I was generating certificate each time
+ *
 resource "aws_route53_record" "cert_validation" {
   for_each = {
     for dvo in aws_acm_certificate.cert.domain_validation_options : dvo.domain_name => {
@@ -210,37 +218,22 @@ resource "aws_acm_certificate_validation" "cert_validation" {
   certificate_arn         = aws_acm_certificate.cert.arn
   validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdn]
 }
-
-resource "aws_route53_zone" "main" {
-  name = "aws.garbuz.com"
-}
-
-resource "aws_route53_record" "www" {
-  zone_id = aws_route53_zone.main.zone_id
-  name    = "www.aws.garbuz.com"
-  type    = "A"
-
-  alias {
-    name                   = aws_lb.resume_service_lb.dns_name
-    zone_id                = aws_lb.resume_service_lb.zone_id
-    evaluate_target_health = true
-  }
-}
-
-resource "aws_route53_record" "root" {
-  zone_id = aws_route53_zone.main.zone_id
-  name    = "aws.garbuz.com"
-  type    = "A"
-
-  alias {
-    name                   = aws_lb.resume_service_lb.dns_name
-    zone_id                = aws_lb.resume_service_lb.zone_id
-    evaluate_target_health = true
-  }
-}
-
-
 */
+resource "aws_route53_record" "resume-service" {
+  zone_id = "Z052030233WIWXK1ZIRMJ"//located under hosted zone details
+  name    = "resume-service.aws.garbuz.com"
+  type    = "A"
+
+  alias {
+    name                   = aws_lb.resume_service_lb.dns_name
+    zone_id                = aws_lb.resume_service_lb.zone_id
+    evaluate_target_health = true
+  }
+}
+
+
+
+/**/
 output "load_balancer_dns_name" {
   description = "The DNS name of the load balancer"
   value       = aws_lb.resume_service_lb.dns_name
