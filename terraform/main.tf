@@ -13,10 +13,10 @@ data "aws_subnets" "default" {
   }
 }
 //
-// Create a new ECS cluster and call it 'dev_resume_service'
+// Create a new ECS cluster and call it 'resume_service_cl'
 //
-resource "aws_ecs_cluster" "dev_resume_service" {
-  name = "dev-resume-service-tf"
+resource "aws_ecs_cluster" "resume_service_cl" {
+  name = "resume_service_cl"
 }
 //
 // Create a new load balancer and call it 'resume_service_lb'
@@ -50,7 +50,9 @@ resource "aws_security_group" "service_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
+//
+// Create security group rule for MySQL to allow connections
+//
 resource "aws_security_group_rule" "allow_lb_to_mysql" {
   type              = "ingress"
   from_port         = 3306
@@ -59,8 +61,9 @@ resource "aws_security_group_rule" "allow_lb_to_mysql" {
   security_group_id = "sg-02a51fde21b44486c"  # MySQL security group ID
   source_security_group_id = aws_security_group.service_sg.id  
 }
-
-
+//
+// Create security group for load balancer
+//
 resource "aws_security_group" "lb_sg" {
   name        = "lb-sg"
   description = "Allow all HTTP(s) traffic"
@@ -102,6 +105,10 @@ resource "aws_ecs_task_definition" "app" {
       ]
       environment = [
         {
+          name  = "SPRING_PROFILES_ACTIVE"
+          value = "prod"
+        },
+        {
           name  = "WEB_SERVER_CONTEXT_PATH"
           value = "/"
         },
@@ -133,7 +140,7 @@ resource "aws_ecs_task_definition" "app" {
 
 resource "aws_ecs_service" "app" {
   name            = "resume-service"
-  cluster         = aws_ecs_cluster.dev_resume_service.id
+  cluster         = aws_ecs_cluster.resume_service_cl.id
   task_definition = aws_ecs_task_definition.app.arn
   desired_count   = 1
   launch_type     = "FARGATE"
@@ -151,7 +158,9 @@ resource "aws_ecs_service" "app" {
     aws_lb_listener.frontend_http
   ]
 }
-
+//
+// Create load balancer target group
+//
 resource "aws_lb_target_group" "app" {
   name        = "resume-service-tg"
   port        = 80
@@ -159,7 +168,10 @@ resource "aws_lb_target_group" "app" {
   vpc_id      = data.aws_vpc.default.id
   target_type = "ip"
 }
-
+//
+// Create HTTPS listener for load balancer that will use existing SSL
+// certificate (see sertificates in AWS) and reference it by its ARN
+//
 resource "aws_lb_listener" "frontend_https" {
   load_balancer_arn = aws_lb.resume_service_lb.arn
   port              = 443
@@ -172,7 +184,9 @@ resource "aws_lb_listener" "frontend_https" {
     target_group_arn = aws_lb_target_group.app.arn
   }
 }
-
+//
+// Create HTTP listener for load balancer 
+//
 resource "aws_lb_listener" "frontend_http" {
   load_balancer_arn = aws_lb.resume_service_lb.arn
   port              = 80

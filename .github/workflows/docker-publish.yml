@@ -18,7 +18,7 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: alexandergarbuz/resume-service
   IMAGE_VERSION: v1.0.0
-  AWS_CLUSTER_NAME: dev-resume-service-tf
+  AWS_CLUSTER_NAME: resume-service-cl
   AWS_SERVICE_NAME: resume-service
 
 
