@@ -13,10 +13,10 @@ data "aws_subnets" "default" {
   }
 }
 //
-// Create a new ECS cluster and call it 'resume_service_cl'
+// Create a new ECS cluster and call it 'resume_cluster'
 //
-resource "aws_ecs_cluster" "resume_service_cl" {
-  name = "resume_service_cl"
+resource "aws_ecs_cluster" "resume_cluster" {
+  name = "resume_cluster"
 }
 //
 // Create a new load balancer and call it 'resume_service_lb'
@@ -92,10 +92,10 @@ resource "aws_security_group" "lb_sg" {
 }
 
 resource "aws_ecs_task_definition" "app" {
-  family                   = "resume-service-task"
+  family                   = "resume-service-task-definition"
   container_definitions    = jsonencode([
     {
-      name  = "resume-service"
+      name  = "resume_service"
       image = "alexandergarbuz/resume-service:main" # Replace with your image
       portMappings = [
         {
@@ -139,8 +139,8 @@ resource "aws_ecs_task_definition" "app" {
 }
 
 resource "aws_ecs_service" "app" {
-  name            = "resume-service"
-  cluster         = aws_ecs_cluster.resume_service_cl.id
+  name            = "resume_service"
+  cluster         = aws_ecs_cluster.resume_cluster.id
   task_definition = aws_ecs_task_definition.app.arn
   desired_count   = 1
   launch_type     = "FARGATE"
@@ -151,7 +151,7 @@ resource "aws_ecs_service" "app" {
   }
   load_balancer {
     target_group_arn = aws_lb_target_group.app.arn
-    container_name   = "resume-service"
+    container_name   = "resume_service"
     container_port   = 80
   }
   depends_on = [
