@@ -167,6 +167,15 @@ resource "aws_lb_target_group" "app" {
   protocol    = "HTTP"
   vpc_id      = data.aws_vpc.default.id
   target_type = "ip"
+
+  health_check {
+    path                = "/actuator/health"
+    interval            = 30
+    timeout             = 5
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+    matcher             = "200"
+  }
 }
 //
 // Create HTTPS listener for load balancer that will use existing SSL
@@ -193,8 +202,12 @@ resource "aws_lb_listener" "frontend_http" {
   protocol          = "HTTP"
 
   default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.app.arn
+    type             = "redirect"
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
   }
 }
 
