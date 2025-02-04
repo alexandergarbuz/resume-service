@@ -91,6 +91,56 @@ resource "aws_security_group" "lb_sg" {
   }
 }
 
+//
+// Execution Roles
+//
+resource "aws_iam_role" "ecs_task_execution_role" {
+  name = "ecsTaskExecutionRole_logs"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Principal = {
+          Service = "ecs-tasks.amazonaws.com"
+        }
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_policy" {
+  role       = aws_iam_role.ecs_task_execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_logs_policy" {
+  role       = aws_iam_role.ecs_task_execution_role.name
+  policy_arn = aws_iam_policy.ecs_task_cloudwatch_logs_policy.arn
+}
+
+resource "aws_iam_policy" "ecs_task_cloudwatch_logs_policy" {
+  name        = "ecsTaskCloudWatchLogsPolicy"
+  description = "Policy to allow ECS tasks to send logs to CloudWatch"
+  
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        Resource = "arn:aws:logs:*:*:*"
+      }
+    ]
+  })
+}
+
 resource "aws_ecs_task_definition" "app" {
   family                   = "resume-service-task-definition"
   container_definitions    = jsonencode([
@@ -103,6 +153,15 @@ resource "aws_ecs_task_definition" "app" {
           hostPort      = 80
         }
       ]
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-group         = aws_ecs_cluster.resume_cluster.name
+          awslogs-region        = "us-east-2"
+          awslogs-stream-prefix = "webapp"
+          awslogs-create-group  = "true"
+        }
+      }
       environment = [
         {
           name  = "SPRING_PROFILES_ACTIVE"
@@ -135,7 +194,7 @@ resource "aws_ecs_task_definition" "app" {
   network_mode             = "awsvpc"
   memory                   = "512"
   cpu                      = "256"
-//  execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
+  execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
 }
 
 resource "aws_ecs_service" "app" {
@@ -173,7 +232,7 @@ resource "aws_lb_target_group" "app" {
     interval            = 30
     timeout             = 5
     healthy_threshold   = 2
-    unhealthy_threshold = 2
+    unhealthy_threshold = 10
     matcher             = "200"
   }
 }
